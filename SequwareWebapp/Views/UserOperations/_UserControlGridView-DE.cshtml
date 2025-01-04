@@ -1,0 +1,111 @@
+﻿@model IEnumerable<css.Data.Models.tbl_SequawareLogin>
+
+
+<div class="widget-head">
+    <div class="tools"><span class="icon s7-upload"></span><span class="icon s7-edit"></span><span class="icon s7-close"></span></div>
+    <div class="title">Benutzerliste</div>
+    <table id="CompanyTable" class="table table-striped table-hover table-fw-widget" style="width: 100% !important;">
+        <thead>
+            <tr>
+                <th>Ich würde</th>
+                <th>Nutzername</th>
+                <th>Passwort</th>
+                <th>Email</th>
+                <th>Unternehmen ID</th>
+                <th>Rollen-ID</th>
+                <th class="hidden">LanguageID</th>
+                <th>Bearbeiten</th>
+                <th>Löschen</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @if (Model != null)
+            {
+                var rowIndex = 1;
+                var count = 1;
+                foreach (var User in Model)
+                {
+
+                    var className = "";
+
+
+                    if (count == 1)
+                    {
+                        className = "odd";
+                        count = 2;
+                    }
+                    else
+                    {
+                        className = "even";
+                        count = 1;
+                    }
+
+            <tr class=@className>
+                <td name="Id-@User.Id">@User.Id</td>
+                <td name="UserName-@User.Id">@User.UserName</td>
+                <td name="Password-@User.Id">@User.Password</td>
+                <td name="Email-@User.Id">@User.Email</td>
+                <td name="Company_ID-@User.Id">@User.Company_ID</td>
+                <td name="Role-@User.Id">@User.role</td>
+                <td name="Language-@User.Id" class="hidden">@User.languageID </td>
+                <td>
+                    <button type="button" data-id="@User.Id" onclick="EditCompanyUser(this)" class="btn btn-space btn-primary btn-xs"><i class="icon s7-info"></i></button>
+                </td>
+                <td>
+                    <button type="button" data-id="@User.Id" onclick="LoadDeleteUserModal(this)" class="btn btn-space btn-primary btn-xs"><i class="icon s7-trash"></i></button>
+                </td>
+
+                @{
+                    rowIndex = rowIndex + 1;
+                }
+            </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+   
+        $(document).ready(function () {
+            $('#table1').DataTable({                
+                "language": { "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/German.json" }
+            });
+
+
+    });
+
+    function EditCompanyUser(x) {
+        var y = $(x).closest("tr");
+        var row = $(x).attr("data-id");
+
+        var x = y.find("td:eq(1)").text().split('-')[0];
+
+        $('#hdncmpUserId').val(y.find("td:eq(0)").text());
+        $('#cmpUsernm').val(x);
+        $('#cmpuserpsw').val(y.find("td:eq(2)").text());
+        $('#cmpusrrepsw').val(y.find("td:eq(2)").text());
+        $('#cmpusremail').val(y.find("td:eq(3)").text());
+        $('#addusercompany').val(y.find("td:eq(4)").text());
+        $('#cmbUserRole').val(y.find("td:eq(5)").text());
+        $('#cmpUsernmTag').val("-C" + y.find("td:eq(4)").text());
+        var num = parseInt(y.find("td:eq(6)").text(), 10);
+        $('#cmbLanguage').val(num);
+        debugger;
+        $('#tabUL a[href="#tabcc-3"]').trigger('click');
+
+        //$('#tabcc-4').removeClass("active");
+        //$('#tabcc-3').addClass("active");
+        //$('#tabcc-4li').removeClass("active");
+        //$('#tabcc-3li').addClass("active");
+        //$('#tabcc-4').css("display", "none");
+        //$('#tabcc-3').css("display", "block");
+        //$('#tabcc-4').attr("aria-hidden", "true");
+        //$('#tabcc-3').attr("aria-hidden", "false");
+
+            }
+</script>

@@ -1,0 +1,687 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Sequware</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <title>Sequware</title>
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/stroke-7/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/jquery.nanoscroller/css/nanoscroller.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/summernote/summernote.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/select2/css/select2.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/lib/datatables/css/dataTables.bootstrap.min.css" />
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="~/assets/css/style.css" type="text/css" />
+    <link rel="icon" href="~/assets/img/logo-full ico 256.ico" sizes="24x24" type="text/css" />
+
+    
+
+
+</head>
+<body>
+
+    @{
+        string name = "";
+        int companyID = 0, Language=0;
+        if (Session["Sequware"] == null)
+        {
+            Response.Redirect("~/Login/Login");
+        }
+        else
+        {
+            css.Data.Models.tbl_SequawareLogin user = (css.Data.Models.tbl_SequawareLogin)Session["Sequware"];
+
+            if (user != null)
+            {
+                name = user.UserName;
+                companyID = user.Company_ID ?? 0;
+                Language = user.languageID ?? 0;
+                <input type="hidden" id="hdnUserName" name="hdnUserName" value=@name />
+                <input type="hidden" id="hdncompanyID" name="hdncompanyID" value=@companyID />
+                <input type="hidden" id="hdnLanguagID" name="hdnLanguagID" value=@Language />
+            }
+        }
+    }
+
+    <div class="am-wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top am-top-header">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="page-title"><span>Blank Page</span></div><a href="#" class="am-toggle-left-sidebar navbar-toggle collapsed"><span class="icon-bar"><span></span><span></span><span></span></span></a><a href="../../Cases/Cases" class="navbar-brand"></a>
+                </div><a href="#" class="am-toggle-right-sidebar"><span class="icon s7-menu2"></span></a><a href="#" data-toggle="collapse" data-target="#am-navbar-collapse" class="am-toggle-top-header-menu collapsed"><span class="icon s7-angle-down"></span></a>
+                <div id="am-navbar-collapse" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right am-user-nav">
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><img src="../../assets/img/avatar8.jpg"><span class="user-name">@name</span><span class="angle-down s7-angle-down"></span></a>
+                            <ul role="menu" class="dropdown-menu">
+                                @*<li><a href="#"> <span class="icon s7-user"></span>My profile</a></li>*@
+                                <!-- <li><a href="#"> <span class="icon s7-config"></span>Settings</a></li>
+                                <li><a href="#"> <span class="icon s7-help1"></span>Help</a></li>-->
+                                <li><a onClick="clearCache()"> <span class="icon s7-power"></span>Sign Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav am-nav-right">
+                        <li><a href="#">SEQUWARE</a></li>
+
+                        <!--   <li><a href="#">About</a></li>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">Services <span class="angle-down s7-angle-down"></span></a>
+                            <ul role="menu" class="dropdown-menu">
+                                <li><a href="#">UI Consulting</a></li>
+                                <li><a href="#">Web Development</a></li>
+                                <li><a href="#">Database Management</a></li>
+                                <li><a href="#">Seo Improvement</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Support</a></li>-->
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right am-icons-nav">
+                        <!--  <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="icon s7-comment"></span></a>
+                            <ul class="dropdown-menu am-messages">
+                                <li>
+                                    <div class="title">Messages<span class="badge">3</span></div>
+                                    <div class="list">
+                                        <div class="am-scroller nano">
+                                            <div class="content nano-content">
+                                                <ul>
+                                                    <li class="active">
+                                                        <a href="#">
+                                                            <div class="logo"><img src="assets/img/avatar2.jpg"></div>
+                                                            <div class="user-content"><span class="date">April 25</span><span class="name">Jessica Caruso</span><span class="text-content">Request you to be a part of the same so that we can work...</span></div>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <div class="logo"><img src="assets/img/avatar3.jpg"></div>
+                                                            <div class="user-content"><span class="date">March 18</span><span class="name">Joel King</span><span class="text-content"> We wish to extend the building.</span></div>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <div class="logo"><img src="assets/img/avatar4.jpg"></div>
+                                                            <div class="user-content"><span class="date">January 3</span><span class="name">Claire Sassu</span><span class="text-content"> We the ladies of a block are wiling to join together to set up a catering...</span></div>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <div class="logo"><img src="assets/img/avatar5.jpg"></div>
+                                                            <div class="user-content"><span class="date">January 2</span><span class="name">Emily Carter</span><span class="text-content"> Request you to be a part of the same so that we can work...</span></div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="footer"> <a href="#">View all messages</a></div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="icon s7-bell"></span><span class="indicator"></span></a>
+                            <ul class="dropdown-menu am-notifications">
+                                <li>
+                                    <div class="title">Notifications<span class="badge">3</span></div>
+                                    <div class="list">
+                                        <div class="am-scroller nano">
+                                            <div class="content nano-content">
+                                                <ul>
+                                                    <li class="active">
+                                                        <a href="#">
+                                                            <div class="
+                                              "><span class="icon s7-pin"></span></div>
+                                                            <div class="user-content"><span class="circle"></span><span class="name">Jessica Caruso</span><span class="text-content"> accepted your invitation to join the team.</span><span class="date">2 min ago</span></div>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <div class="logo"><span class="icon s7-add-user"></span></div>
+                                                            <div class="user-content"><span class="name">Joel King</span><span class="text-content"> is now following you</span><span class="date">2 days ago</span></div>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <div class="logo"><span class="icon s7-gleam"></span></div>
+                                                            <div class="user-content"><span class="name">Claire Sassu</span><span class="text-content"> is watching your main repository</span><span class="date">2 days ago</span></div>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <div class="logo"><span class="icon s7-add-user"></span></div>
+                                                            <div class="user-content"><span class="name">Emily Carter</span><span class="text-content"> is now following you</span><span class="date">5 days ago</span></div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="footer"> <a href="#">View all notifications</a></div>
+                                </li>
+                            </ul>
+                        </li>
+                          -->
+                        @*<li class="dropdown">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="icon s7-share"></span></a>
+                                <ul class="dropdown-menu am-connections">
+                                    <li>
+                                        <div class="title">Connections</div>
+                                        <div class="list">
+                                            <div class="content">
+                                                <ul>
+                                                    <li>
+                                                        <div class="logo"><img src="../../assets/img/github.png"></div>
+                                                        <div class="field">
+                                                            <span>GitHub</span>
+                                                            <div class="pull-right">
+                                                                <div class="switch-button switch-button-sm">
+                                                                    <input type="checkbox" checked="" name="check1" id="switch1"><span>
+                                                                        <label for="switch1"></label>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="logo"><img src="../../assets/img/bitbucket.png"></div>
+                                                        <div class="field">
+                                                            <span>Bitbucket</span>
+                                                            <div class="pull-right">
+                                                                <div class="switch-button switch-button-sm">
+                                                                    <input type="checkbox" name="check2" id="switch2"><span>
+                                                                        <label for="switch2"></label>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="logo"><img src="../../assets/img/slack.png"></div>
+                                                        <div class="field">
+                                                            <span>Slack</span>
+                                                            <div class="pull-right">
+                                                                <div class="switch-button switch-button-sm">
+                                                                    <input type="checkbox" checked="" name="check3" id="switch3"><span>
+                                                                        <label for="switch3"></label>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="logo"><img src="../../assets/img/dribbble.png"></div>
+                                                        <div class="field">
+                                                            <span>Dribbble</span>
+                                                            <div class="pull-right">
+                                                                <div class="switch-button switch-button-sm">
+                                                                    <input type="checkbox" name="check4" id="switch4"><span>
+                                                                        <label for="switch4"> </label>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="footer"> <a href="#">View all connections</a></div>
+                                    </li>
+                                </ul>
+                            </li>*@
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="am-left-sidebar">
+            <div class="content">
+                <div class="am-logo"></div>
+                <ul class="sidebar-elements">
+                    <li class="parent">
+                        <a href="../../Cases/Cases"><i class="icon s7-home"></i><span>Home</span></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="../../Cases/Cases"><i class="icon s7-folder"></i><span> Cases</span></a>
+                            </li>
+                            <li class="">
+                                <a href="../../Archive/Archive"><i class="icon s7-notebook"></i><span> Archives</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="parent">
+                        <a href="../../ServiceInformation/AddServiceCase"><i class="icon s7-plus"></i><span>Add Service Case</span></a>
+                    </li>
+                    @{
+                        var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+                        if (controllerName == "Cases" || controllerName == "Archive")
+                        {
+                            <li class="parent">
+                                <a><i class="icon s7-note"></i><span>Case Actions</span></a>
+                                <ul class="sub-menu">
+
+
+                                    @if (controllerName == "Cases" || controllerName == "cases")
+                                    {
+                                        <li>
+                                            <a id="copyCases" onclick="copyAllcases()" data-modal="nft-colored" class="md-trigger"><i class="icon s7-copy-file"></i><span>Export Cases</span></a>
+                                        </li>
+                                        @*<li class="active">
+                                                <a id="ArchiveCases" onclick="loadArchiveCaseModal()"><i class="icon s7-notebook"></i><span>Archive Case</span></a>
+                                            </li>*@
+
+                                    }
+                                    else if (controllerName == "Archive")
+                                    {
+                                        <li>
+                                            <a id="copyArchiveCases" onclick="copyAllcases()" data-modal="nft-colored" class="md-trigger"><i class="icon s7-copy-file"></i><span>Export Archive Cases</span></a>
+                                        </li>
+                                        @*<li class="active">
+                                                <a id="ReactiveCases" onclick="loadReactiveCaseModal()" lass="md-trigger"><i class="icon s7-notebook"></i><span>Reactivate Case</span></a>
+                                            </li>
+                                            <li>
+                                                <a id="deleteCases" onclick="loadDeleteCaseModal()"><i class="icon s7-trash"></i><span>Delete Case</span></a>
+                                            </li>*@
+
+                                    }
+
+
+                                </ul>
+                            </li>
+                        }
+                    }
+                    <li class="parent">
+                        <a onclick="loadDiagnosisModal()" class="btn btn-space btn-success btn-modal"><i class="icon s7-note2"></i><span>Diagnosis</span></a>
+                    </li>
+
+                </ul>
+                <!--Sidebar bottom content-->
+            </div>
+        </div>
+        <div class="am-content">
+            <div id="pageheaddiv" class="page-head">
+
+                @*@{ var titleName ="";
+                    if (@ViewBag.title != null)
+                    {
+                        titleName = @ViewBag.title;
+                    }*@
+
+                <h2 id="Heading1">Cases</h2>
+                @*    }*@
+                <ol class="breadcrumb">
+                    <li><a href="../../cases/cases">Home</a></li>
+                    <li id="Heading2" class="active">Cases Grid</li>
+                </ol>
+            </div>
+            <div id="google_translate_element" class="main-content">
+                @RenderBody()
+            </div>
+        </div>
+        <nav class="am-right-sidebar">
+            <div class="sb-content">
+                @{
+
+                    if (Session["CompanyName"] != null)
+                    {
+                        string @cmpName = Session["CompanyName"].ToString();
+                        <div class="user-info"><img src="../../assets/img/avatar8.jpg"><span class="name">@name<span class="status"></span></span><span class="position">@cmpName</span></div>
+                    }
+
+                }
+
+                <!--
+                <div class="tab-navigation">
+                    <ul role="tablist" class="nav nav-tabs nav-justified">
+                        <li role="presentation" class="active"><a href="#tab1" aria-controls="home" role="tab" data-toggle="tab"> <span class="icon s7-smile"></span></a></li>
+                        <li role="presentation"><a href="#tab2" aria-controls="profile" role="tab" data-toggle="tab"> <span class="icon s7-chat"></span></a></li>
+                        <li role="presentation"><a href="#tab3" aria-controls="messages" role="tab" data-toggle="tab"> <span class="icon s7-help2"></span></a></li>
+                        <li role="presentation"><a href="#tab4" aria-controls="settings" role="tab" data-toggle="tab"> <span class="icon s7-ticket"></span></a></li>
+                    </ul>
+                </div>-->
+                <div class="tab-panel">
+                    <div class="tab-content">
+                        <div id="tab1" role="tabpanel" class="tab-pane announcement active am-scroller nano">
+                            <div class="nano-content">
+                                <div class="content">
+                                    <h2>Company Operations</h2>
+                                    <ul>
+                                        @{
+                                            if (Session["Role"] != null)
+                                            {
+                                                if (Session["Role"].ToString() == "Owner")
+                                                {
+                                                    <li>
+                                                        <div class="icon"><span class="icon s7-culture"></span></div>
+                                                        <div class="content"><a data-toggle="modal" href="../../Operations/Operations" class="btn btn-space btn-success btn-modal"><span> Company Controls</span></a></div>
+
+                                                    </li>
+
+                                                }
+                                            }
+                                        }
+                                        @{ if (Session["Role"] != null)
+                                            {
+                                                if (Session["Role"].ToString() == "Manager")
+                                                {
+                                                    <li>
+
+                                                        <div class="icon"><span class="icon s7-add-user"></span></div>
+                                                        <div class="content"><a href="../../UserOperations/Usercontrols" class="btn btn-space btn-success btn-modal"><span> User Controls</span></a></div>
+                                                        }
+                                                        }
+
+                                                    </li>
+                                                }
+                                            }
+                                        }
+                                        <li>
+
+                                            <div class="icon"><span class="icon s7-add-user"></span></div>
+                                            <div class="content"><a href="../../Department/Department" class="btn btn-space btn-success btn-modal"><span>Department Controls</span></a></div>
+                                        </li>
+                                        <!--<li>
+                                            <div class="icon"><span class="icon s7-star"></span></div>
+                                            <div class="content"><a href="#">High Score</a><span>Suspendisse nec leo tortor rhoncus tincidunt. Duis sit amet rutrum elit.</span></div>
+                                        </li>-->
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--<div class="search">
+                                <input type="text" placeholder="Search..." name="q"><span class="s7-search"></span>
+                            </div> -->
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+
+    @*---------------Diagnosis Modal-------------------------*@
+
+    <div id="DiagnosisPlaceHolder">
+        @*@Html.Action("TypeValuesPopup", "Types")*@
+    </div>
+
+    @*---------------Delete Case Modal-------------------------*@
+
+    <div id="DeleteCasePlaceHolder">
+        @*@Html.Action("TypeValuesPopup", "Types")*@
+    </div>
+
+    @*---------------Archive Case Modal-------------------------*@
+
+    <div id="ArchiveCasePlaceHolder">
+        @*@Html.Action("TypeValuesPopup", "Types")*@
+    </div>
+
+    @*---------------Reactive Case Modal-------------------------*@
+
+    <div id="ReactiveCasePlaceHolder">
+        @*@Html.Action("TypeValuesPopup", "Types")*@
+    </div>
+
+
+    @*------------------ copy cases---------------------*@
+
+    @*<div id="nft-colored" class="modal-container modal-colored-header modal-effect-1" style="display:none">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #FFC870">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close modal-close"><i class="icon s7-close"></i></button>
+                    <h3 class="modal-title">Copy Cases</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <div class="i-circle text-primary"><i class="icon s7-copy-file"></i></div>
+                        <h4>Awesome!</h4>
+                        <p>Do you want to copy all cases?</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default modal-close">Cancel</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary modal-close" style="background-color: #FFC870">Yes</button>
+                </div>
+            </div>
+        </div>*@
+
+
+
+
+
+
+
+    @*----------------------- Script section------------------------*@
+
+    <script src="~/assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/jquery.nanoscroller/javascripts/jquery.nanoscroller.min.js" type="text/javascript"></script>
+    <script src="~/assets/js/main.js" type="text/javascript"></script>
+    <script src="~/assets/lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/select2/js/select2.min.js" type="text/javascript"></script>
+    <script src="~/assets/lib/bootstrap-slider/js/bootstrap-slider.js" type="text/javascript"></script>
+    <script src="~/assets/js/app-form-elements.js" type="text/javascript"></script>
+    <script src="~/assets/lib/jquery.niftymodals/dist/jquery.niftymodals.js" type="text/javascript"></script>
+
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+   
+    <script type="text/javascript">
+
+
+
+        $(document).ready(function () {
+            var WebServiceUrl = 'https://sequware.site/';
+            //var WebServiceUrl = 'http://localhost:58989/';
+            //initialize the javascript
+            App.init();
+            App.formElements();
+            
+
+
+        });
+    function isEmail(email) {
+    debugger
+    var regex = /^([a-zA-Z0-9_.+-])+\@@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,6})+$/;
+    return regex.test(email);
+    }
+
+    function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+    });
+    }
+
+    function copyAllcases() {
+    debugger;
+    var Resultdata;
+    var url = window.location.pathname.split("/");
+    var controller = url[1];
+    var apiurl = "";
+    var calltype = "GET";
+    if (controller == "Cases") {
+    apiurl = 'api/_CustomerRequest/GetMainRequest?CompanyID=' + $('#hdncompanyID').val();
+    }
+    else if (controller == "Archive") {
+    apiurl = 'api/_CustomerRequest/GetArchiveRequest?companyID=' + $('#hdncompanyID').val();
+    }
+
+    debugger
+    $.ajax({
+
+    type: calltype,
+    url: WebServiceUrl + apiurl,
+    contentType: "application/json;charset=utf-8",
+    success: function (result, status, xhr) {
+    Resultdata = JSON.stringify(result);
+    copyFunc(Resultdata);
+
+    },
+    error: function (xhr, status, error) {
+    }
+    });
+
+
+    }
+
+    function copyFunc(Resultdata) {
+
+    var url = window.location.pathname.split("/");
+    var controller = url[1];
+    var apiurl = "";
+    if (controller == "Cases") {
+    apiurl = '/Cases/CopyCases';
+    }
+    else if (controller == "Archive") {
+    apiurl = '/Cases/CopyArchiveCases';
+    }
+    debugger;
+    $.ajax({
+    cache: false,
+    dataType: "json",
+    type: 'POST',
+    url: apiurl,
+    data: Resultdata,
+    contentType: "application/json; charset=utf-8",
+    success: function (data) {
+    var response = JSON.parse(JSON.stringify(data));
+    window.location = '/Cases/Download?fileGuid=' + response.FileGuid
+    + '&filename=' + response.FileName;
+    }
+    })
+    }
+
+    function loadDiagnosisModal() {
+
+    var companyid= $('#hdncompanyID').val();
+    var url = '@Url.Action("DiagnosisModal", "Cases")';
+    $("#DiagnosisPlaceHolder").load(url + "?companyID=" + companyid  , function (responseTxt, statusTxt, xhr) {
+
+    if (statusTxt == "success") {
+    $('#form-bp2').modal('show');
+    }
+
+    if (statusTxt == "error") {
+    console.log("Error: " + xhr.status + ": " + xhr.statusText);
+    }
+    });
+    }
+
+
+    function loadDeleteCaseModal(requestID) {
+    debugger
+    //    var requestID = $('#request-id').text();
+    //    if (requestID == "......  ") {
+    //    alert("Please select case to be deleted.");
+    //    return false;
+    //}
+    var url = '@Url.Action("DeleteCaseModal", "Cases")';
+    debugger
+    $("#DeleteCasePlaceHolder").load(url + "?requestID=" + requestID  , function (responseTxt, statusTxt, xhr) {
+
+    if (statusTxt == "success") {
+    debugger
+    $('#delete_Cases').modal('show');
+    }
+
+    if (statusTxt == "error") {
+    debugger
+    console.log("Error: " + xhr.status + ": " + xhr.statusText);
+    }
+    });
+    }
+
+
+    function loadArchiveCaseModal(x) {
+    debugger
+
+    // alert($(x).data("id"));
+    var requestID = $(x).data("id");
+    var url = '@Url.Action("ArciveCaseModal", "Cases")';
+    debugger
+    $("#ArchiveCasePlaceHolder").load(url + "?requestID=" + requestID  , function (responseTxt, statusTxt, xhr) {
+
+    if (statusTxt == "success") {
+    debugger
+    $('#archive_Cases').modal('show');
+    }
+
+    if (statusTxt == "error") {
+    debugger
+    console.log("Error: " + xhr.status + ": " + xhr.statusText);
+    }
+    });
+    }
+
+    function loadReactiveCaseModal(requestID) {
+    debugger
+    //var requestID = $('#request-id').text();
+    //if (requestID == "......  ") {
+    //    alert("Please select case to be Reactivated.");
+    //    return false;
+    //}
+    var url = '@Url.Action("ReactiveCaseModal", "Cases")';
+    debugger
+    $("#ReactiveCasePlaceHolder").load(url + "?requestID=" + requestID  , function (responseTxt, statusTxt, xhr) {
+
+    if (statusTxt == "success") {
+    debugger
+    $('#Reactive_Cases').modal('show');
+    }
+
+    if (statusTxt == "error") {
+    debugger
+    console.log("Error: " + xhr.status + ": " + xhr.statusText);
+    }
+    });
+    }
+
+
+    function clearCache() {
+    debugger
+    var Backlen = history.length;
+    history.go(-Backlen);
+    window.location.href = "../../Login/Logout";
+    }
+
+    </script>
+
+
+
+    @RenderSection("PageLevelJs", required: false)
+
+</body>
+</html>

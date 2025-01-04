@@ -1,0 +1,4 @@
+﻿Could not parse the configuration file. The error message is: 'The 'server' keyword is not supported.'. Try editing the file manually and then saving it.
+Generated model file: cssDbModel.edmx.
+Loading metadata from the database took 00:00:01.8940381.
+Generating the model took 00:00:03.1208507.

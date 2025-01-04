@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="eaa390f823964944b164e4c04089d356" Name="Diagram1">
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_Company" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_Completion" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_contact_person" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_country" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_customer" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_customer_request" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_Departments" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_Diagnosis" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.Tbl_EmailContents" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_Inspection" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_language" Width="1.5" PointX="8.75" PointY="5.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_LicenseHistory" Width="1.5" PointX="8.75" PointY="8.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_OrderData" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_priority" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_ProblemDescriptionIssue" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_Reason" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_register" Width="1.5" PointX="10.75" PointY="6.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_SequawareLogin" Width="1.5" PointX="10.75" PointY="10.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_ServiceTask" Width="1.5" PointX="4.75" PointY="11.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_Solution" Width="1.5" PointX="6.75" PointY="11.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_SolutionOptions" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_status" Width="1.5" PointX="12.75" PointY="3.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_zipcodes" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.SampleEmailContent" Width="1.5" PointX="12.75" PointY="9.75" />
+        <EntityTypeShape EntityType="customerServiceDbModel.tbl_SampleDepartments" Width="1.5" PointX="0.75" PointY="14.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

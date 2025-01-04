@@ -1,0 +1,1627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="customerServiceDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'customerServiceDb.dbo.SampleEmailContents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SampleEmailContents">
+          <Key>
+            <PropertyRef Name="Email_id" />
+          </Key>
+          <Property Name="Email_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email_Code" Type="text" />
+          <Property Name="Subject" Type="text" />
+          <Property Name="RMA" Type="text" />
+          <Property Name="Reference" Type="text" />
+          <Property Name="Date" Type="text" />
+          <Property Name="Dear" Type="text" />
+          <Property Name="Email_text" Type="text" />
+          <Property Name="Footer" Type="text" />
+          <Property Name="Signature" Type="text" />
+          <Property Name="Company_ID" Type="int" />
+          <Property Name="To" Type="varchar" MaxLength="50" />
+          <Property Name="LanguageID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Company">
+          <Key>
+            <PropertyRef Name="Company_id" />
+          </Key>
+          <Property Name="Company_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Comapany_Name" Type="text" />
+          <Property Name="Address" Type="text" />
+          <Property Name="Phone_Num" Type="text" />
+          <Property Name="EvaluationLink" Type="text" />
+          <Property Name="Liscense" Type="text" />
+          <Property Name="LisceneExpiryDate" Type="text" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Completion">
+          <Key>
+            <PropertyRef Name="Completion_id" />
+          </Key>
+          <Property Name="Completion_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="request_id" Type="int" />
+          <Property Name="order_number" Type="text" />
+          <Property Name="credite_note_number" Type="text" />
+          <Property Name="Disposal" Type="text" />
+          <Property Name="Evaluation_Request" Type="bit" />
+          <Property Name="Availability" Type="int" />
+          <Property Name="Professional_Competence" Type="int" />
+          <Property Name="Reaction_Time" Type="int" />
+          <Property Name="Kindness" Type="text" />
+          <Property Name="Text" Type="text" />
+          <Property Name="Email_Sent" Type="int" />
+          <Property Name="Email_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_contact_person">
+          <Key>
+            <PropertyRef Name="Contact_id" />
+          </Key>
+          <Property Name="Contact_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar(max)" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="customer_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_country">
+          <Key>
+            <PropertyRef Name="count_id" />
+          </Key>
+          <Property Name="count_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_customer">
+          <Key>
+            <PropertyRef Name="Customer_id" />
+          </Key>
+          <Property Name="Customer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cname" Type="text" />
+          <Property Name="address" Type="text" />
+          <Property Name="Country" Type="text" />
+          <Property Name="street" Type="text" />
+          <Property Name="Zipcode" Type="text" />
+          <Property Name="company" Type="text" />
+          <Property Name="CustomerRefNo" Type="text" />
+          <Property Name="Company_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_customer_request">
+          <Key>
+            <PropertyRef Name="Request_id" />
+          </Key>
+          <Property Name="Request_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ref_num" Type="nvarchar" MaxLength="50" />
+          <Property Name="issue" Type="int" Nullable="false" />
+          <Property Name="customer_file" Type="nvarchar(max)" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="priority" Type="nvarchar" MaxLength="50" />
+          <Property Name="status" Type="nvarchar" MaxLength="50" />
+          <Property Name="date_added" Type="date" />
+          <Property Name="Last_Modified" Type="date" />
+          <Property Name="Individual_FootNote" Type="nchar" MaxLength="10" />
+          <Property Name="FurtherInformatipn" Type="text" />
+          <Property Name="error_description" Type="nvarchar(max)" />
+          <Property Name="worker" Type="nvarchar" MaxLength="50" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="isDelete" Type="bit" Nullable="false" />
+          <Property Name="Company_ID" Type="int" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Departments">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dep_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Company_ID" Type="int" />
+          <Property Name="LanguageID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Diagnosis">
+          <Key>
+            <PropertyRef Name="DiagnosisID" />
+          </Key>
+          <Property Name="DiagnosisID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Diagnosis" Type="text" Nullable="false" />
+          <Property Name="isdelete" Type="bit" />
+          <Property Name="Company_ID" Type="int" />
+          <Property Name="Language" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_EmailContents">
+          <Key>
+            <PropertyRef Name="Email_id" />
+          </Key>
+          <Property Name="Email_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email_Code" Type="text" />
+          <Property Name="Subject" Type="text" />
+          <Property Name="RMA" Type="text" />
+          <Property Name="Reference" Type="text" />
+          <Property Name="Date" Type="text" />
+          <Property Name="Dear" Type="text" />
+          <Property Name="Email_text" Type="text" />
+          <Property Name="Footer" Type="text" />
+          <Property Name="Signature" Type="text" />
+          <Property Name="Company_ID" Type="int" />
+          <Property Name="To" Type="varchar" MaxLength="50" />
+          <Property Name="LanguageID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Inspection">
+          <Key>
+            <PropertyRef Name="InspectionID" />
+          </Key>
+          <Property Name="InspectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestId" Type="int" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="Department" Type="int" />
+          <Property Name="Operator" Type="text" />
+          <Property Name="Complaint" Type="text" />
+          <Property Name="ServiceTask" Type="int" />
+          <Property Name="Diagnosis" Type="int" />
+          <Property Name="Reason" Type="int" />
+          <Property Name="Description" Type="text" />
+          <Property Name="createRp" Type="text" />
+          <Property Name="ReportDone" Type="text" />
+          <Property Name="Create8DReport" Type="text" />
+          <Property Name="report8DDone" Type="text" />
+          <Property Name="Email_Sent" Type="int" />
+          <Property Name="Email_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_language">
+          <Key>
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="languageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_LicenseHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Liscense_Num" Type="varchar" MaxLength="50" />
+          <Property Name="ExpiryDate" Type="varchar" MaxLength="50" />
+          <Property Name="companyId" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_OrderData">
+          <Key>
+            <PropertyRef Name="Order_id" />
+          </Key>
+          <Property Name="Order_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Request_id" Type="int" />
+          <Property Name="Email_Sent" Type="int" />
+          <Property Name="Email_date" Type="datetime" />
+          <Property Name="Confirmation" Type="text" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="CustomerNumber_FrmSheet" Type="text" />
+          <Property Name="CustomerNumber_Org" Type="text" />
+          <Property Name="OrginalOrderNumber" Type="text" />
+          <Property Name="Waranty" Type="text" />
+          <Property Name="DeliveryDate" Type="date" />
+          <Property Name="product" Type="text" />
+          <Property Name="Orignal_Quantity" Type="float" />
+        </EntityType>
+        <EntityType Name="tbl_priority">
+          <Key>
+            <PropertyRef Name="Priority_id" />
+          </Key>
+          <Property Name="Priority_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="priority" Type="nchar" MaxLength="10" />
+          <Property Name="LanguageID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_ProblemDescriptionIssue">
+          <Key>
+            <PropertyRef Name="Issue_ID" />
+          </Key>
+          <Property Name="Issue_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Issue" Type="text" Nullable="false" />
+          <Property Name="LanguageID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Reason">
+          <Key>
+            <PropertyRef Name="ReasonID" />
+          </Key>
+          <Property Name="ReasonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Reason" Type="text" Nullable="false" />
+          <Property Name="LanguageID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_register">
+          <Key>
+            <PropertyRef Name="register_id" />
+          </Key>
+          <Property Name="register_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" />
+          <Property Name="gender" Type="nchar" MaxLength="10" />
+          <Property Name="dob" Type="date" />
+          <Property Name="address" Type="nvarchar(max)" />
+          <Property Name="education" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nchar" MaxLength="10" />
+          <Property Name="Company_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_SampleDepartments">
+          <Key>
+            <PropertyRef Name="deparmentID" />
+          </Key>
+          <Property Name="deparmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="LanguageID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_SequawareLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="text" Nullable="false" />
+          <Property Name="Password" Type="text" Nullable="false" />
+          <Property Name="Email" Type="text" />
+          <Property Name="Company_ID" Type="int" />
+          <Property Name="role" Type="varchar" MaxLength="50" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="ForgotPasswordCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="languageID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_ServiceTask">
+          <Key>
+            <PropertyRef Name="DiagnosisCatID" />
+          </Key>
+          <Property Name="DiagnosisCatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Categories" Type="text" Nullable="false" />
+          <Property Name="isDelete" Type="bit" />
+          <Property Name="LangID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Solution">
+          <Key>
+            <PropertyRef Name="solution_id" />
+          </Key>
+          <Property Name="solution_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="request_id" Type="int" Nullable="false" />
+          <Property Name="statement" Type="text" />
+          <Property Name="Notes" Type="text" />
+          <Property Name="reminder1" Type="text" />
+          <Property Name="reminder2" Type="text" />
+          <Property Name="Email_Sent" Type="int" />
+          <Property Name="Email_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_SolutionOptions">
+          <Key>
+            <PropertyRef Name="option_id" />
+          </Key>
+          <Property Name="option_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="solution_id" Type="int" Nullable="false" />
+          <Property Name="request_id" Type="int" Nullable="false" />
+          <Property Name="Options" Type="text" Nullable="false" />
+          <Property Name="price" Type="float" Nullable="false" />
+          <Property Name="decision" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_status">
+          <Key>
+            <PropertyRef Name="Status_id" />
+          </Key>
+          <Property Name="Status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="text" Nullable="false" />
+          <Property Name="languageID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_zipcodes">
+          <Key>
+            <PropertyRef Name="zipCode_id" />
+          </Key>
+          <Property Name="zipCode_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="zipcode" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Function Name="sp_GetArchiveGriddata" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Company_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetBasicdata" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetMainGriddata" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Company_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetServiceForm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RequestId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_GetServiceInfodata" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RequestID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="customerServiceDbModelStoreContainer">
+          <EntitySet Name="tbl_Company" EntityType="Self.tbl_Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Completion" EntityType="Self.tbl_Completion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_contact_person" EntityType="Self.tbl_contact_person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_country" EntityType="Self.tbl_country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_customer" EntityType="Self.tbl_customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_customer_request" EntityType="Self.tbl_customer_request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Departments" EntityType="Self.tbl_Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Diagnosis" EntityType="Self.tbl_Diagnosis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_EmailContents" EntityType="Self.Tbl_EmailContents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Inspection" EntityType="Self.tbl_Inspection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_language" EntityType="Self.tbl_language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_LicenseHistory" EntityType="Self.tbl_LicenseHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_OrderData" EntityType="Self.tbl_OrderData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_priority" EntityType="Self.tbl_priority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_ProblemDescriptionIssue" EntityType="Self.tbl_ProblemDescriptionIssue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Reason" EntityType="Self.tbl_Reason" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_register" EntityType="Self.tbl_register" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SampleDepartments" EntityType="Self.tbl_SampleDepartments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SequawareLogin" EntityType="Self.tbl_SequawareLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_ServiceTask" EntityType="Self.tbl_ServiceTask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Solution" EntityType="Self.tbl_Solution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_SolutionOptions" EntityType="Self.tbl_SolutionOptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_status" EntityType="Self.tbl_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_zipcodes" EntityType="Self.tbl_zipcodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SampleEmailContents" EntityType="Self.SampleEmailContents" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SampleEmailContents].[Email_id] AS [Email_id], 
+    [SampleEmailContents].[Email_Code] AS [Email_Code], 
+    [SampleEmailContents].[Subject] AS [Subject], 
+    [SampleEmailContents].[RMA] AS [RMA], 
+    [SampleEmailContents].[Reference] AS [Reference], 
+    [SampleEmailContents].[Date] AS [Date], 
+    [SampleEmailContents].[Dear] AS [Dear], 
+    [SampleEmailContents].[Email_text] AS [Email_text], 
+    [SampleEmailContents].[Footer] AS [Footer], 
+    [SampleEmailContents].[Signature] AS [Signature], 
+    [SampleEmailContents].[Company_ID] AS [Company_ID], 
+    [SampleEmailContents].[To] AS [To], 
+    [SampleEmailContents].[LanguageID] AS [LanguageID]
+    FROM [dbo].[SampleEmailContents] AS [SampleEmailContents]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="customerServiceDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="cssDbContext" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_GetBasicdata" ReturnType="Collection(customerServiceDbModel.sp_GetBasicdata_Result)">
+          <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetMainGriddata" ReturnType="Collection(customerServiceDbModel.sp_GetMainGriddata_Result)" >
+          <Parameter Name="Company_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetServiceInfodata" ReturnType="Collection(customerServiceDbModel.sp_GetServiceInfodata_Result)">
+          <Parameter Name="RequestID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetServiceForm" ReturnType="Collection(customerServiceDbModel.sp_GetServiceForm_Result)">
+          <Parameter Name="RequestId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetArchiveGriddata" ReturnType="Collection(customerServiceDbModel.sp_GetArchiveGriddata_Result1)">
+          <Parameter Name="Company_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_GetMainGriddata1">
+          <Parameter Name="Company_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="tbl_Company" EntityType="customerServiceDbModel.tbl_Company" />
+          <EntitySet Name="tbl_Completion" EntityType="customerServiceDbModel.tbl_Completion" />
+          <EntitySet Name="tbl_contact_person" EntityType="customerServiceDbModel.tbl_contact_person" />
+          <EntitySet Name="tbl_country" EntityType="customerServiceDbModel.tbl_country" />
+          <EntitySet Name="tbl_customer" EntityType="customerServiceDbModel.tbl_customer" />
+          <EntitySet Name="tbl_customer_request" EntityType="customerServiceDbModel.tbl_customer_request" />
+          <EntitySet Name="tbl_Departments" EntityType="customerServiceDbModel.tbl_Departments" />
+          <EntitySet Name="tbl_Diagnosis" EntityType="customerServiceDbModel.tbl_Diagnosis" />
+          <EntitySet Name="Tbl_EmailContents" EntityType="customerServiceDbModel.Tbl_EmailContents" />
+          <EntitySet Name="tbl_Inspection" EntityType="customerServiceDbModel.tbl_Inspection" />
+          <EntitySet Name="tbl_language" EntityType="customerServiceDbModel.tbl_language" />
+          <EntitySet Name="tbl_LicenseHistory" EntityType="customerServiceDbModel.tbl_LicenseHistory" />
+          <EntitySet Name="tbl_OrderData" EntityType="customerServiceDbModel.tbl_OrderData" />
+          <EntitySet Name="tbl_priority" EntityType="customerServiceDbModel.tbl_priority" />
+          <EntitySet Name="tbl_ProblemDescriptionIssue" EntityType="customerServiceDbModel.tbl_ProblemDescriptionIssue" />
+          <EntitySet Name="tbl_Reason" EntityType="customerServiceDbModel.tbl_Reason" />
+          <EntitySet Name="tbl_register" EntityType="customerServiceDbModel.tbl_register" />
+          <EntitySet Name="tbl_SequawareLogin" EntityType="customerServiceDbModel.tbl_SequawareLogin" />
+          <EntitySet Name="tbl_ServiceTask" EntityType="customerServiceDbModel.tbl_ServiceTask" />
+          <EntitySet Name="tbl_Solution" EntityType="customerServiceDbModel.tbl_Solution" />
+          <EntitySet Name="tbl_SolutionOptions" EntityType="customerServiceDbModel.tbl_SolutionOptions" />
+          <EntitySet Name="tbl_status" EntityType="customerServiceDbModel.tbl_status" />
+          <EntitySet Name="tbl_zipcodes" EntityType="customerServiceDbModel.tbl_zipcodes" />
+          <EntitySet Name="SampleEmailContents" EntityType="customerServiceDbModel.SampleEmailContent" />
+          <EntitySet Name="tbl_SampleDepartments" EntityType="customerServiceDbModel.tbl_SampleDepartments" />
+          </EntityContainer>
+        <ComplexType Name="sp_GetBasicdata_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="cname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="address" Nullable="true" />
+          <Property Type="String" Name="street" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="zipcode_id" Nullable="true" />
+          <Property Type="Int32" Name="country_id" Nullable="false" />
+          <Property Type="String" Name="company" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="id1" Nullable="true" />
+          <Property Type="String" Name="ref_num" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="issue" Nullable="true" />
+          <Property Type="String" Name="customer_file" Nullable="true" />
+          <Property Type="Int32" Name="customer_id" Nullable="true" />
+          <Property Type="String" Name="priority" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="date_added" Nullable="true" />
+          <Property Type="String" Name="error_description" Nullable="true" />
+          <Property Type="String" Name="worker" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="id2" Nullable="true" />
+          <Property Type="String" Name="zipcode" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="id3" Nullable="true" />
+          <Property Type="String" Name="country" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_GetMainGriddata_Result">
+          <Property Type="String" Name="Case" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Prioritization" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Customer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Service_Reason" Nullable="true" />
+          <Property Type="DateTime" Name="Date" Nullable="true" />
+          <Property Type="Int32" Name="ID" Nullable="true" />
+          <Property Type="String" Name="File" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetArchiveGriddata_Result">
+          <Property Type="Int32" Name="Case" Nullable="false" />
+          <Property Type="String" Name="priority" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Company" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="Service_Reason" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="true" />
+          <Property Type="Int32" Name="ID" Nullable="true" />
+          <Property Type="String" Name="File" Nullable="true" />
+          <Property Type="DateTime" Name="Last_Modified" Nullable="true" />
+          <Property Type="Int32" Name="Request_id" Nullable="false" />
+          <Property Type="Int32" Name="Order_id" Nullable="true" />
+          <Property Type="Int32" Name="Request_id1" Nullable="true" />
+          <Property Type="Int32" Name="Email_Sent" Nullable="true" />
+          <Property Type="DateTime" Name="Email_date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Confirmation" Nullable="true" MaxLength="Max" />
+          <Property Type="Double" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="CustomerNumber_FrmSheet" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="CustomerNumber_Org" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="OrginalOrderNumber" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Waranty" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="DeliveryDate" Nullable="true" />
+          <Property Type="Double" Name="Orignal_Quantity" Nullable="true" />
+          <Property Type="Int32" Name="InspectionID" Nullable="true" />
+          <Property Type="Int32" Name="RequestId" Nullable="true" />
+          <Property Type="Int32" Name="OrderId" Nullable="true" />
+          <Property Type="Int32" Name="Department" Nullable="true" />
+          <Property Type="String" Name="Operator" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Complaint" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="ServiceTask" Nullable="true" />
+          <Property Type="Int32" Name="Diagnosis" Nullable="true" />
+          <Property Type="Int32" Name="Reason" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="createRp" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="ReportDone" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Create8DReport" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="report8DDone" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="Email_Sent1" Nullable="true" />
+          <Property Type="DateTime" Name="Email_date1" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Customer_id" Nullable="true" />
+          <Property Type="String" Name="cname" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="address" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="street" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Zipcode" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="company1" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="CustomerRefNo" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="DepartmentID" Nullable="true" />
+          <Property Type="String" Name="Dep_Name" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="ReasonID" Nullable="true" />
+          <Property Type="String" Name="Reason1" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="DiagnosisID" Nullable="true" />
+          <Property Type="String" Name="Diagnosis1" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="DiagnosisCatID" Nullable="true" />
+          <Property Type="String" Name="Categories" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="Company_ID" Nullable="true" />
+          <Property Type="Int32" Name="Company_ID1" Nullable="true" />
+          <Property Type="Boolean" Name="isdelete" Nullable="true" />
+          <Property Type="Int32" Name="Company_ID2" Nullable="true" />
+          <Property Type="Boolean" Name="isDelete1" Nullable="true" />
+          <Property Type="Int32" Name="Completion_id" Nullable="true" />
+          <Property Type="Int32" Name="request_id2" Nullable="true" />
+          <Property Type="String" Name="order_number" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="credite_note_number" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Disposal" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="Evaluation_Request" Nullable="true" />
+          <Property Type="Int32" Name="Availability" Nullable="true" />
+          <Property Type="Int32" Name="Professional_Competence" Nullable="true" />
+          <Property Type="Int32" Name="Reaction_Time" Nullable="true" />
+          <Property Type="String" Name="Kindness" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Text" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="Email_Sent2" Nullable="true" />
+          <Property Type="DateTime" Name="Email_date2" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="sp_GetServiceInfodata_Result">
+          <Property Type="Int32" Name="Request_id" Nullable="false" />
+          <Property Type="String" Name="ref_num" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="issue" Nullable="false" />
+          <Property Type="String" Name="customer_file" Nullable="true" />
+          <Property Type="Int32" Name="customer_id" Nullable="false" />
+          <Property Type="String" Name="priority" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="date_added" Nullable="true" />
+          <Property Type="DateTime" Name="Last_Modified" Nullable="true" />
+          <Property Type="String" Name="Individual_FootNote" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FurtherInformatipn" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="error_description" Nullable="false" />
+          <Property Type="String" Name="worker" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="isActive" Nullable="false" />
+          <Property Type="Boolean" Name="isDelete" Nullable="false" />
+          <Property Type="Int32" Name="Order_id" Nullable="true" />
+          <Property Type="Int32" Name="Request_id1" Nullable="true" />
+          <Property Type="Int32" Name="Email_Sent" Nullable="true" />
+          <Property Type="DateTime" Name="Email_date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Confirmation" Nullable="true" MaxLength="Max" />
+          <Property Type="Double" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="CustomerNumber_FrmSheet" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="CustomerNumber_Org" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="OrginalOrderNumber" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Waranty" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="DeliveryDate" Nullable="true" />
+          <Property Type="Double" Name="Orignal_Quantity" Nullable="true" />
+          <Property Type="Int32" Name="InspectionID" Nullable="true" />
+          <Property Type="Int32" Name="RequestId" Nullable="true" />
+          <Property Type="Int32" Name="OrderId" Nullable="true" />
+          <Property Type="Int32" Name="Department" Nullable="true" />
+          <Property Type="String" Name="Operator" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Complaint" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="ServiceTask" Nullable="true" />
+          <Property Type="Int32" Name="Diagnosis" Nullable="true" />
+          <Property Type="Int32" Name="Reason" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="createRp" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="ReportDone" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Create8DReport" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="report8DDone" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="Email_Sent1" Nullable="true" />
+          <Property Type="DateTime" Name="Email_date1" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Customer_id1" Nullable="true" />
+          <Property Type="String" Name="cname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="address" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="street" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Zipcode" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="company" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CustomerRefNo" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="Contact_id" Nullable="true" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="true" />
+          <Property Type="String" Name="phone" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="customer_id2" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_GetServiceForm_Result">
+          <Property Type="Int32" Name="Request_id" Nullable="false" />
+          <Property Type="String" Name="ref_num" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="issue" Nullable="false" />
+          <Property Type="String" Name="customer_file" Nullable="true" />
+          <Property Type="Int32" Name="customer_id" Nullable="false" />
+          <Property Type="String" Name="priority" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="date_added" Nullable="true" />
+          <Property Type="DateTime" Name="Last_Modified" Nullable="true" />
+          <Property Type="String" Name="Individual_FootNote" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FurtherInformatipn" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="error_description" Nullable="false" />
+          <Property Type="String" Name="worker" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="isActive" Nullable="false" />
+          <Property Type="Boolean" Name="isDelete" Nullable="false" />
+          <Property Type="Int32" Name="Order_id" Nullable="true" />
+          <Property Type="Int32" Name="Request_id1" Nullable="true" />
+          <Property Type="Int32" Name="Email_Sent" Nullable="true" />
+          <Property Type="DateTime" Name="Email_date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Confirmation" Nullable="true" MaxLength="Max" />
+          <Property Type="Double" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="CustomerNumber_FrmSheet" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="CustomerNumber_Org" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="OrginalOrderNumber" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Waranty" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="DeliveryDate" Nullable="true" />
+          <Property Type="Double" Name="Orignal_Quantity" Nullable="true" />
+          <Property Type="Int32" Name="InspectionID" Nullable="true" />
+          <Property Type="Int32" Name="RequestId" Nullable="true" />
+          <Property Type="Int32" Name="OrderId" Nullable="true" />
+          <Property Type="Int32" Name="Department" Nullable="true" />
+          <Property Type="String" Name="Operator" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Complaint" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="ServiceTask" Nullable="true" />
+          <Property Type="Int32" Name="Diagnosis" Nullable="true" />
+          <Property Type="Int32" Name="Reason" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="createRp" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="ReportDone" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Create8DReport" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="report8DDone" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="Email_Sent1" Nullable="true" />
+          <Property Type="DateTime" Name="Email_date1" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="solution_id" Nullable="true" />
+          <Property Type="Int32" Name="request_id2" Nullable="true" />
+          <Property Type="String" Name="statement" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="reminder1" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="reminder2" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="Email_Sent2" Nullable="true" />
+          <Property Type="DateTime" Name="Email_date2" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Completion_id" Nullable="true" />
+          <Property Type="Int32" Name="request_id3" Nullable="true" />
+          <Property Type="String" Name="order_number" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="credite_note_number" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Disposal" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="Evaluation_Request" Nullable="true" />
+          <Property Type="Int32" Name="Availability" Nullable="true" />
+          <Property Type="Int32" Name="Professional_Competence" Nullable="true" />
+          <Property Type="Int32" Name="Reaction_Time" Nullable="true" />
+          <Property Type="String" Name="Kindness" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Text" Nullable="true" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="sp_GetArchiveGriddata_Result1">
+          <Property Type="Int32" Name="Case" Nullable="false" />
+          <Property Type="String" Name="priority" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Company" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Service_Reason" Nullable="true" />
+          <Property Type="DateTime" Name="Date" Nullable="true" />
+          <Property Type="Int32" Name="ID" Nullable="true" />
+          <Property Type="String" Name="File" Nullable="true" />
+          <Property Type="DateTime" Name="Last_Modified" Nullable="true" />
+          <Property Type="Int32" Name="Request_id" Nullable="false" />
+          <Property Type="Int32" Name="Order_id" Nullable="true" />
+          <Property Type="Int32" Name="Request_id1" Nullable="true" />
+          <Property Type="Int32" Name="Email_Sent" Nullable="true" />
+          <Property Type="DateTime" Name="Email_date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Confirmation" Nullable="true" MaxLength="Max" />
+          <Property Type="Double" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="CustomerNumber_FrmSheet" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="CustomerNumber_Org" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="OrginalOrderNumber" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Waranty" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="DeliveryDate" Nullable="true" />
+          <Property Type="String" Name="product" Nullable="true" MaxLength="Max" />
+          <Property Type="Double" Name="Orignal_Quantity" Nullable="true" />
+          <Property Type="Int32" Name="InspectionID" Nullable="true" />
+          <Property Type="Int32" Name="RequestId" Nullable="true" />
+          <Property Type="Int32" Name="OrderId" Nullable="true" />
+          <Property Type="Int32" Name="Department" Nullable="true" />
+          <Property Type="String" Name="Operator" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Complaint" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="ServiceTask" Nullable="true" />
+          <Property Type="Int32" Name="Diagnosis" Nullable="true" />
+          <Property Type="Int32" Name="Reason" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="createRp" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="ReportDone" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Create8DReport" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="report8DDone" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="Email_Sent1" Nullable="true" />
+          <Property Type="DateTime" Name="Email_date1" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="Customer_id" Nullable="true" />
+          <Property Type="String" Name="cname" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="address" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="street" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Zipcode" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="company1" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="CustomerRefNo" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="Company_ID" Nullable="true" />
+          <Property Type="Int32" Name="DepartmentID" Nullable="true" />
+          <Property Type="String" Name="Dep_Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Company_ID1" Nullable="true" />
+          <Property Type="Int32" Name="ReasonID" Nullable="true" />
+          <Property Type="String" Name="Reason1" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="DiagnosisID" Nullable="true" />
+          <Property Type="String" Name="Diagnosis1" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="isdelete" Nullable="true" />
+          <Property Type="Int32" Name="Company_ID2" Nullable="true" />
+          <Property Type="Int32" Name="DiagnosisCatID" Nullable="true" />
+          <Property Type="String" Name="Categories" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="isDelete1" Nullable="true" />
+          <Property Type="Int32" Name="Completion_id" Nullable="true" />
+          <Property Type="Int32" Name="request_id2" Nullable="true" />
+          <Property Type="String" Name="order_number" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="credite_note_number" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Disposal" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="Evaluation_Request" Nullable="true" />
+          <Property Type="Int32" Name="Availability" Nullable="true" />
+          <Property Type="Int32" Name="Professional_Competence" Nullable="true" />
+          <Property Type="Int32" Name="Reaction_Time" Nullable="true" />
+          <Property Type="String" Name="Kindness" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Text" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="Email_Sent2" Nullable="true" />
+          <Property Type="DateTime" Name="Email_date2" Nullable="true" Precision="23" />
+        </ComplexType>
+        <EntityType Name="tbl_Company">
+          <Key>
+            <PropertyRef Name="Company_id" />
+          </Key>
+          <Property Name="Company_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comapany_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_Num" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EvaluationLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Liscense" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LisceneExpiryDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_Completion">
+          <Key>
+            <PropertyRef Name="Completion_id" />
+          </Key>
+          <Property Name="Completion_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="request_id" Type="Int32" />
+          <Property Name="order_number" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="credite_note_number" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Disposal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Evaluation_Request" Type="Boolean" />
+          <Property Name="Availability" Type="Int32" />
+          <Property Name="Professional_Competence" Type="Int32" />
+          <Property Name="Reaction_Time" Type="Int32" />
+          <Property Name="Kindness" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email_Sent" Type="Int32" />
+          <Property Name="Email_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbl_contact_person">
+          <Key>
+            <PropertyRef Name="Contact_id" />
+          </Key>
+          <Property Name="Contact_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customer_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_country">
+          <Key>
+            <PropertyRef Name="count_id" />
+          </Key>
+          <Property Name="count_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_customer">
+          <Key>
+            <PropertyRef Name="Customer_id" />
+          </Key>
+          <Property Name="Customer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="street" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="company" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerRefNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Company_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_customer_request">
+          <Key>
+            <PropertyRef Name="Request_id" />
+          </Key>
+          <Property Name="Request_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ref_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="issue" Type="Int32" Nullable="false" />
+          <Property Name="customer_file" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="priority" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date_added" Type="DateTime" Precision="0" />
+          <Property Name="Last_Modified" Type="DateTime" Precision="0" />
+          <Property Name="Individual_FootNote" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="FurtherInformatipn" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="error_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="worker" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <Property Name="isDelete" Type="Boolean" Nullable="false" />
+          <Property Name="Company_ID" Type="Int32" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_Departments">
+          <Key>
+            <PropertyRef Name="DepartmentID" />
+          </Key>
+          <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dep_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Company_ID" Type="Int32" />
+          <Property Name="LanguageID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_Diagnosis">
+          <Key>
+            <PropertyRef Name="DiagnosisID" />
+          </Key>
+          <Property Name="DiagnosisID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Diagnosis" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="isdelete" Type="Boolean" />
+          <Property Name="Company_ID" Type="Int32" />
+          <Property Name="Language" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Tbl_EmailContents">
+          <Key>
+            <PropertyRef Name="Email_id" />
+          </Key>
+          <Property Name="Email_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email_Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Dear" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Footer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Signature" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Company_ID" Type="Int32" />
+          <Property Name="To" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LanguageID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_Inspection">
+          <Key>
+            <PropertyRef Name="InspectionID" />
+          </Key>
+          <Property Name="InspectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestId" Type="Int32" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="Department" Type="Int32" />
+          <Property Name="Operator" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Complaint" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceTask" Type="Int32" />
+          <Property Name="Diagnosis" Type="Int32" />
+          <Property Name="Reason" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="createRp" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReportDone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Create8DReport" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="report8DDone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email_Sent" Type="Int32" />
+          <Property Name="Email_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbl_language">
+          <Key>
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="languageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_LicenseHistory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Liscense_Num" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExpiryDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="companyId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_OrderData">
+          <Key>
+            <PropertyRef Name="Order_id" />
+          </Key>
+          <Property Name="Order_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Request_id" Type="Int32" />
+          <Property Name="Email_Sent" Type="Int32" />
+          <Property Name="Email_date" Type="DateTime" Precision="3" />
+          <Property Name="Confirmation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Double" />
+          <Property Name="CustomerNumber_FrmSheet" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerNumber_Org" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OrginalOrderNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Waranty" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
+          <Property Name="product" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Orignal_Quantity" Type="Double" />
+        </EntityType>
+        <EntityType Name="tbl_priority">
+          <Key>
+            <PropertyRef Name="Priority_id" />
+          </Key>
+          <Property Name="Priority_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="priority" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LanguageID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_ProblemDescriptionIssue">
+          <Key>
+            <PropertyRef Name="Issue_ID" />
+          </Key>
+          <Property Name="Issue_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Issue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LanguageID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_Reason">
+          <Key>
+            <PropertyRef Name="ReasonID" />
+          </Key>
+          <Property Name="ReasonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Reason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LanguageID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_register">
+          <Key>
+            <PropertyRef Name="register_id" />
+          </Key>
+          <Property Name="register_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="dob" Type="DateTime" Precision="0" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="education" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Company_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_SequawareLogin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Company_ID" Type="Int32" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="ForgotPasswordCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="languageID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_ServiceTask">
+          <Key>
+            <PropertyRef Name="DiagnosisCatID" />
+          </Key>
+          <Property Name="DiagnosisCatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Categories" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="LangID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_Solution">
+          <Key>
+            <PropertyRef Name="solution_id" />
+          </Key>
+          <Property Name="solution_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="request_id" Type="Int32" Nullable="false" />
+          <Property Name="statement" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="reminder1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="reminder2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email_Sent" Type="Int32" />
+          <Property Name="Email_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbl_SolutionOptions">
+          <Key>
+            <PropertyRef Name="option_id" />
+          </Key>
+          <Property Name="option_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="solution_id" Type="Int32" Nullable="false" />
+          <Property Name="request_id" Type="Int32" Nullable="false" />
+          <Property Name="Options" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <Property Name="decision" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_status">
+          <Key>
+            <PropertyRef Name="Status_id" />
+          </Key>
+          <Property Name="Status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="languageID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_zipcodes">
+          <Key>
+            <PropertyRef Name="zipCode_id" />
+          </Key>
+          <Property Name="zipCode_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="zipcode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SampleEmailContent">
+          <Key>
+            <PropertyRef Name="Email_id" />
+          </Key>
+          <Property Name="Email_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email_Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RMA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Dear" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email_text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Footer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Signature" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Company_ID" Type="Int32" />
+          <Property Name="To" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LanguageID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_SampleDepartments">
+          <Key>
+            <PropertyRef Name="deparmentID" />
+          </Key>
+          <Property Name="deparmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LanguageID" Type="Int32" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="customerServiceDbModelStoreContainer" CdmEntityContainer="cssDbContext">
+          <FunctionImportMapping FunctionImportName="sp_GetBasicdata" FunctionName="customerServiceDbModel.Store.sp_GetBasicdata">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="customerServiceDbModel.sp_GetBasicdata_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cname" ColumnName="cname" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="zipcode_id" ColumnName="zipcode_id" />
+                <ScalarProperty Name="country_id" ColumnName="country_id" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="id1" ColumnName="id1" />
+                <ScalarProperty Name="ref_num" ColumnName="ref_num" />
+                <ScalarProperty Name="issue" ColumnName="issue" />
+                <ScalarProperty Name="customer_file" ColumnName="customer_file" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="date_added" ColumnName="date_added" />
+                <ScalarProperty Name="error_description" ColumnName="error_description" />
+                <ScalarProperty Name="worker" ColumnName="worker" />
+                <ScalarProperty Name="id2" ColumnName="id2" />
+                <ScalarProperty Name="zipcode" ColumnName="zipcode" />
+                <ScalarProperty Name="id3" ColumnName="id3" />
+                <ScalarProperty Name="country" ColumnName="country" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetServiceInfodata" FunctionName="customerServiceDbModel.Store.sp_GetServiceInfodata">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="customerServiceDbModel.sp_GetServiceInfodata_Result">
+                <ScalarProperty Name="Request_id" ColumnName="Request_id" />
+                <ScalarProperty Name="ref_num" ColumnName="ref_num" />
+                <ScalarProperty Name="issue" ColumnName="issue" />
+                <ScalarProperty Name="customer_file" ColumnName="customer_file" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="date_added" ColumnName="date_added" />
+                <ScalarProperty Name="Last_Modified" ColumnName="Last_Modified" />
+                <ScalarProperty Name="Individual_FootNote" ColumnName="Individual_FootNote" />
+                <ScalarProperty Name="FurtherInformatipn" ColumnName="FurtherInformatipn" />
+                <ScalarProperty Name="error_description" ColumnName="error_description" />
+                <ScalarProperty Name="worker" ColumnName="worker" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="Order_id" ColumnName="Order_id" />
+                <ScalarProperty Name="Request_id1" ColumnName="Request_id1" />
+                <ScalarProperty Name="Email_Sent" ColumnName="Email_Sent" />
+                <ScalarProperty Name="Email_date" ColumnName="Email_date" />
+                <ScalarProperty Name="Confirmation" ColumnName="Confirmation" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CustomerNumber_FrmSheet" ColumnName="CustomerNumber_FrmSheet" />
+                <ScalarProperty Name="CustomerNumber_Org" ColumnName="CustomerNumber_Org" />
+                <ScalarProperty Name="OrginalOrderNumber" ColumnName="OrginalOrderNumber" />
+                <ScalarProperty Name="Waranty" ColumnName="Waranty" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="Orignal_Quantity" ColumnName="Orignal_Quantity" />
+                <ScalarProperty Name="InspectionID" ColumnName="InspectionID" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="Complaint" ColumnName="Complaint" />
+                <ScalarProperty Name="ServiceTask" ColumnName="ServiceTask" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="createRp" ColumnName="createRp" />
+                <ScalarProperty Name="ReportDone" ColumnName="ReportDone" />
+                <ScalarProperty Name="Create8DReport" ColumnName="Create8DReport" />
+                <ScalarProperty Name="report8DDone" ColumnName="report8DDone" />
+                <ScalarProperty Name="Email_Sent1" ColumnName="Email_Sent1" />
+                <ScalarProperty Name="Email_date1" ColumnName="Email_date1" />
+                <ScalarProperty Name="Customer_id1" ColumnName="Customer_id1" />
+                <ScalarProperty Name="cname" ColumnName="cname" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="CustomerRefNo" ColumnName="CustomerRefNo" />
+                <ScalarProperty Name="Contact_id" ColumnName="Contact_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="customer_id2" ColumnName="customer_id2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetServiceForm" FunctionName="customerServiceDbModel.Store.sp_GetServiceForm">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="customerServiceDbModel.sp_GetServiceForm_Result">
+                <ScalarProperty Name="Request_id" ColumnName="Request_id" />
+                <ScalarProperty Name="ref_num" ColumnName="ref_num" />
+                <ScalarProperty Name="issue" ColumnName="issue" />
+                <ScalarProperty Name="customer_file" ColumnName="customer_file" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="date_added" ColumnName="date_added" />
+                <ScalarProperty Name="Last_Modified" ColumnName="Last_Modified" />
+                <ScalarProperty Name="Individual_FootNote" ColumnName="Individual_FootNote" />
+                <ScalarProperty Name="FurtherInformatipn" ColumnName="FurtherInformatipn" />
+                <ScalarProperty Name="error_description" ColumnName="error_description" />
+                <ScalarProperty Name="worker" ColumnName="worker" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="Order_id" ColumnName="Order_id" />
+                <ScalarProperty Name="Request_id1" ColumnName="Request_id1" />
+                <ScalarProperty Name="Email_Sent" ColumnName="Email_Sent" />
+                <ScalarProperty Name="Email_date" ColumnName="Email_date" />
+                <ScalarProperty Name="Confirmation" ColumnName="Confirmation" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CustomerNumber_FrmSheet" ColumnName="CustomerNumber_FrmSheet" />
+                <ScalarProperty Name="CustomerNumber_Org" ColumnName="CustomerNumber_Org" />
+                <ScalarProperty Name="OrginalOrderNumber" ColumnName="OrginalOrderNumber" />
+                <ScalarProperty Name="Waranty" ColumnName="Waranty" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="Orignal_Quantity" ColumnName="Orignal_Quantity" />
+                <ScalarProperty Name="InspectionID" ColumnName="InspectionID" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="Complaint" ColumnName="Complaint" />
+                <ScalarProperty Name="ServiceTask" ColumnName="ServiceTask" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="createRp" ColumnName="createRp" />
+                <ScalarProperty Name="ReportDone" ColumnName="ReportDone" />
+                <ScalarProperty Name="Create8DReport" ColumnName="Create8DReport" />
+                <ScalarProperty Name="report8DDone" ColumnName="report8DDone" />
+                <ScalarProperty Name="Email_Sent1" ColumnName="Email_Sent1" />
+                <ScalarProperty Name="Email_date1" ColumnName="Email_date1" />
+                <ScalarProperty Name="solution_id" ColumnName="solution_id" />
+                <ScalarProperty Name="request_id2" ColumnName="request_id2" />
+                <ScalarProperty Name="statement" ColumnName="statement" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="reminder1" ColumnName="reminder1" />
+                <ScalarProperty Name="reminder2" ColumnName="reminder2" />
+                <ScalarProperty Name="Email_Sent2" ColumnName="Email_Sent2" />
+                <ScalarProperty Name="Email_date2" ColumnName="Email_date2" />
+                <ScalarProperty Name="Completion_id" ColumnName="Completion_id" />
+                <ScalarProperty Name="request_id3" ColumnName="request_id3" />
+                <ScalarProperty Name="order_number" ColumnName="order_number" />
+                <ScalarProperty Name="credite_note_number" ColumnName="credite_note_number" />
+                <ScalarProperty Name="Disposal" ColumnName="Disposal" />
+                <ScalarProperty Name="Evaluation_Request" ColumnName="Evaluation_Request" />
+                <ScalarProperty Name="Availability" ColumnName="Availability" />
+                <ScalarProperty Name="Professional_Competence" ColumnName="Professional_Competence" />
+                <ScalarProperty Name="Reaction_Time" ColumnName="Reaction_Time" />
+                <ScalarProperty Name="Kindness" ColumnName="Kindness" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetArchiveGriddata" FunctionName="customerServiceDbModel.Store.sp_GetArchiveGriddata">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="customerServiceDbModel.sp_GetArchiveGriddata_Result1">
+                <ScalarProperty Name="Case" ColumnName="Case" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Service_Reason" ColumnName="Service Reason" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="File" ColumnName="File" />
+                <ScalarProperty Name="Last_Modified" ColumnName="Last_Modified" />
+                <ScalarProperty Name="Request_id" ColumnName="Request_id" />
+                <ScalarProperty Name="Order_id" ColumnName="Order_id" />
+                <ScalarProperty Name="Request_id1" ColumnName="Request_id1" />
+                <ScalarProperty Name="Email_Sent" ColumnName="Email_Sent" />
+                <ScalarProperty Name="Email_date" ColumnName="Email_date" />
+                <ScalarProperty Name="Confirmation" ColumnName="Confirmation" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CustomerNumber_FrmSheet" ColumnName="CustomerNumber_FrmSheet" />
+                <ScalarProperty Name="CustomerNumber_Org" ColumnName="CustomerNumber_Org" />
+                <ScalarProperty Name="OrginalOrderNumber" ColumnName="OrginalOrderNumber" />
+                <ScalarProperty Name="Waranty" ColumnName="Waranty" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="product" ColumnName="product" />
+                <ScalarProperty Name="Orignal_Quantity" ColumnName="Orignal_Quantity" />
+                <ScalarProperty Name="InspectionID" ColumnName="InspectionID" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="Complaint" ColumnName="Complaint" />
+                <ScalarProperty Name="ServiceTask" ColumnName="ServiceTask" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="createRp" ColumnName="createRp" />
+                <ScalarProperty Name="ReportDone" ColumnName="ReportDone" />
+                <ScalarProperty Name="Create8DReport" ColumnName="Create8DReport" />
+                <ScalarProperty Name="report8DDone" ColumnName="report8DDone" />
+                <ScalarProperty Name="Email_Sent1" ColumnName="Email_Sent1" />
+                <ScalarProperty Name="Email_date1" ColumnName="Email_date1" />
+                <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
+                <ScalarProperty Name="cname" ColumnName="cname" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="company1" ColumnName="company1" />
+                <ScalarProperty Name="CustomerRefNo" ColumnName="CustomerRefNo" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="Dep_Name" ColumnName="Dep_Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Company_ID1" ColumnName="Company_ID1" />
+                <ScalarProperty Name="ReasonID" ColumnName="ReasonID" />
+                <ScalarProperty Name="Reason1" ColumnName="Reason1" />
+                <ScalarProperty Name="DiagnosisID" ColumnName="DiagnosisID" />
+                <ScalarProperty Name="Diagnosis1" ColumnName="Diagnosis1" />
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+                <ScalarProperty Name="Company_ID2" ColumnName="Company_ID2" />
+                <ScalarProperty Name="DiagnosisCatID" ColumnName="DiagnosisCatID" />
+                <ScalarProperty Name="Categories" ColumnName="Categories" />
+                <ScalarProperty Name="isDelete1" ColumnName="isDelete1" />
+                <ScalarProperty Name="Completion_id" ColumnName="Completion_id" />
+                <ScalarProperty Name="request_id2" ColumnName="request_id2" />
+                <ScalarProperty Name="order_number" ColumnName="order_number" />
+                <ScalarProperty Name="credite_note_number" ColumnName="credite_note_number" />
+                <ScalarProperty Name="Disposal" ColumnName="Disposal" />
+                <ScalarProperty Name="Evaluation_Request" ColumnName="Evaluation_Request" />
+                <ScalarProperty Name="Availability" ColumnName="Availability" />
+                <ScalarProperty Name="Professional_Competence" ColumnName="Professional_Competence" />
+                <ScalarProperty Name="Reaction_Time" ColumnName="Reaction_Time" />
+                <ScalarProperty Name="Kindness" ColumnName="Kindness" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Email_Sent2" ColumnName="Email_Sent2" />
+                <ScalarProperty Name="Email_date2" ColumnName="Email_date2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetMainGriddata1" FunctionName="customerServiceDbModel.Store.sp_GetMainGriddata" />
+          <EntitySetMapping Name="tbl_Company">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_Company">
+              <MappingFragment StoreEntitySet="tbl_Company">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LisceneExpiryDate" ColumnName="LisceneExpiryDate" />
+                <ScalarProperty Name="Liscense" ColumnName="Liscense" />
+                <ScalarProperty Name="EvaluationLink" ColumnName="EvaluationLink" />
+                <ScalarProperty Name="Phone_Num" ColumnName="Phone_Num" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Comapany_Name" ColumnName="Comapany_Name" />
+                <ScalarProperty Name="Company_id" ColumnName="Company_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Completion">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_Completion">
+              <MappingFragment StoreEntitySet="tbl_Completion">
+                <ScalarProperty Name="Email_date" ColumnName="Email_date" />
+                <ScalarProperty Name="Email_Sent" ColumnName="Email_Sent" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Kindness" ColumnName="Kindness" />
+                <ScalarProperty Name="Reaction_Time" ColumnName="Reaction_Time" />
+                <ScalarProperty Name="Professional_Competence" ColumnName="Professional_Competence" />
+                <ScalarProperty Name="Availability" ColumnName="Availability" />
+                <ScalarProperty Name="Evaluation_Request" ColumnName="Evaluation_Request" />
+                <ScalarProperty Name="Disposal" ColumnName="Disposal" />
+                <ScalarProperty Name="credite_note_number" ColumnName="credite_note_number" />
+                <ScalarProperty Name="order_number" ColumnName="order_number" />
+                <ScalarProperty Name="request_id" ColumnName="request_id" />
+                <ScalarProperty Name="Completion_id" ColumnName="Completion_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_contact_person">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_contact_person">
+              <MappingFragment StoreEntitySet="tbl_contact_person">
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Contact_id" ColumnName="Contact_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_country">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_country">
+              <MappingFragment StoreEntitySet="tbl_country">
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="count_id" ColumnName="count_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_customer">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_customer">
+              <MappingFragment StoreEntitySet="tbl_customer">
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="CustomerRefNo" ColumnName="CustomerRefNo" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="cname" ColumnName="cname" />
+                <ScalarProperty Name="Customer_id" ColumnName="Customer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_customer_request">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_customer_request">
+              <MappingFragment StoreEntitySet="tbl_customer_request">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="worker" ColumnName="worker" />
+                <ScalarProperty Name="error_description" ColumnName="error_description" />
+                <ScalarProperty Name="FurtherInformatipn" ColumnName="FurtherInformatipn" />
+                <ScalarProperty Name="Individual_FootNote" ColumnName="Individual_FootNote" />
+                <ScalarProperty Name="Last_Modified" ColumnName="Last_Modified" />
+                <ScalarProperty Name="date_added" ColumnName="date_added" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="customer_file" ColumnName="customer_file" />
+                <ScalarProperty Name="issue" ColumnName="issue" />
+                <ScalarProperty Name="ref_num" ColumnName="ref_num" />
+                <ScalarProperty Name="Request_id" ColumnName="Request_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Departments">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_Departments">
+              <MappingFragment StoreEntitySet="tbl_Departments">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Dep_Name" ColumnName="Dep_Name" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Diagnosis">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_Diagnosis">
+              <MappingFragment StoreEntitySet="tbl_Diagnosis">
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="DiagnosisID" ColumnName="DiagnosisID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_EmailContents">
+            <EntityTypeMapping TypeName="customerServiceDbModel.Tbl_EmailContents">
+              <MappingFragment StoreEntitySet="Tbl_EmailContents">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="Signature" ColumnName="Signature" />
+                <ScalarProperty Name="Footer" ColumnName="Footer" />
+                <ScalarProperty Name="Email_text" ColumnName="Email_text" />
+                <ScalarProperty Name="Dear" ColumnName="Dear" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="RMA" ColumnName="RMA" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Email_Code" ColumnName="Email_Code" />
+                <ScalarProperty Name="Email_id" ColumnName="Email_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Inspection">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_Inspection">
+              <MappingFragment StoreEntitySet="tbl_Inspection">
+                <ScalarProperty Name="Email_date" ColumnName="Email_date" />
+                <ScalarProperty Name="Email_Sent" ColumnName="Email_Sent" />
+                <ScalarProperty Name="report8DDone" ColumnName="report8DDone" />
+                <ScalarProperty Name="Create8DReport" ColumnName="Create8DReport" />
+                <ScalarProperty Name="ReportDone" ColumnName="ReportDone" />
+                <ScalarProperty Name="createRp" ColumnName="createRp" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="ServiceTask" ColumnName="ServiceTask" />
+                <ScalarProperty Name="Complaint" ColumnName="Complaint" />
+                <ScalarProperty Name="Operator" ColumnName="Operator" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="InspectionID" ColumnName="InspectionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_language">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_language">
+              <MappingFragment StoreEntitySet="tbl_language">
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_LicenseHistory">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_LicenseHistory">
+              <MappingFragment StoreEntitySet="tbl_LicenseHistory">
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Liscense_Num" ColumnName="Liscense_Num" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_OrderData">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_OrderData">
+              <MappingFragment StoreEntitySet="tbl_OrderData">
+                <ScalarProperty Name="Orignal_Quantity" ColumnName="Orignal_Quantity" />
+                <ScalarProperty Name="product" ColumnName="product" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="Waranty" ColumnName="Waranty" />
+                <ScalarProperty Name="OrginalOrderNumber" ColumnName="OrginalOrderNumber" />
+                <ScalarProperty Name="CustomerNumber_Org" ColumnName="CustomerNumber_Org" />
+                <ScalarProperty Name="CustomerNumber_FrmSheet" ColumnName="CustomerNumber_FrmSheet" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Confirmation" ColumnName="Confirmation" />
+                <ScalarProperty Name="Email_date" ColumnName="Email_date" />
+                <ScalarProperty Name="Email_Sent" ColumnName="Email_Sent" />
+                <ScalarProperty Name="Request_id" ColumnName="Request_id" />
+                <ScalarProperty Name="Order_id" ColumnName="Order_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_priority">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_priority">
+              <MappingFragment StoreEntitySet="tbl_priority">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="Priority_id" ColumnName="Priority_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ProblemDescriptionIssue">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_ProblemDescriptionIssue">
+              <MappingFragment StoreEntitySet="tbl_ProblemDescriptionIssue">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Issue" ColumnName="Issue" />
+                <ScalarProperty Name="Issue_ID" ColumnName="Issue_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Reason">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_Reason">
+              <MappingFragment StoreEntitySet="tbl_Reason">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="ReasonID" ColumnName="ReasonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_register">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_register">
+              <MappingFragment StoreEntitySet="tbl_register">
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="education" ColumnName="education" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="register_id" ColumnName="register_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SequawareLogin">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_SequawareLogin">
+              <MappingFragment StoreEntitySet="tbl_SequawareLogin">
+                <ScalarProperty Name="languageID" ColumnName="languageID" />
+                <ScalarProperty Name="ForgotPasswordCode" ColumnName="ForgotPasswordCode" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_ServiceTask">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_ServiceTask">
+              <MappingFragment StoreEntitySet="tbl_ServiceTask">
+                <ScalarProperty Name="LangID" ColumnName="LangID" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="Categories" ColumnName="Categories" />
+                <ScalarProperty Name="DiagnosisCatID" ColumnName="DiagnosisCatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Solution">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_Solution">
+              <MappingFragment StoreEntitySet="tbl_Solution">
+                <ScalarProperty Name="Email_date" ColumnName="Email_date" />
+                <ScalarProperty Name="Email_Sent" ColumnName="Email_Sent" />
+                <ScalarProperty Name="reminder2" ColumnName="reminder2" />
+                <ScalarProperty Name="reminder1" ColumnName="reminder1" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="statement" ColumnName="statement" />
+                <ScalarProperty Name="request_id" ColumnName="request_id" />
+                <ScalarProperty Name="solution_id" ColumnName="solution_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SolutionOptions">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_SolutionOptions">
+              <MappingFragment StoreEntitySet="tbl_SolutionOptions">
+                <ScalarProperty Name="decision" ColumnName="decision" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="Options" ColumnName="Options" />
+                <ScalarProperty Name="request_id" ColumnName="request_id" />
+                <ScalarProperty Name="solution_id" ColumnName="solution_id" />
+                <ScalarProperty Name="option_id" ColumnName="option_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_status">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_status">
+              <MappingFragment StoreEntitySet="tbl_status">
+                <ScalarProperty Name="languageID" ColumnName="languageID" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="Status_id" ColumnName="Status_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_zipcodes">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_zipcodes">
+              <MappingFragment StoreEntitySet="tbl_zipcodes">
+                <ScalarProperty Name="zipcode" ColumnName="zipcode" />
+                <ScalarProperty Name="zipCode_id" ColumnName="zipCode_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SampleEmailContents">
+            <EntityTypeMapping TypeName="customerServiceDbModel.SampleEmailContent">
+              <MappingFragment StoreEntitySet="SampleEmailContents">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="Company_ID" ColumnName="Company_ID" />
+                <ScalarProperty Name="Signature" ColumnName="Signature" />
+                <ScalarProperty Name="Footer" ColumnName="Footer" />
+                <ScalarProperty Name="Email_text" ColumnName="Email_text" />
+                <ScalarProperty Name="Dear" ColumnName="Dear" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="RMA" ColumnName="RMA" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Email_Code" ColumnName="Email_Code" />
+                <ScalarProperty Name="Email_id" ColumnName="Email_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_SampleDepartments">
+            <EntityTypeMapping TypeName="customerServiceDbModel.tbl_SampleDepartments">
+              <MappingFragment StoreEntitySet="tbl_SampleDepartments">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DepartName" ColumnName="DepartName" />
+                <ScalarProperty Name="deparmentID" ColumnName="deparmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

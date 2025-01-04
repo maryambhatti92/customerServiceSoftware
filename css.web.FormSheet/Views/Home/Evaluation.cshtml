@@ -1,0 +1,204 @@
+﻿@using css.Data.Models;
+@{
+    ViewBag.Title = "Evaluation";
+}
+
+
+@section PageLevelCss{}
+
+
+
+@section BreadCrumb{   @* R E Q U I R E D *@
+<li>Home</li>
+<li>Evaluation</li>
+
+}
+
+@section RibbonButtons{
+
+    @*<span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+        <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+        <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>*@
+}
+
+
+@section PageHeading{   @* R E Q U I R E D *@ Evaluation
+
+}
+@*<div class="row">
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddEditPopup">Add Type</button>
+        </div>
+    </div>*@
+
+
+<div class="row">&nbsp;
+
+    <!-- Widget ID (each widget will need unique ID)-->
+    <div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false" data-widget-custombutton="false">
+        <!-- widget options:
+            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+            data-widget-colorbutton="false"
+            data-widget-editbutton="false"
+            data-widget-togglebutton="false"
+            data-widget-deletebutton="false"
+            data-widget-fullscreenbutton="false"
+            data-widget-custombutton="false"
+            data-widget-collapsed="true"
+            data-widget-sortable="false"
+
+        -->
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>Evaluation Form </h2>
+
+        </header>
+
+        <!-- widget div-->
+        <div>
+
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+
+            </div>
+            <!-- end widget edit box -->
+            <!-- widget content -->
+            <div class="widget-body no-padding">
+
+                <form id="Evalreview-form" class="smart-form">
+                    <header>
+                        Criteria
+                    </header>
+
+                    <fieldset>
+                       
+                        <section>
+                            <div class="rating">
+                                <input type="radio" data-id="5" name="Availability" id="Availability-5">
+                                <label for="Availability-5"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id ="4" name="Availability" id="Availability-4">
+                                <label for="Availability-4"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="3" name="Availability" id="Availability-3">
+                                <label for="Availability-3"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="2" name="Availability" id="Availability-2">
+                                <label for="Availability-2"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="1" name="Availability" id="Availability-1">
+                                <label for="Availability-1"><i class="fa fa-star"></i></label>
+                                Availability
+                            </div>
+
+                            <div class="rating">
+                                <input type="radio" data-id="5" name="Competence" id="Competence-5">
+                                <label for="Competence-5"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="4" name="Competence" id="Competence-4">
+                                <label for="Competence-4"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="3" name="Competence" id="Competence-3">
+                                <label for="Competence-3"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="2" name="Competence" id="Competence-2">
+                                <label for="Competence-2"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="1" name="Competence" id="Competence-1">
+                                <label for="Competence-1"><i class="fa fa-star"></i></label>
+                                Professional Competence
+                            </div>
+
+                            <div class="rating">
+                                <input type="radio" data-id="5" name="Reaction" id="Reaction-5">
+                                <label for="Reaction-5"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="4" name="Reaction" id="Reaction-4">
+                                <label for="Reaction-4"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="3" name="Reaction" id="Reaction-3">
+                                <label for="Reaction-3"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="2" name="Reaction" id="Reaction-2">
+                                <label for="Reaction-2"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="1" name="Reaction" id="Reaction-1">
+                                <label for="Reaction-1"><i class="fa fa-star"></i></label>
+                                Reaction Time
+                            </div>
+
+                            <div class="rating">
+                                <input type="radio" data-id="5" name="Kindness" id="Kindness-5">
+                                <label for="Kindness-5"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="4" name="Kindness" id="Kindness-4">
+                                <label for="Kindness-4"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="3" name="Kindness" id="Kindness-3">
+                                <label for="Kindness-3"><i class="fa fa-star"></i></label>
+                                <input type="radio" data-id="2" name="Kindness" id="Kindness-2">
+                                <label for="Kindness-2"><i class="fa fa-star"></i></label>
+                                <input type="radio" value="1" name="Kindness" id="Kindness-1">
+                                <label for="Kindness-1"><i class="fa fa-star"></i></label>
+                                Kindness
+                            </div>
+                            @*<div class="rating">
+        <input type="radio" data-id="5" name="Text" id="Text-5">
+        <label for="Text-5"><i class="fa fa-star"></i></label>
+        <input type="radio" data-id="4" name="Text" id="Text-4">
+        <label for="Text-4"><i class="fa fa-star"></i></label>
+        <input type="radio" data-id="3" name="Text" id="Text-3">
+        <label for="Text-3"><i class="fa fa-star"></i></label>
+        <input type="radio" data-id="2" name="Text" id="Text-2">
+        <label for="Text-2"><i class="fa fa-star"></i></label>
+        <input type="radio" data-id="1" name="Text" id="Text-1">
+        <label for="Text-1"><i class="fa fa-star"></i></label>
+        Text
+    </div>*@
+
+                            <div class="form-group">
+                                <label class="custom col-md-8 control-label">Text</label>
+                                <div class=" col-md-4">
+                                   <input name="Text" id="Text" class="form-control"  type="text">
+                                </div>
+                            </div>
+
+                        </section>
+                    </fieldset>
+                    <footer>
+                        <button type="submit" class="btn btn-primary" id="btnEvalSubmit" >Submit</button>
+                      
+                    </footer>
+                </form>
+
+            </div>
+            <!-- end widget content -->
+
+        </div>
+        <!-- end widget div -->
+
+    </div>
+    <!-- end widget -->	
+
+
+</div>
+<input type="hidden" id="hdnRecordId" />
+
+
+
+@section PageLevelJs{
+    <!-- Start Page Level Script -->
+    <!-- JARVIS WIDGETS -->
+    @*<script src="~/Scripts/ThemeJs/smartwidgets/jarvis.widget.min.js"></script>*@
+
+    <!-- PAGE RELATED PLUGIN(S) -->
+    @*<script src="~/Scripts/ThemeJs/plugin/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/Scripts/ThemeJs/plugin/datatables/dataTables.colVis.min.js"></script>
+        <script src="~/Scripts/ThemeJs/plugin/datatables/dataTables.tableTools.min.js"></script>
+        <script src="~/Scripts/ThemeJs/plugin/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="~/Scripts/ThemeJs/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+        <script src="~/Scripts/ThemeJs/plugin/bootbox/bootbox.min.js"></script>*@
+    <script src="~/Scripts/ThemeJs/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="~/Scripts/ThemeJs/plugin/masked-input/jquery.maskedinput.min.js"></script>
+    <script src="~/Scripts/ThemeJs/plugin/maxlength/bootstrap-maxlength.min.js"></script>
+    <script src="~/Scripts/ThemeJs/plugin/jquery-validate/jquery.validate.min.js"></script>
+    <!-- PAGE's JS -->
+    <script src="~/Scripts/HRMS/Types/IndexTypesJs.js"></script>
+  <link href="~/Content/css/your_style.css" rel="stylesheet" />
+    <script type="text/javascript">
+       
+
+
+    </script>
+
+    <!-- End Page Level Script -->
+}
+

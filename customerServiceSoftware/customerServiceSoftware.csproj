@@ -1,0 +1,577 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8B0CF409-7291-4C70-B06A-F7F54A751A8C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>customerServiceSoftware</RootNamespace>
+    <AssemblyName>customerServiceSoftware</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo full.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bunifu_UI_v1.5.3">
+      <HintPath>..\..\Bunifu_UI_v1.5.3.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=2.1.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.2.1.1\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IronPdf, Version=5.2.0.22321, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPdf.5.2.0.1\lib\net40\IronPdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Outlook, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Pechkin, Version=0.5.8.1, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\Pechkin.0.5.8.1\lib\net40\Pechkin.dll</HintPath>
+    </Reference>
+    <Reference Include="Pechkin.Synchronized, Version=0.5.8.1, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\packages\Pechkin.Synchronized.0.5.8.1\lib\net40\Pechkin.Synchronized.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.2.0.20126.16343\lib\net40\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.2.0.20126.16343\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Add_department.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Add_department.Designer.cs">
+      <DependentUpon>Add_department.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Add_Diagnosis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Add_Diagnosis.Designer.cs">
+      <DependentUpon>Add_Diagnosis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Add_ServiceCase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Add_ServiceCase.Designer.cs">
+      <DependentUpon>Add_ServiceCase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AppConfigReader.cs" />
+    <Compile Include="Archive test- Copy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Archive test- Copy.Designer.cs">
+      <DependentUpon>Archive test- Copy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Archive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Archive.Designer.cs">
+      <DependentUpon>Archive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompanyControls_Owner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompanyControls_Owner.Designer.cs">
+      <DependentUpon>CompanyControls_Owner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Create_User_CompanyAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Create_User_CompanyAdmin.Designer.cs">
+      <DependentUpon>Create_User_CompanyAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Create_User.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Create_User.Designer.cs">
+      <DependentUpon>Create_User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddCompany.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddCompany.Designer.cs">
+      <DependentUpon>AddCompany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="customerServiceDbDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>customerServiceDbDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="customerServiceDbDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>customerServiceDbDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmailEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmailEdit.Designer.cs">
+      <DependentUpon>FormEmailEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ServiceInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ServiceInfo.Designer.cs">
+      <DependentUpon>Form_ServiceInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreen.Designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Home.Designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InstallerSetup.cs">
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="InstallerSetup.Designer.cs">
+      <DependentUpon>InstallerSetup.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="main.Designer.cs">
+      <DependentUpon>main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PdfConvert.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TabClasses\AddServiceOperations.cs" />
+    <Compile Include="TabClasses\ArchiveOperations.cs" />
+    <Compile Include="TabClasses\CompanyOperations.cs" />
+    <Compile Include="TabClasses\CompletionOperations.cs" />
+    <Compile Include="TabClasses\CsvWriter.cs" />
+    <Compile Include="TabClasses\InspectionFunctions.cs" />
+    <Compile Include="TabClasses\OrderFunctions.cs" />
+    <Compile Include="TabClasses\EmailOPerations.cs" />
+    <Compile Include="Sequware_Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sequware_Login.Designer.cs">
+      <DependentUpon>Sequware_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabClasses\RequestFormSheetOperations.cs" />
+    <Compile Include="TabClasses\ServiceInfoOperations.cs" />
+    <Compile Include="TabClasses\SolutionOperations.cs" />
+    <Compile Include="Test_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test_Form.Designer.cs">
+      <DependentUpon>Test_Form.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Add_department.resx">
+      <DependentUpon>Add_department.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Add_Diagnosis.resx">
+      <DependentUpon>Add_Diagnosis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Add_ServiceCase.resx">
+      <DependentUpon>Add_ServiceCase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Archive test- Copy.resx">
+      <DependentUpon>Archive test- Copy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Archive.resx">
+      <DependentUpon>Archive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompanyControls_Owner.resx">
+      <DependentUpon>CompanyControls_Owner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Create_User_CompanyAdmin.resx">
+      <DependentUpon>Create_User_CompanyAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Create_User.resx">
+      <DependentUpon>Create_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddCompany.resx">
+      <DependentUpon>AddCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmailEdit.resx">
+      <DependentUpon>FormEmailEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ServiceInfo.resx">
+      <DependentUpon>Form_ServiceInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="main.resx">
+      <DependentUpon>main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sequware_Login.resx">
+      <DependentUpon>Sequware_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test_Form.resx">
+      <DependentUpon>Test_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="customerServiceDbDataSet.xsc">
+      <DependentUpon>customerServiceDbDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="customerServiceDbDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>customerServiceDbDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="customerServiceDbDataSet.xss">
+      <DependentUpon>customerServiceDbDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="customerServiceDbDataSet1.xsc">
+      <DependentUpon>customerServiceDbDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="customerServiceDbDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>customerServiceDbDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="customerServiceDbDataSet1.xss">
+      <DependentUpon>customerServiceDbDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\css.Data.AdoNet.SqlExecuter.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.cssDbContext.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.sp_GetArchiveGriddata_Result.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.sp_GetBasicdata_Result.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.sp_GetMainGriddata_Result.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_Company.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_contact_person.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_country.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_customer.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_customer_request.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_Departments.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_Diagnosis.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.Tbl_EmailContents.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_Inspection.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_OrderData.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_priority.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_Reason.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_ServiceTask.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_status.datasource" />
+    <None Include="Properties\DataSources\css.Data.Models.tbl_zipcodes.datasource" />
+    <None Include="Properties\DataSources\css.Shared.ViewModels.MainDataVM.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\css.Data\css.Data.csproj">
+      <Project>{0b231a78-4c1e-4cb0-917c-92933a2a6163}</Project>
+      <Name>css.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\css.Shared\css.Shared.csproj">
+      <Project>{fb743639-6739-4f21-9e7f-50f594d24510}</Project>
+      <Name>css.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo-ex-7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flight_bg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\departments.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo mockup_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo mockup_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Asset 3_4x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\User.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\User 2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Password.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pass.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\users-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Password Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Archive_Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon_Delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Add icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Menu icon 2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menu-icon 3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home icon 4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Diagnosis 123.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minimize-window-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon_maximize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Minimize_Window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mini.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Minimize_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Icon_Add_New.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Delete_icon_New.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\archive-icon-new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Open_folder_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_cases.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="libeay32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="libgcc_s_dw2-1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="logo full.ico" />
+    <Content Include="mingwm10.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\copy-icon.png" />
+    <Content Include="Resources\Logo mockup_1.ico" />
+    <Content Include="Resources\logo.ico" />
+    <Content Include="ssleay32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wkhtmltox0.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

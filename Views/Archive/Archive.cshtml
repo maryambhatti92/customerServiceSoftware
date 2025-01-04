@@ -1,0 +1,363 @@
+﻿<style>
+    .main-content {
+        padding-left: 0px;
+        padding-right: 89px;
+        padding-top: 16px;
+    }
+</style>
+
+@{
+    ViewBag.Title = "Archive";
+}
+@{
+    if (Session["Sequware"] == null)
+    {
+        Response.Redirect("~/Login/Login");
+    }
+    else
+    {
+        <div>
+            <div class="row">
+                <div id="ArchiveGridPlaceHolder" class="col-md-10 widget-fullwidth widget-small">
+                    @Html.Action("ArchiveCasesGrid", "archive")
+                </div>
+            </div>
+        </div>
+
+        <aside class="page-aside" style="right: 0px !important;left: unset;">
+            <div class="am-scroller nano">
+                <div class="nano-content">
+                    <div class="content">
+                        <p id="request-id" hidden="hidden">......  </p>
+                        <p id="RMA">RMA No.:</p>
+                        <h4><b>Basic Data</b></h4>
+                        <p id="company">Company:</p>
+                        <p id="street">Street:</p>
+                        <p id="Zip">Zip Code:</p>
+                        <p id="Country">Country:</p>
+
+                        <h4><b>Order Data</b></h4>
+                        <p id="Quantity">Quantity:</p>
+                        <p id="OrderNo">Order No.:</p>
+                        <p id="Warranty">Warranty:</p>
+                        <p id="DeliveryDate">Delivery Date:</p>
+                        <p id="OrignalQty">Original Qty:</p>
+
+                        <h4><b>Inspection Data</b></h4>
+                        <p id="Dept">Assessment Dept:</p>
+                        <p id="Operator">Operator:</p>
+                        <p id="Complaint">Complaint:</p>
+                        <p id="Diagnosiscat">Diagnosis cat.:</p>
+                        <p id="Diagnosis">Diagnosis:</p>
+                        <p id="Reason">Reason:</p>
+
+                        <h4><b>Evaluation Data</b></h4>
+                        <p id="Availability">Availability:</p>
+                        <p id="Competence">Professional Competence:</p>
+                        <p id="Reaction">Reaction Time:</p>
+                        <p id="Kindness">Kindness:</p>
+
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        }
+    }
+
+        @*------------------ Reactive cases---------------------*@
+
+        @*<div id="Reactive_Cases" class="modal-container modal-colored-header modal-effect-1" style="display:none">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #FFC870">
+                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close modal-close"><i class="icon s7-close"></i></button>
+                        <h3 class="modal-title">Reactive Case</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <div class="i-circle text-primary"><i class="icon s7-trash"></i></div>
+                            <h4>Wait!</h4>
+                            <p>Do you want to Reactive selected Case?</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-default modal-close">Cancel</button>
+                        <button id="btnReactiveCases" type="button" data-dismiss="modal" class="btn btn-primary modal-close" style="background-color: #FFC870">Yes</button>
+                    </div>
+                </div>
+            </div>*@
+
+
+
+
+
+
+
+
+
+
+        @section PageLevelJs{
+
+            <script src="../../assets/lib/datatables/js/jquery.dataTables.min.js" type="text/javascript"></script>
+            <script src="../../assets/lib/datatables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+            <script src="../../assets/lib/datatables/plugins/buttons/js/dataTables.buttons.js" type="text/javascript"></script>
+            <script src="../../assets/lib/datatables/plugins/buttons/js/buttons.html5.js" type="text/javascript"></script>
+            <script src="../../assets/lib/datatables/plugins/buttons/js/buttons.flash.js" type="text/javascript"></script>
+            <script src="../../assets/lib/datatables/plugins/buttons/js/buttons.print.js" type="text/javascript"></script>
+            <script src="../../assets/lib/datatables/plugins/buttons/js/buttons.colVis.js" type="text/javascript"></script>
+            <script src="../../assets/lib/datatables/plugins/buttons/js/buttons.bootstrap.js" type="text/javascript"></script>
+            <script src="../../assets/js/app-tables-datatables.js" type="text/javascript"></script>
+            <script src="../../assets/lib/prettify/prettify.js" type="text/javascript"></script>
+
+
+            <script type="text/javascript">
+        var WebServiceUrl = 'https://sequware.site/';
+        //var WebServiceUrl = 'http://localhost:58989/';
+        $(document).ready(function () {
+            //initialize the javascript
+            App.dataTables();
+            prettyPrint();
+            $('#Heading1').text("Archives")
+            $('#Heading2').text("Archives Grid")
+
+        });
+
+
+        $("tr").dblclick(function () {
+            debugger;
+            var $case = $('#request-id').text();
+            var $comp = $('#hdncompanyID').val();
+            // alert($case);
+            if ($case != "......  ") {
+                location.href = '/serviceinformation/serviceinformation/' + $case + '?companyid=' + $comp
+            }
+        });
+
+        $(window).load(function () {
+
+
+        });
+
+        function myFunction(x) {
+
+            $('#request-id').text(x.getElementsByTagName("td")[0].innerHTML);
+            $("#RMA").text("RMA No.: " + x.getElementsByTagName("td")[0].innerHTML);
+
+            if (x.getElementsByTagName("td")[3].innerHTML != "") {
+                $("#company").text("Company: " + x.getElementsByTagName("td")[3].innerHTML);
+            }
+            else {
+                $("#company").text("Company: ");
+            }
+
+
+            if (x.getElementsByTagName("td")[12].innerHTML != "") {
+                $("#street").text("Street: " + x.getElementsByTagName("td")[12].innerHTML);
+            }
+            else {
+                $("#street").text("Street: ");
+            }
+
+
+            if (x.getElementsByTagName("td")[11].innerHTML != "") {
+                $("#Zip").text("Zip Code: " + x.getElementsByTagName("td")[11].innerHTML);
+            }
+            else {
+                $("#Zip").text("Zip Code: ");
+            }
+
+            if (x.getElementsByTagName("td")[13].innerHTML != "") {
+                $("#Country").text("Country: " + x.getElementsByTagName("td")[13].innerHTML);
+            }
+            else {
+                $("#Country").text("Country: ");
+            }
+
+            if (x.getElementsByTagName("td")[14].innerHTML != "0") {
+                $("#Quantity").text("Quantity: " + x.getElementsByTagName("td")[14].innerHTML);
+            }
+            else {
+                $("#Quantity").text("Quantity: ");
+            }
+
+
+            if (x.getElementsByTagName("td")[15].innerHTML != "0") {
+                $("#OrderNo").text("Order No.: " + x.getElementsByTagName("td")[15].innerHTML);
+            }
+            else {
+                $("#OrderNo").text("Order No.: ");
+            }
+
+            if (x.getElementsByTagName("td")[16].innerHTML != "") {
+                $("#Warranty").text("Warranty: " + x.getElementsByTagName("td")[16].innerHTML);
+            }
+            else {
+                $("#Warranty").text("Warranty: ");
+            }
+
+            if (x.getElementsByTagName("td")[17].innerHTML != "") {
+                $("#DeliveryDate").text("Delivery Date: " + x.getElementsByTagName("td")[17].innerHTML);
+            }
+            else {
+                $("#DeliveryDate").text("Delivery Date: ");
+            }
+
+            if (x.getElementsByTagName("td")[18].innerHTML != "0") {
+                $("#OrignalQty").text("Original Qty: " + x.getElementsByTagName("td")[18].innerHTML);
+            }
+            else {
+                $("#OrignalQty").text("Original Qty: ");
+            }
+
+            if (x.getElementsByTagName("td")[19].innerHTML != "") {
+                $("#Operator").text("Operator: " + x.getElementsByTagName("td")[19].innerHTML);
+            }
+            else {
+                $("#Operator").text("Operator: ");
+            }
+
+            if (x.getElementsByTagName("td")[20].innerHTML != "") {
+                $("#Dept").text("Assessment Dept: " + x.getElementsByTagName("td")[20].innerHTML);
+            }
+            else {
+                $("#Dept").text("Assessment Dept: ");
+            }
+
+            if (x.getElementsByTagName("td")[21].innerHTML != "") {
+                $("#Complaint").text("Complaint: " + x.getElementsByTagName("td")[21].innerHTML);
+            }
+            else {
+                $("#Complaint").text("Complaint: ");
+            }
+
+            if (x.getElementsByTagName("td")[22].innerHTML != "") {
+                $("#Reason").text("Reason: " + x.getElementsByTagName("td")[22].innerHTML);
+            }
+            else {
+                $("#Reason").text("Reason: ");
+            }
+
+            if (x.getElementsByTagName("td")[23].innerHTML != "") {
+                $("#Diagnosis").text("Diagnosis: " + x.getElementsByTagName("td")[23].innerHTML);
+            }
+            else {
+                $("#Diagnosis").text("Diagnosis: ");
+            }
+
+            if (x.getElementsByTagName("td")[24].innerHTML != "") {
+                $("#Diagnosiscat").text("Diagnosis: " + x.getElementsByTagName("td")[24].innerHTML);
+            }
+            else {
+                $("#Diagnosiscat").text("Diagnosis: ");
+            }
+
+
+            if (x.getElementsByTagName("td")[5].innerHTML != "0") {
+                $("#Availability").text("Availability: " + x.getElementsByTagName("td")[5].innerHTML);
+            }
+            else {
+                $("#Availability").text("Availability: ");
+            }
+
+            if (x.getElementsByTagName("td")[6].innerHTML != "0") {
+                $("#Competence").text("Professional Competence: " + x.getElementsByTagName("td")[6].innerHTML);
+            }
+            else {
+                $("#Competence").text("Professional Competence: ");
+            }
+
+            if (x.getElementsByTagName("td")[7].innerHTML != "0") {
+                $("#Reaction").text("Reaction Time: " + x.getElementsByTagName("td")[7].innerHTML);
+            }
+            else {
+                $("#Reaction").text("Reaction Time: ");
+            }
+
+            if (x.getElementsByTagName("td")[8].innerHTML != "0") {
+                $("#Kindness").text("Kindness: " + x.getElementsByTagName("td")[8].innerHTML);
+            }
+            else {
+                $("#Kindness").text("Kindness: ");
+            }
+        }
+
+
+         function RefreshArchiveGrid() {
+             var url = '@Url.Action("ArchiveCasesGrid", "archive")';
+            // $("#ArchiveGridPlaceHolder").load(url);
+             location.reload();
+             //$('#request-id').text("......  ");
+             //$("#company").text("Company: ");
+             //$("#street").text("Street: ");
+             //$("#Zip").text("Zip Code: ");
+             //$("#Country").text("Country: ");
+             //$("#Quantity").text("Quantity: ");
+             //$("#OrderNo").text("Order No.: ");
+             //$("#Warranty").text("Warranty: ");
+             //$("#DeliveryDate").text("Delivery Date: ");
+             //$("#OrignalQty").text("Original Qty: ");
+             //$("#Operator").text("Operator: ");
+             //$("#Dept").text("Assessment Dept: ");
+             //$("#Complaint").text("Complaint: ");
+             //$("#Reason").text("Reason: ");
+             //$("#Diagnosis").text("Diagnosis: ");
+             //$("#Diagnosiscat").text("Diagnosis: ");
+             //$("#Availability").text("Availability: ");
+             //$("#Competence").text("Professional Competence: ");
+             //$("#Reaction").text("Reaction Time: ");
+             //$("#Kindness").text("Kindness: ");
+
+        }
+
+        //$("#ReactiveCases").click(function () {
+        //    $('#Reactive_Cases').css('display', 'block');
+        //});
+
+        //jQuery('[data-dismiss="modal"]').on('click', function () {
+        //    jQuery('.modal-backdrop').remove();
+        //    jQuery('.modal').remove();
+        //});
+
+        //$("#btnReactiveCases").click(function () {
+        //    debugger;
+        //    if ($('#request-id').text() == "......  ") {
+        //        alert('Please select case to be Re-activated');
+        //    }
+        //    else {
+
+        //        var Custreq = {
+        //            "Request_id": $('#request-id').text()
+
+        //        };
+        //        debugger;
+
+        //        $.ajax({
+        //            type: 'PUT',
+        //            url: WebServiceUrl + 'api/_CustomerRequest/ArchiveServiceCase',
+        //            data: JSON.stringify(Custreq),
+        //            contentType: "application/json;charset=utf-8",
+        //            success: function (result, status, xhr) {
+        //                RefreshArchiveGrid();
+        //                alert('Successful');
+        //            },
+        //            error: function (xhr, status, error) {
+        //                debugger
+        //                if (error != "") {
+        //                    alert(error);
+        //                }
+        //            }
+        //        });
+
+        //    }
+
+        //});
+
+            </script>
+
+
+
+
+        }
+
+
+

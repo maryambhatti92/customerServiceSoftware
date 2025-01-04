@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html style="overflow-y:scroll;">
+<head>
+
+	<!------------------------------------------------- Start <HEAD> ---------------------------------------------->
+
+	@Html.Partial("_Layout_Head")
+
+	<!-- Start Global Style Tag-->
+	<style type="text/css">
+		
+
+	</style>
+	<!-- End Global Style Tag
+		-->
+	@RenderSection("PageLevelCss", required: false)
+
+	<script src="~/Scripts/ThemeJs/libs/jquery-2.1.1.min.js"></script>
+	<script>
+		if (!window.jQuery) {
+			document.write('<script src="~/Scripts/ThemeJs/libs/jquery-2.1.1.min.js"><\/script>');
+		}
+	</script>
+
+	<!------------------------------------------------- End <HEAD> ---------------------------------------------->
+
+</head>
+
+	<!--
+
+		TABLE OF CONTENTS.
+	
+		Use search to find needed section.
+	
+		===================================================================
+	
+		|  01. #CSS Links                |  all CSS links and file paths  |
+		|  02. #FAVICONS                 |  Favicon links and file paths  |
+		|  03. #GOOGLE FONT              |  Google font link              |
+		|  04. #APP SCREEN / ICONS       |  app icons, screen backdrops   |
+		|  05. #BODY                     |  body tag                      |
+		|  06. #HEADER                   |  header tag                    |
+		|  07. #PROJECTS                 |  project lists                 |
+		|  08. #TOGGLE LAYOUT BUTTONS    |  layout buttons and actions    |
+		|  09. #MOBILE                   |  mobile view dropdown          |
+		|  10. #SEARCH                   |  search field                  |
+		|  11. #NAVIGATION               |  left panel & navigation       |
+		|  12. #RIGHT PANEL              |  right panel userlist          |
+		|  13. #MAIN PANEL               |  main panel                    |
+		|  14. #MAIN CONTENT             |  content holder                |
+		|  15. #PAGE FOOTER              |  page footer                   |
+		|  16. #SHORTCUT AREA            |  dropdown shortcuts area       |
+		|  17. #PLUGINS                  |  all scripts and plugins       |
+	
+		===================================================================
+	
+		-->
+	
+		<!-- #BODY -->
+		<!-- Possible Classes
+
+			* 'smart-style-{SKIN#}'
+			* 'smart-rtl'         - Switch theme mode to RTL
+			* 'menu-on-top'       - Switch to top navigation (no DOM change required)
+			* 'no-menu'			  - Hides the menu completely
+			* 'hidden-menu'       - Hides the main menu but still accessable by hovering over left edge
+			* 'fixed-header'      - Fixes the header
+			* 'fixed-navigation'  - Fixes the main menu
+			* 'fixed-ribbon'      - Fixes breadcrumb
+			* 'fixed-page-footer' - Fixes footer
+			* 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
+		-->
+
+<body class="">
+
+	@{
+//string name = "";
+//if (Session["HRMS"] == null)
+//{
+//    Response.Redirect("~/Account/Login");
+//}
+//else
+//{
+//    //UserVM user = (UserVM) Session["FSS"];
+//    //if (user != null)
+//    //{
+//    //    name = user.NameOfUser;
+//    //}
+//}
+	}
+
+	<!------------------------------------------------- TOP BAR ---------------------------------------------->
+
+	@Html.Partial("_Layout_Topbar")
+
+
+
+	<!------------------------------------------------- SIDE BAR ---------------------------------------------->
+
+	@Html.Partial("_Layout_Sidebar")
+
+
+
+
+	<!------------------------------------------------- C  O  N  T  E  N  T ---------------------------------------------->
+
+	<!-- MAIN PANEL -->
+	<div id="main" role="main">
+
+		<!-- RIBBON (small bread crumb) -->
+		
+		<div id="ribbon">
+
+			<!-- bread crumb -->
+			<ol class="breadcrumb">
+				
+				@RenderSection("BreadCrumb", required: true)     @*<li>Bread</li><li>Crumb</li><li>is</li><li>here</li>*@
+				
+			</ol>
+			<!-- end bread crumb -->
+
+			<!-- Start Ribbon Buttons -->
+			<span class="ribbon-button-alignment pull-right">
+
+				@RenderSection("RibbonButtons", required: false)
+
+				@*<span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+				<span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+				<span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>*@
+			
+			</span>
+			<!-- End Ribbon Buttons -->
+
+		</div>
+		<!-- END RIBBON -->
+
+
+		<!-- MAIN CONTENT -->
+		<div id="content">
+
+			<div class="row">
+				<!-- Page Heading (big bread crumb) -->
+				<div class="col-xs-12 col-sm-7 col-md-7 col-lg-6">
+					<h1 class="page-title txt-color-blueDark">
+
+						@RenderSection("PageHeading", true)
+						@*<i class="fa-fw fa fa-home"></i> Page Heading*@
+
+					</h1>
+				</div>
+				   
+				<div class="col-xs-12 col-sm-5 col-md-5 col-lg-6">
+
+					<!-- Graphs next to Page Heading (big bread crumb) -->
+							
+					@*<ul id="sparks" class="">
+						<li class="sparks-info">
+							<h5> My Income <span class="txt-color-blue">$47,171</span></h5>
+							<div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+								1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+							</div>
+						</li>
+						<li class="sparks-info">
+							<h5> Site Traffic <span class="txt-color-purple"><i class="fa fa-arrow-circle-up"></i>&nbsp;45%</span></h5>
+							<div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+								110,150,300,130,400,240,220,310,220,300, 270, 210
+							</div>
+						</li>
+						<li class="sparks-info">
+							<h5> Site Orders <span class="txt-color-greenDark"><i class="fa fa-shopping-cart"></i>&nbsp;2447</span></h5>
+							<div class="sparkline txt-color-greenDark hidden-mobile hidden-md hidden-sm">
+								110,150,300,130,400,240,220,310,220,300, 270, 210
+							</div>
+						</li>
+					</ul>*@
+				</div>
+
+
+			</div>
+			
+			<hr class="underline-page-heading" />
+					
+				
+			@RenderBody()
+			
+			
+
+		</div>
+		<!-- END MAIN CONTENT -->
+
+	</div>
+	<!-- END MAIN PANEL -->
+
+
+
+	<!------------------------------------------------- FOOTER ---------------------------------------------->
+
+	@*@Html.Partial("_Layout_Footer")*@
+
+
+
+	<!---------------------------------------------- QUICK ACCESS ------------------------------------------->
+
+	@Html.Partial("_Layout_SidebarQuickAccess")
+			
+
+
+	<!------------------------------------------------- SCRIPTS --------------------------------------------->
+			
+	@Html.Partial("_Layout_ScriptReferences")
+			
+	<!-- Start Global Script -->
+	<script>
+		$(document).ready(function () {
+			console.info('Global Script');
+			// DO NOT REMOVE : GLOBAL FUNCTIONS!
+			pageSetUp();
+
+		});
+	</script>
+	<!-- End Global Script-->
+	
+
+	<!-- Start Page Level Script -->
+	@RenderSection("PageLevelJs", required: false)
+	<!-- Start Page Level Script -->
+
+</body>
+</html>

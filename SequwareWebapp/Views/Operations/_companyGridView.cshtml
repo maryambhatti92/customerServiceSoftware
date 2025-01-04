@@ -1,0 +1,106 @@
+﻿@model IEnumerable<css.Data.Models.tbl_Company>
+
+<div class="col-sm-12">
+    <div class="widget widget-fullwidth widget-small">
+        <div class="widget-head">
+            <div class="tools"><span class="icon s7-upload"></span><span class="icon s7-edit"></span><span class="icon s7-close"></span></div>
+            <div class="title">Company List </div>
+        </div>
+        <table id="table1" class="table table-striped table-hover table-fw-widget" style="width: 100% !important;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Phone(s)</th>
+                    <th>Address</th>
+                    <th>License</th>
+                    <th>License Expiry Date</th>
+                    <th>Email</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model != null)
+                {
+                    var rowComIndex = 1;
+                    var count = 1;                    
+                    foreach (var comp in Model)
+                    {
+
+                        var className = "";
+
+
+                        if (count == 1)
+                        {
+                            className = "odd";
+                            count = 2;
+                        }
+                        else
+                        {
+                            className = "even";
+                            count = 1;
+                        }
+
+                <tr class=@className>
+                    <td name="cmpID-@comp.Company_id">@comp.Company_id</td>
+                    <td name="cmpName-@comp.Company_id">@comp.Comapany_Name</td>
+                    <td name="cmpPhone-@comp.Company_id">@comp.Phone_Num</td>
+                    <td name="cmpAddress-@comp.Company_id">@comp.Address</td>
+                    <td name="cmpLiscence-@comp.Company_id">@comp.Liscense</td>
+                    <td name="cmpDate-@comp.Company_id">@comp.LisceneExpiryDate</td>
+                    <td name="cmpEmail-@comp.Company_id">@comp.Email</td>
+                    <td>
+                        <button type="button" data-id="@comp.Company_id" onclick="EditCompany(this)" class="btn btn-space btn-primary btn-xs"><i class="icon s7-info"></i></button>
+                    </td>
+                    <td>
+                        <button type="button" data-id="@comp.Company_id" onclick="LoadDeleteCompanyModal(this)" class="btn btn-space btn-primary btn-xs"><i class="icon s7-trash"></i></button>
+                    </td>
+
+                    @{
+                        rowComIndex = rowComIndex + 1;
+                    }
+
+                </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function EditCompany(x) {
+        debugger
+        var y = $(x).closest("tr");
+        var row = $(x).attr("data-id");
+        var date = y.find("td:eq(5)").text().substring(0, 10);
+
+        $('#hdncmpId').val(y.find("td:eq(0)").text());
+        $('#Cmpname').val(y.find("td:eq(1)").text());
+        $('#cmpphone').val(y.find("td:eq(2)").text());
+        $('#cmpEmail').val(y.find("td:eq(6)").text());
+        $('#cmpaddress').val(y.find("td:eq(3)").text());
+        $('#cmpLiscence').val(y.find("td:eq(4)").text());
+        $('#cmpDate').val(date);
+        $("#btnLicenseRenewal").css("display", "block")
+        $("#btnAddLicense").css("display", "none")
+        $("#cmpDate").attr("disabled", "disabled");
+
+        $('#tabUL a[href="#tabcc-1"]').trigger('click');
+
+
+        //$('#tabcc-2').removeClass("active");
+        //$('#tabcc-1').addClass("active");        
+        //$('#tabcc-2li').removeClass("active");
+        //$('#tabcc-1li').addClass("active");
+        //$('#tabcc-2').css("display", "none");
+        //$('#tabcc-1').css("display", "block");
+        //$('#tabcc-2').attr("aria-hidden", "true");
+        //$('#tabcc-1').attr("aria-hidden", "false");
+
+    }
+</script>

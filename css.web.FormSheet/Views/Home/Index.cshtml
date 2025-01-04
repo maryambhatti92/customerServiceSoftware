@@ -1,0 +1,399 @@
+﻿@using css.Data.Models;
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@section PageLevelCss{}
+
+
+
+@section BreadCrumb{   @* R E Q U I R E D *@
+<li>Home</li>
+<li>Form Sheet</li>
+
+}
+
+@section RibbonButtons{
+
+    @*<span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+        <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+        <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>*@
+}
+
+
+@section PageHeading{   @* R E Q U I R E D *@
+
+<i class="fa fa-pencil-square-o fa-fw "></i> Form Sheet
+
+}
+@*<div class="row">
+    <div class="col-md-12 text-right">
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddEditPopup">Add Type</button>
+    </div>
+</div>*@
+
+
+<div class="row">&nbsp;</div>
+
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- NEW WIDGET START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false">
+                <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-check"></i> </span>
+                    <h2>Form Sheet Fields </h2>
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body">
+
+                        <div class="row">
+                            <form id="wizard-1" novalidate="novalidate">
+                                <div id="bootstrap-wizard-1" class="col-sm-12">
+                                    <div class="form-bootstrapWizard">
+                                        <ul class="bootstrapWizard form-wizard">
+                                            <li class="active" data-target="#step1">
+                                                <a href="#tab1" data-toggle="tab"> <span class="step">1</span> <span class="title">Customer information</span> </a>
+                                            </li>
+                                            <li data-target="#step2">
+                                                <a href="#tab2" data-toggle="tab"> <span class="step">2</span> <span class="title">Contact Person</span> </a>
+                                            </li>
+                                            <li data-target="#step3">
+                                                <a href="#tab3" data-toggle="tab"> <span class="step">3</span> <span class="title">Problem Description</span> </a>
+                                            </li>
+                                            <li data-target="#step4">
+                                                <a href="#tab4" data-toggle="tab"> <span class="step">4</span> <span class="title">Save Form</span> </a>
+                                            </li>
+                                         
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab1">
+                                            <br>
+                                            <h3><strong>Step 1 </strong> - Customer Information</h3>
+                                            <h4><strong>Address </strong></h4>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                            <input class="form-control input-lg" placeholder="Company" type="text" name="companyname" id="companyname">
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                            <input class="form-control input-lg" placeholder="Street" type="text" name="Street" id="Street">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-lg fa-fw"></i></span>
+                                                            <input class="form-control input-lg" placeholder="Zip Code" type="text" name="Zipcode" id="Zipcode">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                           
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-lg fa-fw"></i></span>
+                                                        <input class="form-control input-lg" placeholder="Country" type="text" name="Country" id="Country">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        </div>
+                                        <div class="tab-pane" id="tab2">
+                                            <br>
+                                            <h3><strong>Step 2</strong> - Contact Person</h3>
+                                            <h4><strong>Person 1: </strong></h4>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                            <input class="form-control input-lg" placeholder="Name" type="text" name="cp1name" id="cp1name">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                            <input class="form-control input-lg" placeholder="email@example.com" type="text" name="cp1email" id="cp1email">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-phone fa-lg fa-fw"></i></span>
+                                                            <input class="form-control input-lg" data-mask="+99 (999) 999-9999" data-mask-placeholder="X" placeholder="+1" type="text" name="cp1phone" id="cp1phone">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <h4><strong>Person 2: </strong></h4>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                            <input class="form-control input-lg" placeholder="Name" type="text" name="cp2name" id="cp2name">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
+                                                            <input class="form-control input-lg" placeholder="email@example.com" type="text" name="cp2email" id="cp2email">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-phone fa-lg fa-fw"></i></span>
+                                                            <input class="form-control input-lg" data-mask="+99 (999) 999-9999" data-mask-placeholder="X" placeholder="+1" type="text" name="cp2phone" id="cp2phone">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="tab3">
+                                            <br>
+                                            <h3><strong>Step 3</strong> - Problem Description</h3>
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Choose issue for service request:</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                            <select class="form-control input-lg" name="IssueChoices">
+                                                                <option value="" selected="selected">Select Choice</option>
+                                                                <option>Repair</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">                                                        
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa-fw fa fa-info"></i></span>
+                                                            <input class="form-control input-lg" placeholder="Description..." type="text" name="Description" id="Description">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">                                                        
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-map-marker fa-lg fa-fw"></i></span>
+                                                            <input class="form-control input-lg" placeholder="Reference number from your system" type="text" name="reference" id="reference">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Further information</label>
+                                                         <div class="input-group">                                                           
+                                                            <button type="submit" class="btn btn-primary">
+                                                                Upload Data
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                       
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa-fw fa fa-info"></i></span>
+                                                            <input class="form-control input-lg" placeholder="Individual Footnote" type="text" name="IndividualFooter" id="IndividualFooter">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane" id="tab4">
+                                            <br>
+                                            <h3><strong>Step 4</strong> - Save Form</h3>
+                                            <br>
+                                            <h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i> Complete</strong></h1>
+                                            <h4 class="text-center">Click next to finish</h4>
+                                            <br>
+                                            <br>
+                                        </div>
+
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <ul class="pager wizard no-margin">
+                                                        <!--<li class="previous first disabled">
+                                                        <a href="javascript:void(0);" class="btn btn-lg btn-default"> First </a>
+                                                        </li>-->
+                                                        <li class="previous disabled">
+                                                            <a href="javascript:void(0);" class="btn btn-lg btn-default"> Previous </a>
+                                                        </li>
+                                                        <!--<li class="next last">
+                                                        <a href="javascript:void(0);" class="btn btn-lg btn-primary"> Last </a>
+                                                        </li>-->
+                                                        <li class="next">
+                                                            <a href="javascript:void(0);" class="btn btn-lg txt-color-darken"> Next </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+        </article>
+        <!-- WIDGET END -->
+     
+
+    </div>
+
+    <!-- end row -->
+
+</section>
+<!-- end widget grid -->
+
+@*@Html.Action("TypesEntryPopup");*@
+
+<input type="hidden" id="hdnRecordId" />
+
+
+
+@section PageLevelJs{
+    <!-- Start Page Level Script -->
+    <!-- JARVIS WIDGETS -->
+    @*<script src="~/Scripts/ThemeJs/smartwidgets/jarvis.widget.min.js"></script>*@
+
+    <!-- PAGE RELATED PLUGIN(S) -->
+    @*<script src="~/Scripts/ThemeJs/plugin/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/ThemeJs/plugin/datatables/dataTables.colVis.min.js"></script>
+    <script src="~/Scripts/ThemeJs/plugin/datatables/dataTables.tableTools.min.js"></script>
+    <script src="~/Scripts/ThemeJs/plugin/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="~/Scripts/ThemeJs/plugin/datatable-responsive/datatables.responsive.min.js"></script>
+    <script src="~/Scripts/ThemeJs/plugin/bootbox/bootbox.min.js"></script>*@
+<script src="~/Scripts/ThemeJs/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="~/Scripts/ThemeJs/plugin/masked-input/jquery.maskedinput.min.js"></script>
+<script src="~/Scripts/ThemeJs/plugin/maxlength/bootstrap-maxlength.min.js"></script>
+<script src="~/Scripts/ThemeJs/plugin/jquery-validate/jquery.validate.min.js"></script>
+    <!-- PAGE's JS -->
+    <script src="~/Scripts/HRMS/Types/IndexTypesJs.js"></script>
+
+    <script type="text/javascript">
+
+
+    </script>
+
+    <!-- End Page Level Script -->
+}
+

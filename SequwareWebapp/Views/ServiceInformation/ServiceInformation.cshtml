@@ -1,0 +1,2412 @@
+﻿@model css.Shared.ViewModels.ServiceFormVM
+
+@{
+    ViewBag.Title = "Service Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .heading {
+        border: solid;
+        background-color: #68c5b5 !important;
+        border-color: white !important;
+        text-align: center;
+        color: white;
+    }
+</style>
+
+@{
+    if (Session["Sequware"] == null)
+    {
+        Response.Redirect("~/Login/Login");
+    }
+    else
+    {
+
+        <div id="basic-alert" role="alert" class="alert alert-danger alert-icon alert-border-color alert-dismissible" style="display: none;">
+            <div class="icon"><span class="s7-close-circle"></span></div>
+            <div id="warningMSg1" class="message">
+                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button> Information not saved!
+            </div>
+        </div>
+
+
+        <div id="basic-alert1" role="alert" class="alert alert-success alert-icon alert-dismissible" style="display: none;">
+            <div class="icon"><span class="s7-check"></span></div>
+            <div id="SuccessMSg1" class="message">
+                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button><strong>Great!</strong> Successful
+            </div>
+        </div>
+
+
+
+        <div id="accordion1" class="panel-group accordion">
+
+            <div class="row">
+                <div class="center">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne" class="collapsed"><i class="icon s7-angle-down"></i> Basic Information</a></h4>
+                        </div>
+
+                        <div id="collapseOne" class="panel-collapse collapse">
+
+
+
+                            <div class="panel-body">
+                                <form role="form" class="form-horizontal">
+                                    <input type="hidden" id="hdnRequestId" value="@Model.customerRequest.Request_id" />
+                                    <div class="form-group">
+
+                                        <label for="rmanum" class="col-sm-2 control-label">RMA Number:</label>
+                                        <div class="col-sm-4">
+                                            <input id="rmanum" type="text" placeholder="RMA Number" class="form-control" value="@Model.customerRequest.Request_id" required disabled>
+                                        </div>
+
+                                        <label for="manager" class="col-sm-2 control-label">Manager:</label>
+                                        <div class="col-sm-4">
+                                            <input id="manager" type="text" placeholder="Manager" class="form-control" value="@Model.customerRequest.worker" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label for="entryDate" class="col-sm-2 control-label">Date of Entry:</label>
+                                        @*<div class="col-sm-4">
+                                                                            <div data-min-view="2" data-date-format="mm/dd/yyyy" class="input-group date datetimepicker col-sm-10">
+                                                <input id="entryDate" value="@Model.customerRequest.date_added" size="16" type="text" class="form-control"><span class="input-group-addon btn btn-primary"><i class="icon-th s7-date"></i></span>
+                                            </div>
+                                                                              var x = serviceinfo.customerRequest.date_added.ToString();
+                                                    string  y= x.Substring(0, 10);
+
+                                                    serviceinfo.customerRequest.date_added = DateTime.ParseExact(y, "mm/dd/yyyy",new CultureInfo("en-US"), DateTimeStyles.None);
+
+
+                                                                        </div>*@
+
+                                        @{ var added = Model.customerRequest.date_added.ToString();
+                                            string @added1 = added.Substring(0, 10);
+
+
+                                            <div class="col-sm-4">
+                                                <div data-min-view="2" data-date-format="mm/dd/yyyy" class="input-group date datetimepicker col-sm-8">
+                                                    <input id="entryDate" value="@added1" size="16" type="text" class="form-control" data-val="true" data-val-required="*License Date is required"><span class="input-group-addon btn btn-primary"><i class="icon-th s7-date"></i></span>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        <label for="cmbStatus" class="col-sm-2 control-label">Status:</label>
+                                        <div class="col-sm-4">
+                                            @Html.DropDownListFor(m => m.customerRequest.status,
+new SelectList(Model.status, "Status_id", "status"),
+"-- Select --",
+new { id = "cmbStatus", @class = "form-control" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Priority" class="col-sm-2 control-label">Priority:</label>
+                                        <div class="col-sm-4">
+                                            @Html.DropDownListFor(m => m.customerRequest.priority,
+ViewData["list"] as SelectList,
+"-- Select --",
+new { id = "cmbPriority", @class = "form-control", @onchange = "changePriorityColor()" })
+                                        </div>
+                                        @*<label for="btnFile" class="col-sm-2 control-label">File:</label>*@
+                                        <div class="col-sm-4">
+                                            @*<button id="btnFile" type="button" class="btn btn-success md-close" onclick="window.open('D:\Projects\Business\Cosmetic surgeon website')">Open</button>*@
+
+                                            @{
+                                                if (Model.customerRequest.isActive == true)
+                                                {
+                                                    <button id="btnSaveBasicInfo" type="button" class="btn btn-success md-close pull-right">Update</button>
+                                                }
+                                                else
+                                                {
+                                                    <button id="btnSaveBasicInfo" type="button" class="btn btn-success md-close pull-right" disabled>Update</button>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="center">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapsetwo" aria-expanded="false" class="collapsed"><i class="icon s7-angle-down"></i> Service Details</a></h4>
+                        </div>
+                        <div id="collapsetwo" class="panel-collapse collapse">
+                            <div class="tab-container">
+                                <ul class="nav nav-tabs" style="background-color: #f5f5f5;">
+
+                                    <li id="tabcc-1li" class="active"><a href="#tabcc-1" data-toggle="tab"><strong>Information</strong></a></li>
+                                    <li id="tabcc-2li"><a href="#tabcc-2" data-toggle="tab"><strong>Order Data</strong></a></li>
+                                    <li id="tabcc-3li"><a href="#tabcc-3" data-toggle="tab"><strong>Inspection</strong></a></li>
+                                    <li id="tabcc-4li"><a href="#tabcc-4" data-toggle="tab"><strong>Solution</strong></a></li>
+                                    <li id="tabcc-5li"><a href="#tabcc-5" data-toggle="tab"><strong>Completion</strong></a></li>
+                                </ul>
+                                <div class="tab-content" style="background: #ffffff;">
+                                    <div id="tabcc-1" class="tab-pane active cont">
+
+                                        <div id="tab1-alertd" role="alert" class="alert alert-danger alert-icon alert-border-color alert-dismissible" style="display: none;">
+                                            <div class="icon"><span class="s7-close-circle"></span></div>
+                                            <div id="warningMSg1d" class="message">
+                                                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button> Hola
+                                            </div>
+                                        </div>
+
+
+                                        <div id="tab1-alert1d" role="alert" class="alert alert-success alert-icon alert-dismissible" style="display: none;">
+                                            <div class="icon"><span class="s7-check"></span></div>
+                                            <div id="SuccessMSg1d" class="message">
+                                                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button><strong>Great!</strong> Successful
+                                            </div>
+                                        </div>
+
+                                        <div class="center">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3>Customer Information</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form role="form" id="CustomerInfoForm" class="form-horizontal">
+                                                        <input type="hidden" id="hdnCustomerId" value="@Model.Customer.Customer_id" />
+                                                        <div class="form-group">
+                                                            <label for="Cname" class="col-sm-2 control-label">Customer Name</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="Cname" name="Cname" type="text" placeholder="Customer Name" value="@Model.Customer.company" class="form-control" />  @*data-val="true" data-val-required="*Customer Name is required">*@
+                                                                <span style="color: red;" class="field-validation-valid" data-valmsg-for="Cname" data-valmsg-replace="true"></span>
+                                                            </div>
+                                                            <label for="street" class="col-sm-2 control-label">Street</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="street" name="street" type="text" placeholder="Street" value="@Model.Customer.street" class="form-control" />  @*data-val="true" data-val-required="*Street is required">*@
+                                                                <span style="color: red;" class="field-validation-valid" data-valmsg-for="street" data-valmsg-replace="true"></span>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="zipcode" class="col-sm-2 control-label">Zip Code and City:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="zipcode" name="zipcode" type="text" placeholder="Zip Code and City" value="@Model.Customer.Zipcode" class="form-control" />  @*data-val="true" data-val-required="*Zip Code and City is required">*@
+                                                                <span style="color: red;" class="field-validation-valid" data-valmsg-for="zipcode" data-valmsg-replace="true"></span>
+                                                            </div>
+                                                            <label for="country" class="col-sm-2 control-label">Country:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="country" name="country" type="text" placeholder="Country" value="@Model.Customer.Country" class="form-control" />  @*data-val="true" data-val-required="*Country is required">*@
+                                                                <span style="color: red;" class="field-validation-valid" data-valmsg-for="country" data-valmsg-replace="true"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+
+                                                            <label for="refnum" class="col-sm-2 control-label">Customer Reference Number:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="refnum" name="refnum" type="text" placeholder="Customer Reference Number" value="@Model.Customer.CustomerRefNo" class="form-control" />  @*data-val="true" data-val-required="*Customer Reference Number is required">*@
+                                                                <span style="color: red;" class="field-validation-valid" data-valmsg-for="refnum" data-valmsg-replace="true"></span>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                                <div class="panel-heading">
+                                                    <h3>Contact Person</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <input type="hidden" id="hdnContactId" value="@Model.Contacts.FirstOrDefault().Contact_id" />
+                                                    <form role="form" id="ContactForm" class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label for="Contactname" class="col-sm-2 control-label">Name:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="Contactname" name="Contactname" type="text" placeholder="Name" value="@Model.Contacts.FirstOrDefault().name" class="form-control" /> @*data-val="true" data-val-required="*Contact name is required">*@
+                                                                <span style="color: red;" class="field-validation-valid" data-valmsg-for="Contactname" data-valmsg-replace="true"></span>
+                                                            </div>
+                                                            <label for="contactEmail" class="col-sm-2 control-label">Email:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="contactEmail" name="contactEmail" type="email" placeholder="Email" value="@Model.Contacts.FirstOrDefault().email" class="form-control" />  @*data-val="true" data-val-required="*Email is required">*@
+                                                                <span style="color: red;" class="field-validation-valid" data-valmsg-for="contactEmail" data-valmsg-replace="true"></span>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="ContactPhone" class="col-sm-2 control-label">Phone:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="ContactPhone" name="ContactPhone" type="text" placeholder="Phone" value="@Model.Contacts.FirstOrDefault().phone" class="form-control" />  @*data-val="true" data-val-required="*Phone is required">*@
+                                                                <span style="color: red;" class="field-validation-valid" data-valmsg-for="ContactPhone" data-valmsg-replace="true"></span>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+
+                                                <div class="panel-heading">
+                                                    <h3>Problem Description</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form role="form" id="ProblemForm" class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label for="Sreq" class="col-sm-2 control-label">Service Request:</label>
+                                                            <div class="col-sm-4">
+                                                                @Html.DropDownListFor(m => m.customerRequest.issue,
+new SelectList(Model.issues, "Issue_ID", "Issue"),
+new { id = "cmbserReq", @class = "form-control" })
+
+
+                                                                @*@Html.DropDownListFor(
+                                                                    x => x.customerRequest.issue,
+                                                                    new SelectList(Model.issues, "Issue_ID", "Issue"),
+                                                                    new { @class = "form-control" })*@
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="Reason" class="col-sm-2 control-label">Reason:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="Reason" name="Reason" type="text" value="@Model.customerRequest.error_description" class="form-control">
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+
+
+                                                <div class="panel-heading">
+                                                    <h3>Further Information</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form role="form" class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label for="furtherinfo" class="col-sm-2 control-label">Further Information:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="furtherinfo" placeholder="Further Information" type="text" class="form-control" value="@Model.customerRequest.FurtherInformatipn">
+                                                            </div>
+
+                                                            @*<label for="btnupload" class="col-sm-2 control-label">Upload Data:</label>
+                                                                <div class="col-sm-4">
+                                                                    <button id="btnupload" type="button" class="btn btn-success md-close">Upload</button>
+                                                                </div>*@
+
+                                                        </div>
+
+
+
+                                                        <div class="form-group pull-right">
+                                                            @{
+                                                                if (Model.customerRequest.isActive == true)
+                                                                {
+                                                                    <button id="btnSavebasicDetail" type="button" class="btn btn-success md-close">Save</button>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <button id="btnSavebasicDetail" type="button" class="btn btn-success md-close" disabled>Save</button>
+                                                                }
+                                                            }
+                                                        </div>
+
+
+                                                    </form>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div id="tabcc-2" class="tab-pane cont">
+                                        <div id="tab2-alert" role="alert" class="alert alert-danger alert-icon alert-border-color alert-dismissible" style="display: none;">
+                                            <div class="icon"><span class="s7-close-circle"></span></div>
+                                            <div id="warningMSg2" class="message">
+                                                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button> Hola
+                                            </div>
+                                        </div>
+
+
+                                        <div id="tab2-alert1" role="alert" class="alert alert-success alert-icon alert-dismissible" style="display: none;">
+                                            <div class="icon"><span class="s7-check"></span></div>
+                                            <div id="SuccessMSg2" class="message">
+                                                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button><strong>Great!</strong> Successful
+                                            </div>
+                                        </div>
+
+                                        <div class="center">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3>After Goods Receipt</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form role="form" class="form-horizontal">
+                                                        <input type="hidden" id="hdnOrderId" value="@Model.orderData.Order_id" />
+                                                        <div class="form-group">
+                                                            <label for="ordproduct" class="col-sm-2 control-label">Product:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="ordproduct" type="text" placeholder="Product" class="form-control" value="@Model.orderData.product" required>
+                                                            </div>
+                                                            <label for="ordQuantity" class="col-sm-2 control-label">Quantity:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="ordQuantity" type="number" placeholder="Quantity" class="form-control" value="@Model.orderData.Quantity" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" required>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="zipcode" class="col-sm-2 control-label">Return Confirmation:</label>
+                                                            <div class="col-sm-4">
+                                                                @{
+                                                                    if (Model.orderData.Email_Sent != 1)
+                                                                    {
+                                                                        if (Model.customerRequest.isActive == true)
+                                                                        {
+                                                                            <button id="btnordemail" type="button" class="btn-group btn-space btn btn-default" onclick="loadSendEmailPopupData('order')" style="color: #ec4444;">Email</button>
+                                                                            <button data-toggle="modal" data-target="#form-EmailEditModal" id="btnordemailedit" onclick="loadEditEmailPopupData('order')" type="button" class="btn-group btn-space btn btn-default" style="color: #ec4444;"><i class="icon s7-pen"></i></button>
+                                                                        }
+                                                                        @*<button data-toggle="modal" data-target="#form-EmailViewModal" id="btnordemailView" type="button" class="btn-group btn-space btn btn-default" onclick="createGUID()" style="color: #ec4444;"><i class="icon s7-folder"></i></button>*@
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <p>@Model.orderData.Email_date</p>
+                                                                    }
+                                                                }
+                                                                @*<button id="btnordemailfolder" type="button" class="btn-group btn-space btn btn-default" onclick="createGUID()" style="color: #ec4444;"><i class="icon s7-folder"></i></button>*@
+
+                                                            </div>
+
+                                                            <div class="form-group">
+
+                                                                <div class="col-sm-6">
+                                                                    @{
+                                                                        if (Model.orderData.Confirmation == "Yes")
+                                                                        {
+                                                                            <div class="am-radio inline">
+                                                                                <input type="radio" checked="checked" name="rad2" id="rad4" value="Yes">
+                                                                                <label for="rad4">Yes</label>
+                                                                            </div>
+                                                                            <div class="am-radio inline">
+                                                                                <input type="radio" name="rad2" id="rad5" value="No">
+                                                                                <label for="rad5">No</label>
+                                                                            </div>
+                                                                            <div class="am-radio inline">
+                                                                                <input type="radio" name="rad2" id="rad6" value="Not-Necessary">
+                                                                                <label for="rad6">Not Necessary</label>
+                                                                            </div>
+                                                                        }
+                                                                        else if (Model.orderData.Confirmation == "No")
+                                                                        {
+                                                                            <div class="am-radio inline">
+                                                                                <input type="radio" name="rad2" id="rad4" value="Yes">
+                                                                                <label for="rad4">Yes</label>
+                                                                            </div>
+                                                                            <div class="am-radio inline">
+                                                                                <input type="radio" checked="checked" name="rad2" id="rad5" value="No">
+                                                                                <label for="rad5">No</label>
+                                                                            </div>
+                                                                            <div class="am-radio inline">
+                                                                                <input type="radio" name="rad2" id="rad6" value="Not-Necessary">
+                                                                                <label for="rad6">Not Necessary</label>
+                                                                            </div>
+                                                                        }
+
+                                                                        else
+                                                                        {
+                                                                            <div class="am-radio inline">
+                                                                                <input type="radio" name="rad2" id="rad4" value="Yes">
+                                                                                <label for="rad4">Yes</label>
+                                                                            </div>
+                                                                            <div class="am-radio inline">
+                                                                                <input type="radio" name="rad2" id="rad5" value="No">
+                                                                                <label for="rad5">No</label>
+                                                                            </div>
+                                                                            <div class="am-radio inline">
+                                                                                <input type="radio" checked="checked" name="rad2" id="rad6" value="Not-Necessary">
+                                                                                <label for="rad6">Not Necessary</label>
+                                                                            </div>
+                                                                        }
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+                                                <div class="panel-heading">
+                                                    <h3>Order Data</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form role="form" id="OrderDataform" class="form-horizontal">
+                                                        @*<div class="form-group">
+                                                            <label for="ordformsheetnum" class="col-sm-2 control-label">Customer Number (Formsheet):</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="ordformsheetnum" name="ordformsheetnum" type="text" class="form-control" value="@Model.orderData.CustomerNumber_FrmSheet" />  @*data-val="true" data-val-required="*Customer Number (Formsheet) is required">*@
+                                                        @*<span style="color: red;" class="field-validation-valid" data-valmsg-for="ordformsheetnum" data-valmsg-replace="true"></span>
+                                                                </div>
+                                                                <label for="ordcustorg" class="col-sm-2 control-label">Customer Number (Original Order):</label>
+                                                                <div class="col-sm-4">
+                                                                    <input id="ordcustorg" type="text" class="form-control" value="@Model.orderData.CustomerNumber_Org">
+                                                                </div>
+
+                                                            </div>*@
+
+                                                        <div class="form-group">
+                                                            <label for="ordorignalnum" class="col-sm-2 control-label">Customer Number:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="ordorignalnum" name="ordorignalnum" type="text" class="form-control" value="@Model.orderData.OrginalOrderNumber" /> @*data-val="true" data-val-required="*Original Order Number is required">*@
+                                                                <span style="color: red;" class="field-validation-valid" data-valmsg-for="ordorignalnum" data-valmsg-replace="true"></span>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+
+                                                <div class="panel-heading">
+                                                    <h3>Warranty</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form role="form" class="form-horizontal">
+                                                        <input type="hidden" id="hdncmpId" />
+                                                        <div class="form-group">
+
+                                                            <label for="ordwarrantydate" class="col-sm-2 control-label">Delivery Date:</label>
+                                                            @{ string @devDate = Model.orderData.DeliveryDate.ToString();
+                                                                if (@devDate != "")
+                                                                    @devDate = @devDate.Substring(0, 10);
+                                                            }
+                                                            <div class="col-sm-4">
+                                                                <div data-min-view="2" data-date-format="mm/dd/yyyy" class="input-group date datetimepicker col-sm-12">
+                                                                    <input id="ordwarrantydate" name="cmpDate" size="16" type="text" value="@devDate" class="form-control" data-val="true" data-val-required="*License Date is required"><span class="input-group-addon btn btn-primary"><i class="icon-th s7-date"></i></span>
+
+                                                                </div>
+                                                            </div>
+
+
+                                                            <label class="col-sm-2 control-label">Guarantee:</label>
+                                                            <div class="col-sm-4">
+                                                                @{
+                                                                    if (Model.orderData.Waranty == "Inside Period")
+                                                                    {
+                                                                        <div class="am-radio inline">
+                                                                            <input type="radio" checked="checked" name="radwar1" id="radwar1" value="Inside Period">
+                                                                            <label for="radwar1">Within Warranty</label>
+                                                                        </div>
+                                                                        <div class="am-radio inline">
+                                                                            <input type="radio" name="radwar1" id="radwar2" value="Outside Period">
+                                                                            <label for="radwar2">Warranty Expired</label>
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <div class="am-radio inline">
+                                                                            <input type="radio" name="radwar1" id="radwar1" value="Inside Period">
+                                                                            <label for="radwar1">Within Warranty</label>
+                                                                        </div>
+                                                                        <div class="am-radio inline">
+                                                                            <input type="radio" checked="checked" name="radwar1" id="radwar2" value="Inside Period">
+                                                                            <label for="radwar2">Warranty Expired</label>
+                                                                        </div>
+                                                                    }
+                                                                }
+                                                            </div>
+
+
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="ordorgquantity" class="col-sm-2 control-label">Original Quantity:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="ordorgquantity" type="number" class="form-control" value="@Model.orderData.Orignal_Quantity" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group pull-right">
+                                                            @{
+                                                                if (Model.customerRequest.isActive == true)
+                                                                {
+                                                                    <button id="btnSaveOrder" type="button" class="btn btn-success md-close">Save</button>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <button id="btnSaveOrder" type="button" class="btn btn-success md-close" disabled>Save</button>
+                                                                }
+
+                                                            }
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tabcc-3" class="tab-pane cont">
+
+                                        <div id="tab3-alert" role="alert" class="alert alert-danger alert-icon alert-border-color alert-dismissible" style="display: none;">
+                                            <div class="icon"><span class="s7-close-circle"></span></div>
+                                            <div id="warningMSg3" class="message">
+                                                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button> Hola
+                                            </div>
+                                        </div>
+
+
+                                        <div id="tab3-alert1" role="alert" class="alert alert-success alert-icon alert-dismissible" style="display: none;">
+                                            <div class="icon"><span class="s7-check"></span></div>
+                                            <div id="SuccessMSg3" class="message">
+                                                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button><strong>Great!</strong> Successful
+                                            </div>
+                                        </div>
+
+                                        <div class="center">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3>Analysis</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form role="form" class="form-horizontal">
+                                                        <input type="hidden" id="hdnInspectionId" value="@Model.inspectionData.InspectionID" />
+                                                        <div class="form-group">
+                                                            <label for="cmbAssessDept" class="col-sm-2 control-label">Responsible Department:</label>
+                                                            <div class="col-sm-4">
+
+                                                                @*@Html.DropDownListFor(
+                                                                    m => m.inspectionData.Department,
+                                                                    new SelectList(Model.departments, "DepartmentID", "Dep_Name"),
+                                                                    new { @class = "form-control" })*@
+
+                                                                @Html.DropDownListFor(m => m.inspectionData.Department,
+new SelectList(Model.departments, "DepartmentID", "Dep_Name"),
+
+new { id = "cmbAssessDept", @class = "form-control" })
+                                                            </div>
+
+
+                                                            <label for="InsOperator" class="col-sm-2 control-label">Operator:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="InsOperator" type="text" class="form-control" value="@Model.inspectionData.Operator">
+                                                            </div>
+
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="btnInsemail" class="col-sm-2 control-label">Email:</label>
+                                                            <div class="col-sm-4">
+                                                                @{
+                                                                    if (Model.inspectionData.Email_Sent != 1)
+                                                                    {
+                                                                        if (Model.customerRequest.isActive == true)
+                                                                        {
+                                                                            <button id="btnInsemail" type="button" class="btn-group btn-space btn btn-default" onclick="loadSendEmailPopupData('Inspection_ExternalDept')" style="color: #ec4444;">Email</button>
+                                                                            <button data-toggle="modal" data-target="#form-EmailEditModal" id="btninsemailedit" onclick="loadEditEmailPopupData('Inspection_ExternalDept')" type="button" class="btn-group btn-space btn btn-default" style="color: #ec4444;"><i class="icon s7-pen"></i></button>
+                                                                        }
+                                                                        @*<button data-toggle="modal" data-target="#form-EmailViewModal" id="btnordemailView" type="button" class="btn-group btn-space btn btn-default" onclick="createGUID()" style="color: #ec4444;"><i class="icon s7-folder"></i></button>*@
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <p>@Model.inspectionData.Email_date</p>
+                                                                    }
+                                                                }
+
+
+                                                            </div>
+
+
+
+                                                            <label for="btnInsComplaint" class="col-sm-2 control-label">Legitimate Complaint:</label>
+                                                            <div class="col-sm-4">
+                                                                @{
+
+                                                                    if (Model.inspectionData.Complaint == "Yes" || Model.inspectionData.Complaint == null || Model.inspectionData.Complaint == "")
+                                                                    {
+                                                                        <div class="am-radio inline">
+                                                                            <input type="radio" checked="checked" name="rad3" id="radyes" value="Yes">
+                                                                            <label for="radyes">Yes</label>
+                                                                        </div>
+                                                                        <div class="am-radio inline">
+                                                                            <input type="radio" name="rad3" id="radno" value="No">
+                                                                            <label for="radno">No</label>
+                                                                        </div>
+
+                                                                    }
+                                                                    else if (Model.inspectionData.Complaint == "No")
+                                                                    {
+                                                                        <div class="am-radio inline">
+                                                                            <input type="radio" name="rad3" id="radyes" value="Yes">
+                                                                            <label for="radyes">Yes</label>
+                                                                        </div>
+                                                                        <div class="am-radio inline">
+                                                                            <input type="radio" checked="checked" name="rad3" id="radno" value="No">
+                                                                            <label for="radno">No</label>
+                                                                        </div>
+
+                                                                    }
+                                                                }
+
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </form>
+                                                </div>
+
+                                                <div class="panel-heading">
+                                                    <h3>External Investigation Report</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form role="form" class="form-horizontal">
+
+                                                        <div class="form-group">
+                                                            <label for="Create8DReport" class="col-sm-2 control-label">Report Format:</label>
+                                                            <div class="col-sm-4">
+                                                                <div class="am-radio inline">
+                                                                    <input type="radio" checked="checked" name="radReport" id="Reprad1" value="Word">
+                                                                    <label for="Reprad1">Word</label>
+                                                                </div>
+                                                                <div class="am-radio inline">
+                                                                    <input type="radio" name="radReport" id="Reprad2" value="Excel">
+                                                                    <label for="Reprad2">Excel</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="CreateReport" class="col-sm-2 control-label">Create Report:</label>
+                                                            <div class="col-sm-4">
+                                                                @{
+                                                                    if (Model.customerRequest.isActive == true)
+                                                                    {
+                                                                        <button id="btncreateReport" type="button" class="btn-group btn-space btn btn-default" onclick="CreateReport()" style="color: #ec4444;">Create Report</button>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <button id="btncreateReport" type="button" class="btn-group btn-space btn btn-default" onclick="CreateReport()" style="color: #ec4444;" disabled>Create Report</button>
+                                                                    }
+                                                                }
+                                                            </div>
+                                                            <label for="InsReportdone" class="col-sm-2 control-label">Report Done:</label>
+                                                            <div class="col-sm-4">
+
+                                                                <input id="InsReportdone" type="text" class="form-control" value="@Model.inspectionData.ReportDone">
+
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                                        <div class="form-group">
+                                                            <label for="Create8DReport" class="col-sm-2 control-label">Create 8D-Report:</label>
+                                                            <div class="col-sm-4">
+                                                                @{
+                                                                    if (Model.customerRequest.isActive == true)
+                                                                    {
+                                                                        <button id="btnCreate8DReport" type="button" class="btn-group btn-space btn btn-default" onclick="CreateReport()" style="color: #ec4444;">Create 8D-Report</button>
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <button id="btnCreate8DReport" type="button" class="btn-group btn-space btn btn-default" onclick="CreateReport()" style="color: #ec4444;" disabled>Create 8D-Report</button>
+                                                                    }
+                                                                }
+                                                            </div>
+
+                                                            <label for="Ins8DReportdone" class="col-sm-2 control-label">8D-Report Done:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="Ins8DReportdone" type="text" class="form-control" value="@Model.inspectionData.report8DDone">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="InsDescription" class="col-sm-2 control-label">Description:</label>
+                                                            <div class="col-sm-8">
+                                                                <input id="InsDescription" type="text" class="form-control col-sm-8" value="@Model.inspectionData.Description">
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+
+                                                <div class="panel-heading">
+                                                    <h3>Internal Result</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form role="form" class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label for="cmbCategory" class="col-sm-2 control-label">Diagnosis, Category:</label>
+                                                            <div class="col-sm-4">
+                                                                @Html.DropDownListFor(m => m.inspectionData.ServiceTask,
+new SelectList(Model.serviceTask, "DiagnosisCatID", "Categories"),
+"-- Select --",
+new { id = "cmbCategory", @class = "form-control" })
+                                                            </div>
+
+                                                            <label for="cmbDiagnosis" class="col-sm-2 control-label">Diagnosis:</label>
+                                                            <div class="col-sm-4">
+                                                                @Html.DropDownListFor(m => m.inspectionData.Diagnosis,
+new SelectList(Model.diagnosis, "DiagnosisID", "Diagnosis"),
+"-- Select --",
+new { id = "cmbDiagnosis", @class = "form-control" })
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="cmbReason" class="col-sm-2 control-label">Reason:</label>
+                                                            <div class="col-sm-4">
+                                                                @Html.DropDownListFor(m => m.inspectionData.Reason,
+new SelectList(Model.reason, "ReasonID", "Reason"),
+"-- Select --",
+new { id = "cmbReason", @class = "form-control" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group pull-right">
+                                                            @{
+                                                                if (Model.customerRequest.isActive == true)
+                                                                {
+                                                                    <button id="btnSaveInspection" type="button" class="btn btn-success md-close">Save</button>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <button id="btnSaveInspection" type="button" class="btn btn-success md-close" disabled>Save</button>
+                                                                }
+                                                            }
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="tabcc-4" class="tab-pane cont">
+                                        <div id="tab4-alert" role="alert" class="alert alert-danger alert-icon alert-border-color alert-dismissible" style="display: none;">
+                                            <div class="icon"><span class="s7-close-circle"></span></div>
+                                            <div id="warningMSg4" class="message">
+                                                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button> Hola
+                                            </div>
+                                        </div>
+
+
+                                        <div id="tab4-alert1" role="alert" class="alert alert-success alert-icon alert-dismissible" style="display: none;">
+                                            <div class="icon"><span class="s7-check"></span></div>
+                                            <div id="SuccessMSg4" class="message">
+                                                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button><strong>Great!</strong> Successful
+                                            </div>
+                                        </div>
+
+                                        <div class="center">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading col-sm-12 ">
+                                                    <div class="col-sm-3 heading">
+                                                        <h5>Options for Actions</h5>
+                                                    </div>
+                                                    <div class="col-sm-3 heading">
+                                                        <h5>Price (€)</h5>
+                                                    </div>
+                                                    <div class="col-sm-3 heading">
+                                                        <h5>Decision from Customer </h5>
+                                                    </div>
+                                                    <div class="col-sm-3 heading">
+                                                        <h5>Notes</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form role="form" class="form-horizontal">
+                                                        @{ if (@Model.solutionData.solution != null)
+                                                            {
+                                                        <input type="hidden" id="hdnSolutionId" value="@Model.solutionData.solution.solution_id" />
+                                                            }
+                                                            }
+                                                        <div class="form-group">
+                                                            <label id="option-1-lbl" class="col-sm-2 control-label">Repair:</label>
+                                                            @{
+                                                                int @repcount = 0;
+                                                                double @reprice = 0;
+                                                                bool @repdes = false;
+                                                                <div class="col-sm-1">
+                                                                    @foreach (var x in Model.solutionData.options)
+                                                                    {
+
+                                                                        if (x.Options == "Repair")
+                                                                        {
+                                                                            repcount = 1;
+                                                                            reprice = x.price;
+                                                                            repdes = x.decision ?? false;
+                                                                            <div class="am-checkbox">
+                                                                                <input id="option-1" type="checkbox" checked="checked" onchange="enabledisableelments($(this).attr('id'))">
+                                                                                <label for="option-1"></label>
+                                                                            </div>
+
+                                                                        }
+                                                                    }
+
+                                                                    @if (@repcount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="option-1" type="checkbox" onchange="enabledisableelments($(this).attr('id'))">
+                                                                            <label for="option-1"></label>
+                                                                        </div>
+                                                                    }
+
+                                                                </div>
+
+                                                                if (@repcount == 0)
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-1" type="number" placeholder="Repair" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" disabled>
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-1" type="number" placeholder="Repair" class="form-control" value="@reprice" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                                                                    </div>
+                                                                }
+                                                            }
+
+                                                            <div class="col-sm-1 center">
+
+                                                            </div>
+                                                            <div class="col-sm-2 center">
+
+                                                                @{
+                                                                    if (repcount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="Des-1" type="checkbox" disabled>
+                                                                            <label for="Des-1"></label>
+                                                                        </div>
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if (repdes == true)
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-1" type="checkbox" checked="checked">
+                                                                                <label for="Des-1"></label>
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-1" type="checkbox">
+                                                                                <label for="Des-1"></label>
+                                                                            </div>
+                                                                        }
+
+                                                                    }
+                                                                }
+
+
+
+
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                @{
+
+                                                                    if (Model.solutionData.solution != null)
+                                                                    {
+
+                                                                        <input id="notes" type="text" placeholder="Note" class="form-control" value=" @Model.solutionData.solution.Notes">
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input id="notes" type="text" placeholder="Note" class="form-control" value=" ">
+                                                                    }
+                                                                }
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label id="option-2-lbl" class="col-sm-2 control-label">Retour:</label>
+                                                            @{
+                                                                int @retcount = 0;
+                                                                double @retprice = 0;
+                                                                bool @retdes = false;
+                                                                <div class="col-sm-1">
+                                                                    @foreach (var x in Model.solutionData.options)
+                                                                    {
+
+                                                                        if (x.Options == "Retour")
+                                                                        {
+                                                                            retcount = 1;
+                                                                            retprice = x.price;
+                                                                            retdes = x.decision ?? false;
+                                                                            <div class="am-checkbox">
+                                                                                <input id="option-2" type="checkbox" checked="checked" onchange="enabledisableelments($(this).attr('id'))">
+                                                                                <label for="option-2"></label>
+                                                                            </div>
+
+                                                                        }
+                                                                    }
+
+                                                                    @if (retcount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="option-2" type="checkbox" onchange="enabledisableelments($(this).attr('id'))">
+                                                                            <label for="option-2"></label>
+                                                                        </div>
+                                                                    }
+
+                                                                </div>
+
+                                                                if (retcount == 0)
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-2" type="number" placeholder="Retour" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" disabled>
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-2" type="number" placeholder="Retour" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" value="@retprice">
+                                                                    </div>
+                                                                }
+                                                            }
+
+                                                            <div class="col-sm-1 center">
+
+                                                            </div>
+                                                            <div class="col-sm-2 center">
+
+                                                                @{
+                                                                    if (retcount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="Des-2" type="checkbox" disabled>
+                                                                            <label for="Des-2"></label>
+                                                                        </div>
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if (retdes == true)
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-2" type="checkbox" checked="checked">
+                                                                                <label for="Des-2"></label>
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-2" type="checkbox">
+                                                                                <label for="Des-2"></label>
+                                                                            </div>
+                                                                        }
+
+                                                                    }
+                                                                }
+
+
+
+
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                <label control-label">Reminder 1:</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label id="option-3-lbl" class="col-sm-2 control-label">Modification:</label>
+                                                            @{
+                                                                int @Modcount = 0;
+                                                                double @Modprice = 0;
+                                                                bool @Moddes = false;
+                                                                <div class="col-sm-1">
+                                                                    @foreach (var x in Model.solutionData.options)
+                                                                    {
+
+                                                                        if (x.Options == "Modification")
+                                                                        {
+                                                                            Modcount = 1;
+                                                                            Modprice = x.price;
+                                                                            Moddes = x.decision ?? false;
+                                                                            <div class="am-checkbox">
+                                                                                <input id="option-3" type="checkbox" checked="checked" onchange="enabledisableelments($(this).attr('id'))">
+                                                                                <label for="option-3"></label>
+                                                                            </div>
+
+                                                                        }
+                                                                    }
+
+                                                                    @if (Modcount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="option-3" type="checkbox" onchange="enabledisableelments($(this).attr('id'))">
+                                                                            <label for="option-3"></label>
+                                                                        </div>
+                                                                    }
+
+                                                                </div>
+
+                                                                if (Modcount == 0)
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-3" type="number" placeholder="Modification" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" disabled>
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-3" type="number" placeholder="Modification" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" value="@Modprice">
+                                                                    </div>
+                                                                }
+                                                            }
+
+                                                            <div class="col-sm-1 center">
+
+                                                            </div>
+                                                            <div class="col-sm-2 center">
+
+                                                                @{
+                                                                    if (Modcount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="Des-3" type="checkbox" disabled>
+                                                                            <label for="Des-3"></label>
+                                                                        </div>
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if (Moddes == true)
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-3" type="checkbox" checked="checked">
+                                                                                <label for="Des-3"></label>
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-3" type="checkbox">
+                                                                                <label for="Des-3"></label>
+                                                                            </div>
+                                                                        }
+
+                                                                    }
+                                                                }
+
+
+
+
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                @{
+                                                                    if (@Model.solutionData.solution != null)
+                                                                    {
+                                                                        <input id="reminder1" type="text" placeholder="Reminder 1" class="form-control" value="@Model.solutionData.solution.reminder1">
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input id="reminder1" type="text" placeholder="Reminder 1" class="form-control" value="">
+                                                                    }
+                                                                }
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label id="option-4-lbl" class="col-sm-2 control-label">New Product:</label>
+                                                            @{
+                                                                int @Prodcount = 0;
+                                                                double @Prodprice = 0;
+                                                                bool @Proddes = false;
+                                                                <div class="col-sm-1">
+                                                                    @foreach (var x in Model.solutionData.options)
+                                                                    {
+
+                                                                        if (x.Options == "New Product")
+                                                                        {
+                                                                            Prodcount = 1;
+                                                                            Prodprice = x.price;
+                                                                            Proddes = x.decision ?? false;
+                                                                            <div class="am-checkbox">
+                                                                                <input id="option-4" type="checkbox" checked="checked" onchange="enabledisableelments($(this).attr('id'))">
+                                                                                <label for="option-4"></label>
+                                                                            </div>
+
+                                                                        }
+                                                                    }
+
+                                                                    @if (Prodcount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="option-4" type="checkbox" onchange="enabledisableelments($(this).attr('id'))">
+                                                                            <label for="option-4"></label>
+                                                                        </div>
+                                                                    }
+
+                                                                </div>
+
+                                                                if (Prodcount == 0)
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-4" type="number" placeholder="New Product" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" disabled>
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-4" type="number" placeholder="New Product" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" value="@Prodprice">
+                                                                    </div>
+                                                                }
+                                                            }
+
+                                                            <div class="col-sm-1 center">
+
+                                                            </div>
+                                                            <div class="col-sm-2 center">
+
+                                                                @{
+                                                                    if (Prodcount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="Des-4" type="checkbox" disabled>
+                                                                            <label for="Des-4"></label>
+                                                                        </div>
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if (Proddes == true)
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-4" type="checkbox" checked="checked">
+                                                                                <label for="Des-4"></label>
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-4" type="checkbox">
+                                                                                <label for="Des-4"></label>
+                                                                            </div>
+                                                                        }
+
+                                                                    }
+                                                                }
+
+
+
+
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                <label control-label">Reminder 2:</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label id="option-5-lbl" class="col-sm-2 control-label">Disposal:</label>
+                                                            @{
+                                                                int @Discount = 0;
+                                                                double @Disprice = 0;
+                                                                bool @Disdes = false;
+                                                                <div class="col-sm-1">
+                                                                    @foreach (var x in Model.solutionData.options)
+                                                                    {
+
+                                                                        if (x.Options == "Disposal")
+                                                                        {
+                                                                            Discount = 1;
+                                                                            Disprice = x.price;
+                                                                            Disdes = x.decision ?? false;
+                                                                            <div class="am-checkbox">
+                                                                                <input id="option-5" type="checkbox" checked="checked" onchange="enabledisableelments($(this).attr('id'))">
+                                                                                <label for="option-5"></label>
+                                                                            </div>
+
+                                                                        }
+                                                                    }
+
+                                                                    @if (Discount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="option-5" type="checkbox" onchange="enabledisableelments($(this).attr('id'))">
+                                                                            <label for="option-5"></label>
+                                                                        </div>
+                                                                    }
+
+                                                                </div>
+
+                                                                if (Discount == 0)
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-5" type="number" placeholder="Disposal" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" disabled>
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-5" type="number" placeholder="Disposal" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" value="@Disprice">
+                                                                    </div>
+                                                                }
+                                                            }
+
+                                                            <div class="col-sm-1 center">
+
+                                                            </div>
+                                                            <div class="col-sm-2 center">
+
+                                                                @{
+                                                                    if (Discount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="Des-5" type="checkbox" disabled>
+                                                                            <label for="Des-5"></label>
+                                                                        </div>
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if (Disdes == true)
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-5" type="checkbox" checked="checked">
+                                                                                <label for="Des-5"></label>
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-5" type="checkbox">
+                                                                                <label for="Des-5"></label>
+                                                                            </div>
+                                                                        }
+
+                                                                    }
+                                                                }
+
+
+
+
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                @{
+                                                                    if (@Model.solutionData.solution != null)
+                                                                    {
+                                                                        <input id="reminder2" type="text" placeholder="Reminder 2" class="form-control" value="@Model.solutionData.solution.reminder2">
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input id="reminder2" type="text" placeholder="Reminder 2" class="form-control" value=" ">
+                                                                    }
+                                                                }
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label id="option-6-lbl" class="col-sm-2 control-label">Credit Note:</label>
+                                                            @{
+                                                                int @Crecount = 0;
+                                                                double @Creprice = 0;
+                                                                bool @Credes = false;
+                                                                <div class="col-sm-1">
+                                                                    @foreach (var x in Model.solutionData.options)
+                                                                    {
+
+                                                                        if (x.Options == "Credit Note")
+                                                                        {
+                                                                            Crecount = 1;
+                                                                            Creprice = x.price;
+                                                                            Credes = x.decision ?? false;
+                                                                            <div class="am-checkbox">
+                                                                                <input id="option-6" type="checkbox" checked="checked" onchange="enabledisableelments($(this).attr('id'))">
+                                                                                <label for="option-6"></label>
+                                                                            </div>
+
+                                                                        }
+                                                                    }
+
+                                                                    @if (Crecount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="option-6" type="checkbox" onchange="enabledisableelments($(this).attr('id'))">
+                                                                            <label for="option-6"></label>
+                                                                        </div>
+                                                                    }
+
+                                                                </div>
+
+                                                                if (Crecount == 0)
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-6" type="number" placeholder="Credit Note" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" disabled>
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-6" type="number" placeholder="Credit Note" class="form-control" value="@Creprice" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                                                                    </div>
+                                                                }
+                                                            }
+
+                                                            <div class="col-sm-1 center">
+
+                                                            </div>
+                                                            <div class="col-sm-2 center">
+
+                                                                @{
+                                                                    if (Crecount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="Des-6" type="checkbox" disabled>
+                                                                            <label for="Des-6"></label>
+                                                                        </div>
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if (Credes == true)
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-6" type="checkbox" checked="checked">
+                                                                                <label for="Des-6"></label>
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-6" type="checkbox">
+                                                                                <label for="Des-6"></label>
+                                                                            </div>
+                                                                        }
+
+                                                                    }
+                                                                }
+
+
+
+
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label id="option-7-lbl" class="col-sm-2 control-label">Special Options:</label>
+                                                            @{
+                                                                int @Specount = 0;
+                                                                double @Speprice = 0;
+                                                                bool @Spedes = false;
+                                                                <div class="col-sm-1">
+                                                                    @foreach (var x in Model.solutionData.options)
+                                                                    {
+
+                                                                        if (x.Options == "Special Options")
+                                                                        {
+                                                                            Specount = 1;
+                                                                            Speprice = x.price;
+                                                                            Spedes = x.decision ?? false;
+                                                                            <div class="am-checkbox">
+                                                                                <input id="option-7" type="checkbox" checked="checked" onchange="enabledisableelments($(this).attr('id'))">
+                                                                                <label for="option-7"></label>
+                                                                            </div>
+
+                                                                        }
+                                                                    }
+
+                                                                    @if (Specount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="option-7" type="checkbox" onchange="enabledisableelments($(this).attr('id'))">
+                                                                            <label for="option-7"></label>
+                                                                        </div>
+                                                                    }
+
+                                                                </div>
+
+                                                                if (Specount == 0)
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-7" type="number" placeholder="Special Options" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" disabled>
+                                                                    </div>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <div class="col-sm-3">
+                                                                        <input id="price-7" type="number" placeholder="Special Options" class="form-control" value="@Speprice" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null">
+                                                                    </div>
+                                                                }
+                                                            }
+
+                                                            <div class="col-sm-1 center">
+
+                                                            </div>
+                                                            <div class="col-sm-2 center">
+
+                                                                @{
+                                                                    if (Specount == 0)
+                                                                    {
+                                                                        <div class="am-checkbox">
+                                                                            <input id="Des-7" type="checkbox" disabled>
+                                                                            <label for="Des-7"></label>
+                                                                        </div>
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if (Spedes == true)
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-7" type="checkbox" checked="checked">
+                                                                                <label for="Des-7"></label>
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div class="am-checkbox">
+                                                                                <input id="Des-7" type="checkbox">
+                                                                                <label for="Des-7"></label>
+                                                                            </div>
+                                                                        }
+
+                                                                    }
+                                                                }
+
+
+
+
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-3">
+                                                                <label control-label">Statement:</label>
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                <label control-label">Information Package Report:</label>
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                <label control-label">Send Information Package:</label>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+
+                                                            <div class="col-sm-3">
+                                                                @{
+                                                                    if (@Model.solutionData.solution != null)
+                                                                    {
+                                                                        <input id="statement" type="text" placeholder="Statement" class="form-control" value="@Model.solutionData.solution.statement">
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input id="statement" type="text" placeholder="Statement" class="form-control" value=" ">
+                                                                            }
+                                                                        } 
+                                                                </div>
+
+                                                            <div class="col-sm-3">
+                                                                @{
+                                                                    if (Model.customerRequest.isActive == true)
+                                                                    {
+                                                                        @*<a class="btn btn-default buttons-print" tabindex="0" aria-controls="table3"><span>Print</span></a>*@
+                                                                        <button id="btncreateSolReport" type="button" class="btn-group btn-space btn btn-default" onclick="CreateSolReport()" style="color: #ec4444;">Create Report</button>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <button id="btncreateSolReport" type="button" class="btn-group btn-space btn btn-default" onclick="CreateSolReport()" style="color: #ec4444;" disabled>Create Report</button>
+                                                                    }
+                                                                }
+                                                            </div>
+
+                                                            <div class="col-sm-3">
+                                                                
+                                                                @{ if (Model.customerRequest.isActive == true)
+                                                                    {
+                                                                        <button id="btnInsemail" type="button" class="btn-group btn-space btn btn-default" onclick="loadSendEmailPopupData('Solution')" style="color: #ec4444;">Send Email</button>
+                                                                        <button data-toggle="modal" data-target="#form-EmailEditModal" id="btnsolemailedit" type="button" class="btn-group btn-space btn btn-default" onclick="loadEditEmailPopupData('Solution')" style="color: #ec4444;"><i class="icon s7-pen"></i></button>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <button id="btnInsemail" type="button" class="btn-group btn-space btn btn-default" onclick="loadSendEmailPopupData()" style="color: #ec4444;" disabled>Send Email</button>
+                                                                    }
+                                                                }
+                                                                
+
+
+                                                            </div>
+
+
+
+
+
+
+                                                        </div>
+
+
+
+                                                        <div class="form-group pull-right">
+                                                            @{
+                                                                if (Model.customerRequest.isActive == true)
+                                                                {
+                                                                    <button id="btnSaveSolution" type="button" class="btn btn-success md-close">Save</button>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <button id="btnSaveSolution" type="button" class="btn btn-success md-close" disabled>Save</button>
+                                                                }
+                                                            }
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div id="tabcc-5" class="tab-pane cont">
+
+                                        <div id="tab5-alertd" role="alert" class="alert alert-danger alert-icon alert-border-color alert-dismissible" style="display: none;">
+                                            <div class="icon"><span class="s7-close-circle"></span></div>
+                                            <div id="warningMSg5d" class="message">
+                                                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button> Hola
+                                            </div>
+                                        </div>
+
+
+                                        <div id="tab5-alert1d" role="alert" class="alert alert-success alert-icon alert-dismissible" style="display: none;">
+                                            <div class="icon"><span class="s7-check"></span></div>
+                                            <div id="SuccessMSg5d" class="message">
+                                                <button type="button" data-dismiss="alert" aria-label="Close" class="close"><span aria-hidden="true" class="s7-close"></span></button><strong>Great!</strong> Successful
+                                            </div>
+                                        </div>
+
+                                        <div class="center">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3>Completion</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form role="form" class="form-horizontal">
+                                                        <input type="hidden" id="hdnCompletionId" value="@Model.completionData.Completion_id" />
+                                                        <div class="form-group">
+                                                            @*<label for="btnInsemail" class="col-sm-2 control-label">Create Email:</label>
+                                                                <div class="col-sm-4">
+                                                                    @{
+                                                                        if (Model.customerRequest.isActive == true)
+                                                                        {
+                                                                            <button id="btnCompletionemail" type="button" class="btn-group btn-space btn btn-default" onclick="loadSendEmailPopupData()" style="color: #ec4444;">Email</button>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <button id="btnCompletionemail" type="button" class="btn-group btn-space btn btn-default" onclick="loadSendEmailPopupData()" style="color: #ec4444;" disabled>Email</button>
+                                                                        }
+                                                                    }
+                                                                </div>*@
+                                                            <label for="newOrdNum" class="col-sm-2 control-label">New Order Number:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="newOrdNum" type="text" placeholder="New Order Number:" value="@Model.completionData.order_number" class="form-control" required>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="CrnoteNum" class="col-sm-2 control-label">Credit Note Number:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="CrnoteNum" type="text" placeholder="Credit Note Number" value="@Model.completionData.credite_note_number" class="form-control" required>
+                                                            </div>
+                                                            <label for="dispInfo" class="col-sm-2 control-label">Disposal Information:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="dispInfo" type="text" placeholder="Disposal Information" value="@Model.completionData.Disposal" class="form-control" required>
+                                                            </div>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+
+                                                <div class="panel-heading">
+                                                    <h3>Send Evaluation</h3>
+                                                </div>
+                                                <div class="panel-body">
+
+                                                    <form role="form" class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label for="btnEvaluationemail" class="col-sm-2 control-label">Email:</label>
+                                                            <div class="col-sm-4">
+                                                                @{
+                                                                    if (Model.completionData.Email_Sent != 1)
+                                                                    {
+                                                                        if (Model.customerRequest.isActive == true)
+                                                                        {
+                                                                            <button id="btnEvaluationemail" type="button" class="btn-group btn-space btn btn-default" onclick="loadSendEmailPopupData('Evaluation')" style="color: #ec4444;">Send Evaluation:</button>
+                                                                            <button data-toggle="modal" data-target="#form-EmailEditModal" id="btnCompemailedit" type="button" class="btn-group btn-space btn btn-default" onclick="loadEditEmailPopupData('Evaluation')" style="color: #ec4444;"><i class="icon s7-pen"></i></button>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <button id="btnEvaluationemail" type="button" class="btn-group btn-space btn btn-default" onclick="loadSendEmailPopupData()" style="color: #ec4444;" disabled>Send Evaluation:</button>
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <p>@Model.inspectionData.Email_date</p>
+                                                                    }
+                                                                }
+
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+
+
+                                                <div class="panel-heading">
+                                                    <h3>Evaluation</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <form role="form" class="form-horizontal">
+
+                                                        <div class="form-group">
+                                                            <label for="Eavailability" class="col-sm-2 control-label">Availability:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="Eavailability" type="number" placeholder="Availability" value="@Model.completionData.Availability" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" required>
+
+                                                            </div>
+                                                            <label for="EProfessionalComp" class="col-sm-2 control-label">Professional Competence:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="EProfessionalComp" type="number" placeholder="Professional Competence:" value="@Model.completionData.Professional_Competence" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" required>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="EReaction" class="col-sm-2 control-label">Reaction Time:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="EReaction" type="number" placeholder="Reaction Time" value="@Model.completionData.Reaction_Time" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" required>
+                                                            </div>
+                                                            <label for="EKindness" class="col-sm-2 control-label">Kindness:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="EKindness" type="number" placeholder="Kindness" value="@Model.completionData.Kindness" class="form-control" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+
+                                                            <label for="Etext" class="col-sm-2 control-label">Text:</label>
+                                                            <div class="col-sm-4">
+                                                                <input id="Etext" type="text" placeholder="Text" value="@Model.completionData.Text" class="form-control" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group pull-right">
+                                                            @{
+                                                                if (Model.customerRequest.isActive == true)
+                                                                {
+                                                                    <button id="btnSaveCompletionData" type="button" class="btn btn-success md-close">Save</button>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <button id="btnSaveCompletionData" type="button" class="btn btn-success md-close" disabled>Save</button>
+                                                                }
+                                                            }
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div id="SendpopupPlaceHolder">
+            @*@Html.Action("TypeValuesPopup", "Types")*@
+        </div>
+        <div id="editPopupPlaceHolder">
+            @*@Html.Action("TypeValuesPopup", "Types")*@
+        </div>
+        <div id="SentPopupPlaceHolder">
+            @*@Html.Action("TypeValuesPopup", "Types")*@
+        </div>
+        <!--// Modal -->
+
+
+    }
+}
+
+
+
+
+@section PageLevelJs{
+
+    <script src="../../assets/lib/datatables/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="../../assets/lib/datatables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../assets/lib/datatables/plugins/buttons/js/buttons.html5.js" type="text/javascript"></script>
+    <script src="../../assets/lib/prettify/prettify.js" type="text/javascript"></script>
+    <script src="../../assets/lib/summernote/summernote.min.js" type="text/javascript"></script>
+    <script src="../../assets/lib/summernote/summernote-ext-amaretti.js" type="text/javascript"></script>
+    <script src="../../assets/lib/select2/js/select2.min.js" type="text/javascript"></script>
+
+
+    <script type="text/javascript">
+
+          var WebServiceUrl = 'https://sequware.site/';
+         //var WebServiceUrl = 'http://localhost:58989/';
+
+        $(document).ready(function () {
+            //initialize the javascript
+            prettyPrint();
+            App.formElements();
+            $('#pageheaddiv').remove();
+        });
+
+        function changePriorityColor() {
+            if ($('#cmbPriority').val() == 1) {
+                $('#cmbPriority').attr("style", "background-color:red");
+
+            }
+            else if ($('#cmbPriority').val() == 2) {
+                $('#cmbPriority').attr("style", "background-color:yellow");
+
+            }
+            else {
+                $('#cmbPriority').attr("style", "background-color:green");
+                $('#cmbPriority').css("color", "white");
+            }
+        }
+
+                $('#btnSaveBasicInfo').on('click', function (e) {
+
+
+            var reqid = 0;
+            if ($('#hdnRequestId').val() != "") {
+                reqid = $('#hdnRequestId').val();
+            }
+
+            var status = 0;
+            if ($('#cmbStatus').val() != "") {
+                status = $('#cmbStatus').val();
+            }
+            var priortiy = 0;
+            if ($('#cmbPriority').val() != "") {
+                priortiy = $('#cmbPriority').val();
+            }
+
+            var BasicInfo = {
+                "request_id": reqid,
+                "worker": $("#manager").val(),
+                "status": status, // $("select[name='EmployeeType']").val(),
+                "priority": priortiy
+
+                //"customer_id": $("#addusercompany option:selected").val(), // $("select[name='Parentage']").val(),
+
+            };
+
+            debugger
+            $.ajax({
+                type: 'PUT',
+                url: WebServiceUrl + 'api/_CustomerRequest/UpdateBasicInformation',
+                data: JSON.stringify(BasicInfo),
+                contentType: "application/json;charset=utf-8",
+                success: function (result, status, xhr) {
+                    debugger
+                    $('#basic-alert').attr("style", "display:none");
+                    $('#basic-alert1').attr("style", "display:in-block");
+                    $('#SuccessMSg1').text("Successful");
+
+                },
+                error: function (xhr, status, error) {
+                    debugger
+                    if (error != "") {
+                        $('#basic-alert').attr("style", "display:in-block");
+                        $('#warningMSg1').text(error);
+                    }
+                }
+            });
+
+
+        });
+
+        $('#btnSavebasicDetail').on('click', function (e) {
+
+            debugger;
+            var Phone = new RegExp('^[0-9-+\s()]*$');
+            var x = $("#ContactPhone").val();
+
+            if (!Phone.test(x)) {
+                alert('Enter correct Phone number');
+                return false;
+            }
+            //if ($('#CustomerInfoForm').valid() == false) {
+            //    return false;
+            //}
+
+            //if ($('#ContactForm').valid() == false) {
+            //    return false;
+            //}
+
+            //if ($('#Problemform').valid() == false) {
+            //    return false;
+            //}
+
+            var reqid = 0;
+            if ($('#hdnRequestId').val() != "") {
+                reqid = $('#hdnRequestId').val();
+            }
+
+
+            var BasicInfo = {
+                "Customer_id": $("#hdnCustomerId").val(),
+                "street": $("#street").val(),
+                "company": $("#Cname").val(), // $("select[name='EmployeeType']").val(),
+                "CustomerRefNo": $("#refnum").val(),
+                "Request_id": reqid,
+                "issue": $("#cmbserReq").val(), // $("select[name='EmployeeType']").val(),
+                "error_description": $("#Reason").val(),
+                "zipcode": $("#zipcode").val(),
+                "country": $("#country").val(),
+                "Contact_id": $("#hdnContactId").val(),
+                "Contact_name": $("#Contactname").val(), // $("select[name='EmployeeType']").val(),
+                "email": $("#contactEmail").val(),
+                "phone": $("#ContactPhone").val(),
+                "furtherInfo": $('#furtherinfo').val()
+
+            };
+
+            debugger
+            $.ajax({
+                type: 'PUT',
+                url: WebServiceUrl + 'api/_BasicData/UpdateBasicDetail',
+                data: JSON.stringify(BasicInfo),
+                contentType: "application/json;charset=utf-8",
+                success: function (result, status, xhr) {
+                    debugger
+                    $('#tab1-alertd').attr("style", "display:none");
+                    $('#tab1-alert1d').attr("style", "display:in-block");
+                    $('#SuccessMSg1d').text("Successful");
+
+                },
+                error: function (xhr, status, error) {
+                    debugger
+                    if (error != "") {
+                        $('#tab1-alertd').attr("style", "display:in-block");
+                        $('#warningMSg1d').text(error);
+                    }
+                }
+            });
+
+
+        });
+
+        $('#btnSaveOrder').on('click', function (e) {
+
+
+            //if ($('#OrderDataform').valid() == false) {
+            //    return false;
+            //}
+
+            var reqid = 0;
+            if ($('#hdnRequestId').val() != "") {
+                reqid = $('#hdnRequestId').val();
+            }
+
+            var orderid = 0;
+            if ($('#hdnOrderId').val() != "") {
+                orderid = $('#hdnOrderId').val();
+            }
+
+
+            var BasicInfo = {
+                "Order_id": orderid,
+                "Request_id": reqid,
+                "Email_Sent": '', // $("select[name='EmployeeType']").val(),
+                "Email_date": '',
+                "Quantity": $("#ordQuantity").val(),
+                "CustomerNumber_FrmSheet": '', // $("select[name='EmployeeType']").val(),
+                "CustomerNumber_Org": '',
+                "OrginalOrderNumber": $("#ordorignalnum").val(),
+                "Confirmation": $("input[name='rad2']:checked").val(),
+                "Waranty": $("input[name='radwar1']:checked").val(),
+                "DeliveryDate": $("#ordwarrantydate").val(),
+                "product": $("#ordproduct").val(), // $("select[name='EmployeeType']").val(),
+                "Orignal_Quantity": $("#ordorgquantity").val(),
+
+            };
+
+            var apiurl = "";
+            var calltype = "";
+            if (orderid == 0) {
+                apiurl = 'api/_OrderData/CreateOrderData';
+                calltype = 'POST';
+            }
+            else {
+                apiurl = 'api/_OrderData/UpdateOrderData';
+                calltype = 'PUT';
+            }
+
+
+            $.ajax({
+                type: calltype,
+                url: WebServiceUrl + apiurl,
+                data: JSON.stringify(BasicInfo),
+                contentType: "application/json;charset=utf-8",
+                success: function (result, status, xhr) {
+                    debugger
+                    if (orderid == 0) {
+                        $('#hdnOrderId').val(result.Order_id);
+                    }
+                    $('#tab2-alert').attr("style", "display:none");
+                    $('#tab2-alert1').attr("style", "display:in-block");
+                    $('#SuccessMSg2').text("Successful");
+
+                },
+                error: function (xhr, status, error) {
+                    debugger
+                    if (error != "") {
+                        $('#tab2-alert').attr("style", "display:in-block");
+                        $('#warningMSg2').text(error);
+                    }
+                }
+            });
+
+
+        });
+
+        $('#btnSaveInspection').on('click', function (e) {
+            var reqid = 0;
+            if ($('#hdnRequestId').val() != "") {
+                reqid = $('#hdnRequestId').val();
+            }
+
+            var orderid = 0;
+            if ($('#hdnOrderId').val() != "") {
+                orderid = $('#hdnOrderId').val();
+            }
+
+            debugger;
+            var InspectionID = 0;
+            if ($('#hdnInspectionId').val() != "") {
+                InspectionID = $('#hdnInspectionId').val();
+            }
+
+
+            var BasicInfo = {
+                "InspectionID": InspectionID,
+                "RequestId": reqid,
+                "OrderId": orderid, // $("select[name='EmployeeType']").val(),
+                "Department": $('#cmbAssessDept').val(),
+                "Operator": $("#InsOperator").val(),
+                "Complaint": $("input[name='rad3']:checked").val(), // $("select[name='EmployeeType']").val(),
+                "ServiceTask": $("#cmbCategory").val(),
+                "Diagnosis": $("#cmbDiagnosis").val(),
+                "Description": $("#InsDescription").val(),
+                "Reason": $("#cmbReason").val(),
+                "createRp": '',
+                "ReportDone": $("#InsReportdone").val(),
+                "Create8DReport": '', // $("select[name='EmployeeType']").val(),
+                "report8DDone": $("#Ins8DReportdone").val(),
+                "Email_Sent": '', // $("select[name='EmployeeType']").val(),
+                "Email_date": ''
+
+            };
+
+            var apiurl = "";
+            var calltype = "";
+            if (InspectionID == 0) {
+                apiurl = 'api/_Inspection/CreateInspectionData';
+                calltype = 'POST';
+            }
+            else {
+                apiurl = 'api/_Inspection/UpdateInspection';
+                calltype = 'PUT';
+            }
+
+            debugger
+            $.ajax({
+                type: calltype,
+                url: WebServiceUrl + apiurl,
+                data: JSON.stringify(BasicInfo),
+                contentType: "application/json;charset=utf-8",
+                success: function (result, status, xhr) {
+                    debugger
+                    if (InspectionID == 0) {
+                        $('#hdnInspectionId').val(result.InspectionID);
+                    }
+                    $('#tab3-alert').attr("style", "display:none");
+                    $('#tab3-alert1').attr("style", "display:in-block");
+                    $('#SuccessMSg3').text("Successful");
+
+                },
+                error: function (xhr, status, error) {
+                    debugger
+                    if (error != "") {
+                        $('#tab3-alert').attr("style", "display:in-block");
+                        $('#warningMSg3').text(error);
+                    }
+                }
+            });
+
+
+        });
+
+        $('#btnSaveSolution').on('click', function (e) {
+            debugger;
+            var soluOptions = SolOptionCreation();
+            var reqid = 0;
+            if ($('#hdnRequestId').val() != "") {
+                reqid = $('#hdnRequestId').val();
+            }
+
+            debugger;
+            var InspectionID = 0;
+            if ($('#hdnInspectionId').val() != "") {
+                InspectionID = $('#hdnInspectionId').val();
+            }
+
+            var solutionID = 0;
+            if ($('#hdnSolutionId').val() != "") {
+                solutionID = $('#hdnSolutionId').val();
+            }
+
+
+
+            var soluData = {
+                "solution_id": solutionID,
+                "request_id": reqid,
+                "statement": $('#statement').val(), // $("select[name='EmployeeType']").val(),
+                "Notes": $('#notes').val(),
+                "reminder1": $('#reminder1').val(),
+                "reminder2": $('#reminder2').val(),
+                "Email_Sent": '', // $("select[name='EmployeeType']").val(),
+                "Email_date": ''
+
+            };
+
+
+            var solutionData = {
+
+                "solution": soluData,
+                "options": soluOptions
+            };
+
+            var apiurl = "";
+            var calltype = "";
+            if (solutionID == 0) {
+                apiurl = 'api/_Solution/CreateSolutionData';
+                calltype = 'POST';
+            }
+            else {
+                apiurl = 'api/_Solution/UpdateSolutionData';
+                calltype = 'PUT';
+            }
+
+            debugger
+            $.ajax({
+                type: calltype,
+                url: WebServiceUrl + apiurl,
+                data: JSON.stringify(solutionData),
+                contentType: "application/json;charset=utf-8",
+                success: function (result, status, xhr) {
+                    debugger
+                    if (solutionID == 0) {
+                        $('#hdnSolutionId').val(result.solution_id);
+                    }
+                    $('#tab4-alert').attr("style", "display:none");
+                    $('#tab4-alert1').attr("style", "display:in-block");
+                    $('#SuccessMSg4').text("Successful");
+
+                },
+                error: function (xhr, status, error) {
+                    debugger
+                    if (error != "") {
+                        $('#tab4-alert').attr("style", "display:in-block");
+                        $('#warningMSg4').text(error);
+                    }
+                }
+            });
+
+
+        });
+
+        $('#btnSaveCompletionData').on('click', function (e) {
+            var reqid = 0;
+            if ($('#hdnRequestId').val() != "") {
+                reqid = $('#hdnRequestId').val();
+            }
+
+            var CompletionID = 0;
+            if ($('#hdnCompletionId').val() != "") {
+                CompletionID = $('#hdnCompletionId').val();
+            }
+
+                 var BasicInfo = {
+                "Completion_id": CompletionID,
+                "request_id": reqid,
+                 "order_number": $('#newOrdNum').val(), // $("select[name='EmployeeType']").val(),
+                 "credite_note_number": $('#CrnoteNum').val(),
+                 "Disposal": $("#dispInfo").val(),
+                "Evaluation_Request": '',
+                 "Availability": $("#Eavailability").val(),
+                 "Professional_Competence": $("#EProfessionalComp").val(),
+                 "Reaction_Time": $("#EReaction").val(),
+                 "Kindness": $("#EKindness").val(),
+                 "Text": $("#Etext").val(),
+                "Email_Sent": '', // $("select[name='EmployeeType']").val(),
+                "Email_date": ''
+
+            };
+
+            var apiurl = "";
+            var calltype = "";
+            if (CompletionID == 0) {
+                apiurl = 'api/_Completion/CreateCompletionData';
+                calltype = 'POST';
+            }
+            else {
+                apiurl = 'api/_Completion/UpdateCompletionData';
+                calltype = 'PUT';
+            }
+
+            debugger
+            $.ajax({
+                type: calltype,
+                url: WebServiceUrl + apiurl,
+                data: JSON.stringify(BasicInfo),
+                contentType: "application/json;charset=utf-8",
+                success: function (result, status, xhr) {
+                    debugger
+                    if (CompletionID == 0) {
+                        $('#hdnCompletionId').val(result.Completion_id);
+                    }
+                    $('#tab5-alertd').attr("style", "display:none");
+                    $('#tab5-alert1d').attr("style", "display:in-block");
+                    $('#SuccessMSg5d').text("Successful");
+
+                },
+                error: function (xhr, status, error) {
+                    debugger
+                    if (error != "") {
+                        $('#tab5-alertd').attr("style", "display:in-block");
+                        $('#warningMSg5d').text(error);
+                    }
+                }
+            });
+
+
+        });
+
+
+        function CreateReport() {
+
+          var format =  $("input[name='radReport']:checked").val()
+
+            debugger
+            $.ajax({
+                cache: false,
+                url: '/ServiceInformation/CreatInspectionReport?format=' + format,
+                success: function (data) {
+                    var response = JSON.parse(JSON.stringify(data));
+                    debugger;
+                    window.location = '/ServiceInformation/Download?fileGuid=' + response.FileGuid
+                        + '&filename=' + response.FileName;
+
+                }
+            })
+        }
+
+        function CreateSolReport() {
+            if ($('#hdnSolutionId').val() == "0") {
+                alert("Save Solution data first");
+                return false;
+            }
+            var companyid = $('#hdncompanyID').val();
+            var LanguageID = $('#hdnLanguagID').val();
+            var reqId = $('#hdnRequestId').val();
+            var link = '/ServiceInformation/CreateSolutionReport?reqid=' + reqId + '&compId=' + companyid + '&LangID=' + LanguageID;
+            window.open(link, "_blank");
+        }
+
+
+
+        $(window).load(function () {
+            changePriorityColor();
+
+            $('#Heading1').text("Case Information")
+            $('#Heading2').text("Details Section")
+
+
+        });
+
+        //Email modal work
+        function loadSendEmailPopupData(code) {
+            debugger
+            $emailCode = code;
+            if ($emailCode == 'order') {
+                if ($('#hdnOrderId').val() == "0") {
+                    alert("Save Order first");
+                    return false;
+                }
+            }
+            else if ($emailCode == 'Inspection_ExternalDept') {
+                if ($('#hdnInspectionId').val() == "0") {
+                    alert("Save Inspection first");
+                    return false;
+                }
+            }
+            else if ($emailCode == 'Solution') {
+                if ($('#hdnSolutionId').val() == "0") {
+                    alert("Save Solution data first");
+                    return false;
+                }
+            }
+            else if ($emailCode == 'Evaluation') {
+                if ($('#hdnCompletionId').val() == "0") {
+                    alert("Save Completion data first");
+                    return false;
+                }
+            }
+
+            var url = '@Url.Action("EmailSendModal", "serviceinformation")';
+            if (code == 'order') {
+                $emailCode = $("input[name='rad2']:checked").val();
+            }
+
+            $("#SentPopupPlaceHolder").load(url + "?emailCode=" + $emailCode + "&refnum=" + @Model.customerRequest.Request_id + "&evalid=" + @Model.completionData.Completion_id , function (responseTxt, statusTxt, xhr) {
+
+                if (statusTxt == "success") {
+                    var x = $('#Reference').val() + $('#refnum').val();
+                    $('#Reference').val(x);
+                    $('#form-EmailModal').modal('show');
+                }
+
+                if (statusTxt == "error") {
+                    console.log("Error: " + xhr.status + ": " + xhr.statusText);
+                }
+            });
+        }
+
+        function loadEditEmailPopupData(code) {
+            debugger
+            $emailCode = code;
+            if ($emailCode == 'order') {
+                if ($('#hdnOrderId').val() == "0") {
+                    alert("Save Order first");
+                    return false;
+                }
+            }
+            else if ($emailCode == 'Inspection_ExternalDept') {
+                if ($('#hdnInspectionId').val() == "0") {
+                    alert("Save Inspection first");
+                    return false;
+                }
+            }
+            else if ($emailCode == 'Solution') {
+                if ($('#hdnSolutionId').val() == "0") {
+                    alert("Save Solution data first");
+                    return false;
+                }
+            }
+            else if ($emailCode == 'Evaluation') {
+                if ($('#hdnCompletionId').val() == "0") {
+                    alert("Save Completion data first");
+                    return false;
+                }
+            }
+
+            var url = '@Url.Action("EmailEditModal", "serviceinformation")';
+            if (code == 'order') {
+                $emailCode = $("input[name='rad2']:checked").val();
+            }
+
+            debugger
+            $("#editPopupPlaceHolder").load(url + "?emailCode=" + $emailCode + "&refnum=" + @Model.customerRequest.Request_id + "&evalid=" + @Model.completionData.Completion_id , function (responseTxt, statusTxt, xhr) {
+
+                if (statusTxt == "success") {
+                    var x = $('#Reference').val() + $('#refnum').val();
+                    $('#Reference').val(x);
+                    $('#form-EmailEditModal').modal('show');
+                }
+
+                if (statusTxt == "error") {
+                    console.log("Error: " + xhr.status + ": " + xhr.statusText);
+                }
+            });
+        }
+        function enabledisableelments(parm) {
+            var arr = parm.split('-');
+            if ($('#' + parm).is(":checked")) {
+                $('#Des-' + arr[1]).removeAttr("disabled");
+                $('#price-' + arr[1]).removeAttr("disabled");
+                //alert(parm);
+            }
+            else {
+                debugger;
+                $('#Des-' + arr[1]).prop('checked', false);
+                $('#Des-' + arr[1]).attr('disabled', 'disabled');
+                $('#price-' + arr[1]).attr('disabled', 'disabled');
+                $('#price-' + arr[1]).val("");
+            }
+        }
+
+
+        function SolOptionCreation() {
+            var DataList = [];
+            for (var i = 0; i <= 7; i++) {
+                var opt,pri, dec;
+                if ($('#option-' + i).is(":checked")) {
+                    opt = $('#option-' + i + '-lbl').text();
+                    dec = $('#Des-' + i).is(":checked");
+                    pri = $('#price-' + i).val();
+                    opt = opt.substring(0, opt.length - 1);
+                    if (pri == '') {
+                        pri = 0;
+                    }
+
+
+                    DataList.push({
+                        Options: opt,
+                        price: pri,
+                        decision: dec
+                    });
+                }
+
+
+            }
+            debugger;
+            return DataList;
+        }
+
+    </script>
+
+
+}
+

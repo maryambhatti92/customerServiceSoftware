@@ -1,0 +1,167 @@
+﻿@model css.Shared.ViewModels.ServiceFormVM
+
+<!DOCTYPE html>
+
+<html>
+<head>
+</head>
+<body>
+
+    @*@{
+        string name = "";
+        int companyID = 0;
+        if (Session["Sequware"] == null)
+        {
+            Response.Redirect("~/Login/Login");
+        }      
+    }*@
+    <div>
+        <p><img src="~/assets/img/image001.png" alt="" width="1000" height="154" dock="top">&nbsp;</p>
+        <p>&nbsp;</p>
+        <br clear="ALL">
+        <p><strong style="font-size: 24px; font-family: serif;">Informationen zu Serviceanfragen: </strong>RMA-Nummer: @Model.customerRequest.Request_id  Datum der Serviceanfrage: @Model.customerRequest.date_added</p>
+    </div>
+    <p>&nbsp;</p>
+    <div>
+        <div><hr noshade="noshade" size="3" width="100%"></div>
+        <h2 style="color: blue;">Mast. Dateiadresse:</h2>
+        <table width="479" cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr>
+                    <td width="211">
+                        <p>Unternehmen:  </p>
+                    </td>
+                    <td width="211"><p>@Model.Customer.company </p></td>
+                </tr>
+
+                <tr>
+                    <td width="211">
+                        <p>Straße:  </p>
+                    </td>
+                    <td width="211"><p>@Model.Customer.street </p></td>
+                </tr>
+
+                <tr>
+                    <td width="211">
+                        <p>PLZ und Ort:  </p>
+                    </td>
+                    <td width="211"><p>@Model.Customer.Zipcode </p></td>
+                </tr>
+
+
+                <tr>
+                    <td width="211">
+                        <p>Land:  </p>
+                    </td>
+                    <td width="211"><p>@Model.Customer.Country </p></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div><hr noshade="noshade" size="3" width="100%"></div>
+        <h2 style="color: blue;">Informationen zu Serviceanfragen:</h2>
+        <table width="479" cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr>
+                    <td width="211" style="border-bottom:1pt solid black;">
+                        <p>RMA-Nr.:</p>
+                    </td>
+                    <td width="268" style="border-bottom:1pt solid black;">
+                        <p>@Model.customerRequest.Request_id</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="211" style="border-bottom:1pt solid black;">
+                        <p>Zeitpunkt des Inkrafttretens:</p>
+                    </td>
+                    <td width="268" style="border-bottom:1pt solid black;">
+                        <p>@Model.customerRequest.date_added</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="211" style="border-bottom:1pt solid black;">
+                        <p>Produkt:</p>
+                    </td>
+                    <td width="268" style="border-bottom:1pt solid black;">
+                        <p>@Model.orderData.product</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="211" style="border-bottom:1pt solid black;">
+                        <p>Liefertermin:</p>
+                    </td>
+                    <td width="268" style="border-bottom:1pt solid black;">
+                        <p>@Model.orderData.DeliveryDate</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="211" style="border-bottom:1pt solid black;">
+                        <p>Ihre Referenz:</p>
+                    </td>
+                    <td width="268" style="border-bottom:1pt solid black;">
+                        <p>@Model.customerRequest.ref_num</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="211" style="border-bottom:1pt solid black;">
+                        <p>Service-Anfrage:</p>
+                    </td>
+                    <td width="268" style="border-bottom:1pt solid black;">
+                        <p>@Model.customerRequest.issue</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div><hr size="2" width="100%"></div>
+        <h2 style="color: blue;">Gegebene Kontakte:</h2>
+        @{
+            var @x = @Model.Contacts.FirstOrDefault();
+            <p>Name: @x.name </p>
+            <p>E-Mail: @x.email </p>
+            <p>Telefon: @x.phone </p>
+
+        }
+        <div><hr size="2" width="100%"></div>
+        <h2 style="color: blue;">Deine Beschreibung:</h2>
+        <p>@Model.ProblemDescriptionIssue</p>
+        <p>Grund: @Model.customerRequest.error_description</p>
+        <p>Ursprüngliche Menge: @Model.orderData.Orignal_Quantity </p>
+        <p>Liefertermin: @Model.orderData.DeliveryDate </p>
+        <h2 style="color: blue;">Inspektion:</h2>
+        <p>Diagnose: @Model.Diagnosis & @Model.ServiceTask </p>
+        <p>Beschreibung: @Model.inspectionData.Description </p>
+        <div><hr size="2" width="100%"></div>
+        <p>&nbsp;</p>
+    </div>
+
+    <div>
+        <h2 style="color: blue;">Handlungsoptionen:</h2>
+        <table width="479" cellspacing="0" cellpadding="0">
+            <tbody>
+                @{
+                    foreach (var @option in Model.solutionData.options)
+                    {
+                        <tr><td width="312" style="border-bottom:1pt solid black; "><p>  @option.Options:</p></td> <td width="168" style="border-bottom:1pt solid black; "><p>  @option.price EUR</p></td></tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+        <p>
+            Sollten Sie sich für eine Verschrottung der gelieferten Teile entscheiden, bitten wir um Ihre Freigabe. Dieser Service ist für Sie natürlich kostenlos.
+        </p>
+
+        <p>Hinweis: Es gelten unsere allgemeinen Liefer- und Verkaufsbedingungen. Alle genannten Preise zzgl. MwSt.</p>
+
+    </div>
+</body>
+</html>
+
+
+<style type="text/css">
+    p {
+        font-family: serif;
+        font-size: 20px;
+    }
+</style>

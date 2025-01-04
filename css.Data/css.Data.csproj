@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0B231A78-4C1E-4CB0-917C-92933A2A6163}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>css.Data</RootNamespace>
+    <AssemblyName>css.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdoNet\SqlExecuter.cs" />
+    <Compile Include="Models\cssDbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cssDbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cssDbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cssDbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>cssDbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SampleEmailContent.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetArchiveGriddata_Result.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetArchiveGriddata_Result1.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetBasicdata_Result.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetMainGriddata_Result.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetServiceForm_Result.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_GetServiceInfodata_Result.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_Company.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_Completion.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_contact_person.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_country.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_customer.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_customer_request.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_Departments.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_Diagnosis.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tbl_EmailContents.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_Inspection.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_language.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_LicenseHistory.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_OrderData.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_priority.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_ProblemDescriptionIssue.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_Reason.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_register.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SampleDepartments.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SequawareLogin.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_ServiceTask.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_Solution.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_SolutionOptions.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_status.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_zipcodes.cs">
+      <DependentUpon>cssDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Models\cssDbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>cssDbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\cssDbModel.edmx.diagram">
+      <DependentUpon>cssDbModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\cssDbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>cssDbModel.edmx</DependentUpon>
+      <LastGenOutput>cssDbModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\cssDbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>cssDbModel.edmx</DependentUpon>
+      <LastGenOutput>cssDbModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

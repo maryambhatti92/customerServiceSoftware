@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{07D7727A-A77F-4718-B986-50C2C43B1510}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>css.Repository</RootNamespace>
+    <AssemblyName>css.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interfaces\IBasicDataRepository.cs" />
+    <Compile Include="Interfaces\ICompanyRepository.cs" />
+    <Compile Include="Interfaces\ICompletionRepository.cs" />
+    <Compile Include="Interfaces\IContactPersonRepository.cs" />
+    <Compile Include="Interfaces\ICustomerRepository.cs" />
+    <Compile Include="Interfaces\IDepartmentRepository.cs" />
+    <Compile Include="Interfaces\IDiagnosisRepository.cs" />
+    <Compile Include="Interfaces\IEmailRepository.cs" />
+    <Compile Include="Interfaces\IInspectionRepository.cs" />
+    <Compile Include="Interfaces\IissueRepository.cs" />
+    <Compile Include="Interfaces\ILicenseHistoryRepository.cs" />
+    <Compile Include="Interfaces\ILoginRepository.cs" />
+    <Compile Include="Interfaces\IOrderDataRepository.cs" />
+    <Compile Include="Interfaces\ILanguageRepository.cs" />
+    <Compile Include="Interfaces\IReasonRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\ICustomerRequestRepository.cs" />
+    <Compile Include="Interfaces\ISampleDepartmentRepository.cs" />
+    <Compile Include="Interfaces\ISampleEmailContentsRepository.cs" />
+    <Compile Include="Interfaces\IServiceTaskRepository.cs" />
+    <Compile Include="Interfaces\ISolutionRepository.cs" />
+    <Compile Include="Interfaces\ISolutionOptionsRepository.cs" />
+    <Compile Include="Interfaces\IstatusRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\BasicDataRepository.cs" />
+    <Compile Include="Repositories\CompanyRepository.cs" />
+    <Compile Include="Repositories\CompletionRepository.cs" />
+    <Compile Include="Repositories\ContactPersonRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\CustomerRequestRepository.cs" />
+    <Compile Include="Repositories\DepartmentRepository.cs" />
+    <Compile Include="Repositories\DiagnosisRepository.cs" />
+    <Compile Include="Repositories\EmailRepository.cs" />
+    <Compile Include="Repositories\InspectionRepository.cs" />
+    <Compile Include="Repositories\IssueRepository.cs" />
+    <Compile Include="Repositories\LicenseHistoryRepository.cs" />
+    <Compile Include="Repositories\LoginRepository.cs" />
+    <Compile Include="Repositories\OrderDataRepository.cs" />
+    <Compile Include="Repositories\LanguageRepository.cs" />
+    <Compile Include="Repositories\ReasonRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\SampleDepartmentContents.cs" />
+    <Compile Include="Repositories\SampleEmailContents.cs" />
+    <Compile Include="Repositories\ServiceTaskRepository.cs" />
+    <Compile Include="Repositories\SolutionOptionRepository.cs" />
+    <Compile Include="Repositories\SolutionRepository.cs" />
+    <Compile Include="Repositories\StatusRepository.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\css.Data\css.Data.csproj">
+      <Project>{0b231a78-4c1e-4cb0-917c-92933a2a6163}</Project>
+      <Name>css.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\css.Shared\css.Shared.csproj">
+      <Project>{fb743639-6739-4f21-9e7f-50f594d24510}</Project>
+      <Name>css.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

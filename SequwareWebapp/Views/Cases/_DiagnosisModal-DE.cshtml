@@ -1,0 +1,175 @@
+﻿
+@model IEnumerable<css.Data.Models.tbl_Diagnosis>
+
+<div id="form-bp2" tabindex="-1" role="dialog" class="modal fade modal-colored-header">
+    <div   id ="modal-unload2" class="modal-dialog custom-width">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #FFC870">
+                <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i class="icon s7-close"></i></button>
+                <h3 class="modal-title">Diagnosevorgänge</h3>
+            </div>
+            <div class="modal-body " style="background-color:#302f2f; color:white;">
+                <div class="col-sm-12" style="background-color:#302f2f; color:white; padding-left:0px; padding-right:0px;">
+                    <div class="tab-container tab-bottom">
+                        <div class="tab-content" style="background-color:#302f2f; color:white;">
+                            <div id="tab2-1" class="tab-pane active cont">
+                                <form role="form" id="AddDiagnosisForm" name="AddDiagnosisForm">
+                                    <div class="form-group">
+                                        <label>Diagnose</label>
+                                        <input id="InDiagnosis" placeholder="Add Diagnosis" class="form-control" data-val="true" data-val-required="*Diagnosis Name is required">
+                                        <span style="color: red;" class="field-validation-valid col-sm-5" data-valmsg-for="InDiagnosis" data-valmsg-replace="true"></span>
+
+
+                                    </div>
+
+                                    <div class="modal-footer" style="background-color:#302f2f; color:white;">
+                                        <button type="button" data-dismiss="modal" class="btn btn-success md-close">Stornieren</button>
+                                        <button id="btnSaveDiagnosis" type="button" data-dismiss="modal" class="btn btn-success md-close">speichern</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div id="tab2-2" class="tab-pane cont" style="background-color:#302f2f;">
+                                <form role="form" id="DeleteDiagnosisForm" class="form-horizontal">
+                                    <div class="form-group ">
+                                        <label>
+                                            Diagnose hinzugefügt
+                                        </label>
+                                            <div class="btn-group btn-space">
+
+                                                @Html.DropDownList("cmbDiagnosis",
+                                                                    new SelectList(Model, "DiagnosisID", "Diagnosis"),
+                                                                    new { @class = "form-control" })
+
+                                            </div>
+</div>
+                                </form>
+                                    <div class="modal-footer" style="background-color:#302f2f; color:white;">
+                                        <button type="button" data-dismiss="modal" class="btn btn-success md-close">Stornieren</button>
+                                        <button id="btnDeleteDiagnosis" type="button" data-dismiss="modal" class="btn btn-danger md-close">Löschen</button>
+                                    </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div style="background-color:#3d3c3c;">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab2-1" data-toggle="tab">Diagnose hinzufügen</a></li>
+                        <li><a href="#tab2-2" data-toggle="tab">Diagnose löschen</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script type="text/javascript">
+
+        $.validator.unobtrusive.parse("#AddDiagnosisForm");
+        // Because this popup is loaded dynamically based on dropdown selection.
+        // Therefore, this event was not registering when I put it in TypeValues.js file.
+        // That's why I have put it here.
+
+        $("#form-bp2").on("hidden.bs.modal", function () {    
+            $("#DiagnosisPlaceHolder").html("");
+        });
+
+        $('body').on('hidden.bs.modal', function () {
+            if ($('.modal.in').length > 0) {
+                $('body').addClass('modal-open');
+                $('.modal').css('overflow-y', 'auto');
+            }
+        });
+
+        $('#btnSaveDiagnosis').on('click', function (e) {
+            debugger;
+            if ($('#AddDiagnosisForm').valid() == false) {
+                return false;
+            }
+            var companyID = "";
+            if ($('#hdncompanyID').val() != "") {
+                companyID = $('#hdncompanyID').val();
+            }
+            debugger;                
+
+            var BasicInfo = {
+                "Diagnosis": $('#InDiagnosis').val(),
+                "Company_ID": companyID,
+                "isdelete" : 'False'
+            };
+
+            var apiurl = "";
+            var calltype = "";
+
+            apiurl = 'api/_Diagnosis/CreateDiagnosis';
+            calltype = 'POST';
+            debugger
+            $.ajax({
+                type: calltype,
+                url: WebServiceUrl + apiurl,
+                data: JSON.stringify(BasicInfo),
+                contentType: "application/json;charset=utf-8",
+                success: function (result, status, xhr) {
+                    debugger
+                    alert("Diagnose hinzugefügt!");
+
+                },
+                error: function (xhr, status, error) {
+                    debugger
+                    if (error != "") {
+                        alert("Diagnoseergänzung fehlgeschlagen!");
+                    }
+                }
+            });
+        });
+
+        $('#btnDeleteDiagnosis').on('click', function (e) {
+            var companyID = "";
+            if ($('#hdncompanyID').val() != "") {
+                companyID = $('#hdncompanyID').val();
+            }
+            debugger;
+
+            var BasicInfo = {
+                "DiagnosisID": $('#cmbDiagnosis').val()
+            };
+
+            var apiurl = "";
+            var calltype = "";
+
+            apiurl = 'api/_Diagnosis/DelteDiagnosis';
+            calltype = 'POST';
+            debugger
+            $.ajax({
+                type: calltype,
+                url: WebServiceUrl + apiurl,
+                data: JSON.stringify(BasicInfo),
+                contentType: "application/json;charset=utf-8",
+                success: function (result, status, xhr) {
+                    debugger
+                    if (result == "Successful") {
+                        alert("Diagnose gelöscht!");
+                    }
+                    else {
+                        alert("Die Diagnose kann nicht gelöscht werden, sie wird in der Inspektion verwendet");
+
+                    }
+                    
+                },
+                error: function (xhr, status, error) {
+                    debugger
+                    if (error != "") {
+                        alert("Löschen der Diagnose fehlgeschlagen!");
+                    }
+                }
+            });
+        });
+     
+    </script>
+</div>

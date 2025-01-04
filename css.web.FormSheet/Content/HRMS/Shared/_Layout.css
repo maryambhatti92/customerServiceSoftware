@@ -1,0 +1,44 @@
+﻿.underline-page-heading {
+    border-top: 1px solid #404040;
+    margin-top: 0px;
+}
+
+/*#toast-container > div {
+    opacity: 1;
+}*/
+
+.toast {
+    opacity: 1 !important;
+}
+
+
+
+/* ---------- Vertically Align a "row" ----------------*/
+
+.v-block {
+    height: 50px;
+}
+
+    .v-block:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+
+.v-centered {
+    display: inline-block;
+    vertical-align: middle;
+}
+.grid-filter-ddl {
+    width: 250px;
+}
+
+/* ---------- Validation Errors ----------------*/
+
+.field-validation-error {
+    color:red;
+}
+.input-validation-error {
+    border: 1px solid red;
+}
